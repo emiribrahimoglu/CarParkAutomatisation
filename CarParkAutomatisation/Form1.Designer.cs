@@ -37,9 +37,10 @@
             // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(295, 84);
+            this.metroButton1.Location = new System.Drawing.Point(258, 78);
+            this.metroButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(237, 97);
+            this.metroButton1.Size = new System.Drawing.Size(208, 91);
             this.metroButton1.TabIndex = 0;
             this.metroButton1.Text = "metroButton1";
             this.metroButton1.UseSelectable = true;
@@ -47,18 +48,20 @@
             // 
             // metroButton2
             // 
-            this.metroButton2.Location = new System.Drawing.Point(470, 262);
+            this.metroButton2.Location = new System.Drawing.Point(411, 246);
+            this.metroButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(139, 50);
+            this.metroButton2.Size = new System.Drawing.Size(121, 47);
             this.metroButton2.TabIndex = 1;
             this.metroButton2.Text = "metroButton2";
             this.metroButton2.UseSelectable = true;
             // 
             // emirnaber
             // 
-            this.emirnaber.Location = new System.Drawing.Point(227, 288);
+            this.emirnaber.Location = new System.Drawing.Point(198, 270);
+            this.emirnaber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.emirnaber.Name = "emirnaber";
-            this.emirnaber.Size = new System.Drawing.Size(75, 23);
+            this.emirnaber.Size = new System.Drawing.Size(65, 22);
             this.emirnaber.TabIndex = 2;
             this.emirnaber.Text = "emir";
             this.emirnaber.UseSelectable = true;
@@ -66,26 +69,27 @@
             // 
             // metroButton3
             // 
-            this.metroButton3.Location = new System.Drawing.Point(167, 141);
+            this.metroButton3.Location = new System.Drawing.Point(146, 133);
+            this.metroButton3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.metroButton3.Name = "metroButton3";
-            this.metroButton3.Size = new System.Drawing.Size(75, 23);
+            this.metroButton3.Size = new System.Drawing.Size(65, 22);
             this.metroButton3.TabIndex = 3;
             this.metroButton3.Text = "babaaaaa";
             this.metroButton3.UseSelectable = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1066, 554);
+            this.ClientSize = new System.Drawing.Size(933, 519);
             this.Controls.Add(this.metroButton3);
             this.Controls.Add(this.emirnaber);
             this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.metroButton1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
-
         }
 
         #endregion
