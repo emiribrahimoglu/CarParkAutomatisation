@@ -32,6 +32,7 @@
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.emirnaber = new MetroFramework.Controls.MetroButton();
+            this.metroButton3 = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // metroButton1
@@ -63,11 +64,21 @@
             this.emirnaber.UseSelectable = true;
             this.emirnaber.Click += new System.EventHandler(this.metroButton3_Click);
             // 
+            // metroButton3
+            // 
+            this.metroButton3.Location = new System.Drawing.Point(167, 141);
+            this.metroButton3.Name = "metroButton3";
+            this.metroButton3.Size = new System.Drawing.Size(75, 23);
+            this.metroButton3.TabIndex = 3;
+            this.metroButton3.Text = "babaaaaa";
+            this.metroButton3.UseSelectable = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1066, 554);
+            this.Controls.Add(this.metroButton3);
             this.Controls.Add(this.emirnaber);
             this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.metroButton1);
@@ -82,5 +93,6 @@
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton emirnaber;
+        private MetroFramework.Controls.MetroButton metroButton3;
     }
 }
