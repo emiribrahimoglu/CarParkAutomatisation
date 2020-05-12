@@ -18,11 +18,6 @@ namespace CarParkAutomatisation
             InitializeComponent();
         }
 
-        private void metroButton1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void metroButton3_Click(object sender, EventArgs e)
         {
 
