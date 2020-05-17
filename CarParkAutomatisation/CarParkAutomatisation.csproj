@@ -61,10 +61,31 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="PersonelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonelForm.Designer.cs">
+      <DependentUpon>PersonelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UyeGirisForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UyeGirisForm.Designer.cs">
+      <DependentUpon>UyeGirisForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UyeliksiGirisForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UyeliksiGirisForm.Designer.cs">
+      <DependentUpon>UyeliksiGirisForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonelForm.resx">
+      <DependentUpon>PersonelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,6 +96,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UyeGirisForm.resx">
+      <DependentUpon>UyeGirisForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UyeliksiGirisForm.resx">
+      <DependentUpon>UyeliksiGirisForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

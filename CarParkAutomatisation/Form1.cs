@@ -16,5 +16,31 @@ namespace CarParkAutomatisation
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            saatLabel.Text = DateTime.Now.ToLongTimeString();
+            tarihLabel.Text = DateTime.Today.ToLongDateString();
+            saatTimer.Enabled = true;
+        }
+
+        private void saatTimer_Tick(object sender, EventArgs e)
+        {
+            saatLabel.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void personelButton_Click(object sender, EventArgs e)
+        {
+            PersonelForm personelForm = new PersonelForm();
+            personelForm.Show();
+            //this.Hide();
+        }
+
+        private void uyeliksizButton_Click(object sender, EventArgs e)
+        {
+            UyeliksiGirisForm uyeliksiGirisForm = new UyeliksiGirisForm();
+            uyeliksiGirisForm.Show();
+            //this.Hide();
+        }
     }
 }
