@@ -8,5 +8,11 @@ namespace CarParkAutomatisation
         {
             InitializeComponent();
         }
+
+        private void uyelikAcButton_Click(object sender, System.EventArgs e)
+        {
+            YeniUye yeniUye = new YeniUye();
+            yeniUye.Show();
+        }
     }
 }

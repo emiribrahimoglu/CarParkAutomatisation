@@ -81,6 +81,12 @@
     <Compile Include="UyeliksiGirisForm.Designer.cs">
       <DependentUpon>UyeliksiGirisForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="YeniUye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YeniUye.Designer.cs">
+      <DependentUpon>YeniUye.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UyeliksiGirisForm.resx">
       <DependentUpon>UyeliksiGirisForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YeniUye.resx">
+      <DependentUpon>YeniUye.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
