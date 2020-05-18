@@ -12,6 +12,7 @@ namespace CarParkAutomatisation
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace CarParkAutomatisation
             saatLabel.Text = DateTime.Now.ToLongTimeString();
             tarihLabel.Text = DateTime.Today.ToLongDateString();
             saatTimer.Enabled = true;
+            Veritabani.Baglan();
         }
 
         private void saatTimer_Tick(object sender, EventArgs e)

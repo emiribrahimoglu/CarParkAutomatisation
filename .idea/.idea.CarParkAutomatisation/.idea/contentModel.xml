@@ -30,6 +30,10 @@
         <e p="UyeliksiGirisForm.cs" t="Include" />
         <e p="UyeliksiGirisForm.Designer.cs" t="Include" />
         <e p="UyeliksiGirisForm.resx" t="Include" />
+        <e p="Veritabani.cs" t="Include" />
+        <e p="YeniUye.cs" t="Include" />
+        <e p="YeniUye.Designer.cs" t="Include" />
+        <e p="YeniUye.resx" t="Include" />
       </e>
       <e p="CarParkAutomatisation.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
