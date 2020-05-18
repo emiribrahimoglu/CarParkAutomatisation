@@ -20,6 +20,7 @@ namespace CarParkAutomatisation
         private static MySqlCommand komut;
         private static MySqlDataAdapter adaptor;
         private static MySqlDataReader dataReader;
+        private static DataSet dataSet;
 
         public static void Baglan()
         {
@@ -35,6 +36,15 @@ namespace CarParkAutomatisation
 
             MessageBox.Show("Veritabanı Bağlantı Durumu: " + baglanti.State);
 
+        }
+
+        public static DataSet Sorgu(string komutString)
+        {
+            komut = new MySqlCommand(komutString, baglanti);
+            adaptor = new MySqlDataAdapter(komut);
+            dataSet = new DataSet();
+            adaptor.Fill(dataSet, "sorguSonuc");
+            return dataSet;
         }
     }
 }
