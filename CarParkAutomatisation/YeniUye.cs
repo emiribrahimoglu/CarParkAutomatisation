@@ -22,14 +22,13 @@ namespace CarParkAutomatisation
 
         private void uyeOlButton_Click(object sender, EventArgs e)
         {
-            sorguCumlesi = "insert into plakalar(plaka) values (?plaka)";
+            sorguCumlesi = "insert into plakalar (plaka) values (@plaka)";
             Veritabani.PlakaEkle(sorguCumlesi,uyelikPlakaTxt.Text);
-            sorguCumlesi = "select plakaId from plakalar where plaka=" + uyelikPlakaTxt.Text + ";";
+            sorguCumlesi = "select plakaId from plakalar where plaka=" + "'"+uyelikPlakaTxt.Text+"'";
             plakaid = Veritabani.PlakaGetir(sorguCumlesi);
             sorguCumlesi =
-                "insert into uyeler(uyeSifre, ad, soyad, telno, uyelikbaslangici plakaId) values(?uyeSifre, ?ad, ?soyad, ?telno, ?uyelikbaslangici, ?plakaId)";
-            uyeOlParametreler = uyelikSifreTxt.Text + " " + uyelikAdTxt.Text + " " + uyelikSoyadTxt.Text + " " +
-                                DateTime.Now + " " + plakaid;
+                "insert into uyeler (uyeSifre, ad, soyad, telno, uyelikbaslangici, plakaId) values(@uyeSifre, @ad, @soyad, @telno, @uyelikbaslangici, @plakaId);";
+            uyeOlParametreler = uyelikSifreTxt.Text + " " + uyelikAdTxt.Text + " " + uyelikSoyadTxt.Text + " "+uyelikTelTxt.Text+" " +DateTime.Now + " " + plakaid;
             MessageBox.Show(uyeOlParametreler);
             Veritabani.KayitOlInsert(sorguCumlesi, uyeOlParametreler);
         }

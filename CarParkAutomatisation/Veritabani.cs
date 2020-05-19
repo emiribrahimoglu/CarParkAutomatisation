@@ -46,12 +46,7 @@ namespace CarParkAutomatisation
             try
             {
                 komut = new MySqlCommand(komutString, baglanti);
-                var sorguSonuc = komut.ExecuteScalar();
-                if (sorguSonuc!=null)
-                {
-                    plakaid = Convert.ToInt32(sorguSonuc);
-                }
-
+                plakaid = Convert.ToInt32(komut.ExecuteScalar());
                 return plakaid;
             }
             catch (Exception e)
@@ -66,7 +61,7 @@ namespace CarParkAutomatisation
             try
             {
                 komut = new MySqlCommand(komutString, baglanti);
-                komut.Parameters.Add("?plaka", MySqlDbType.VarChar).Value = plaka;
+                komut.Parameters.Add("@plaka", MySqlDbType.VarChar).Value = plaka;
                 komut.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -99,13 +94,13 @@ namespace CarParkAutomatisation
             {
                 komut = new MySqlCommand(komutString, baglanti);
                 uyeOlDizi = parametreler.Split(' ');
-                komut.Parameters.Add("?uyeSifre", MySqlDbType.VarChar).Value = uyeOlDizi[0];
-                komut.Parameters.Add("?ad", MySqlDbType.VarChar).Value = uyeOlDizi[1];
-                komut.Parameters.Add("?soyad", MySqlDbType.VarChar).Value = uyeOlDizi[2];
-                komut.Parameters.Add("?telno", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[3]);
-                komut.Parameters.Add("?uyelikbaslangici", MySqlDbType.DateTime).Value =
+                komut.Parameters.Add("@uyeSifre", MySqlDbType.VarChar).Value = uyeOlDizi[0];
+                komut.Parameters.Add("@ad", MySqlDbType.VarChar).Value = uyeOlDizi[1];
+                komut.Parameters.Add("@soyad", MySqlDbType.VarChar).Value = uyeOlDizi[2];
+                komut.Parameters.Add("@telno", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[3]);
+                komut.Parameters.Add("@uyelikbaslangici", MySqlDbType.DateTime).Value =
                     Convert.ToDateTime(uyeOlDizi[4]+" "+uyeOlDizi[5]);
-                komut.Parameters.Add("?plakaId", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[6]);
+                komut.Parameters.Add("@plakaId", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[6]);
                 komut.ExecuteNonQuery();
                 /*adaptor = new MySqlDataAdapter(komut);
                 dataSet = new DataSet();
