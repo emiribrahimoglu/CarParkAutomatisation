@@ -21,6 +21,7 @@ namespace CarParkAutomatisation
         private static MySqlDataAdapter adaptor;
         private static MySqlDataReader dataReader;
         private static DataSet dataSet;
+        private static string[] uyeOlDizi;
 
         public static void Baglan()
         {
@@ -38,13 +39,83 @@ namespace CarParkAutomatisation
 
         }
 
+        public static int PlakaGetir(string komutString)
+        {
+            int plakaid = 0;
+            
+            try
+            {
+                komut = new MySqlCommand(komutString, baglanti);
+                var sorguSonuc = komut.ExecuteScalar();
+                if (sorguSonuc!=null)
+                {
+                    plakaid = Convert.ToInt32(sorguSonuc);
+                }
+
+                return plakaid;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return plakaid;
+            }
+        }
+
+        public static void PlakaEkle(string komutString, string plaka)
+        {
+            try
+            {
+                komut = new MySqlCommand(komutString, baglanti);
+                komut.Parameters.Add("?plaka", MySqlDbType.VarChar).Value = plaka;
+                komut.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
         public static DataSet Sorgu(string komutString)
         {
-            komut = new MySqlCommand(komutString, baglanti);
-            adaptor = new MySqlDataAdapter(komut);
-            dataSet = new DataSet();
-            adaptor.Fill(dataSet, "sorguSonuc");
-            return dataSet;
+            try
+            {
+                komut = new MySqlCommand(komutString, baglanti);
+                adaptor = new MySqlDataAdapter(komut);
+                dataSet = new DataSet();
+                adaptor.Fill(dataSet, "sorguSonuc");
+                return dataSet;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return new DataSet();
+            }
+            
         }
+
+        public static void KayitOlInsert(string komutString, string parametreler)
+        {
+            try
+            {
+                komut = new MySqlCommand(komutString, baglanti);
+                uyeOlDizi = parametreler.Split(' ');
+                komut.Parameters.Add("?uyeSifre", MySqlDbType.VarChar).Value = uyeOlDizi[0];
+                komut.Parameters.Add("?ad", MySqlDbType.VarChar).Value = uyeOlDizi[1];
+                komut.Parameters.Add("?soyad", MySqlDbType.VarChar).Value = uyeOlDizi[2];
+                komut.Parameters.Add("?telno", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[3]);
+                komut.Parameters.Add("?uyelikbaslangici", MySqlDbType.DateTime).Value =
+                    Convert.ToDateTime(uyeOlDizi[4]+" "+uyeOlDizi[5]);
+                komut.Parameters.Add("?plakaId", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[6]);
+                komut.ExecuteNonQuery();
+                /*adaptor = new MySqlDataAdapter(komut);
+                dataSet = new DataSet();
+                adaptor.Fill(dataSet, "sorguSonuc");*/
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + Environment.NewLine + e.Data);
+            }
+        }
+
     }
 }

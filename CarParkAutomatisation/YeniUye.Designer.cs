@@ -143,6 +143,7 @@
             this.uyeOlButton.TabIndex = 26;
             this.uyeOlButton.Text = "ÜYE OL";
             this.uyeOlButton.UseSelectable = true;
+            this.uyeOlButton.Click += new System.EventHandler(this.uyeOlButton_Click);
             // 
             // YeniUyeFormLabel
             // 
