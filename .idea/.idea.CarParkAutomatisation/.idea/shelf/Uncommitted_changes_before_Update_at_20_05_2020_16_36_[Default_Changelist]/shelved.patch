@@ -1,0 +1,62 @@
+Index: CarParkAutomatisation/YeniUye.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.ComponentModel;\r\nusing System.Data;\r\nusing System.Drawing;\r\nusing System.Linq;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Windows.Forms;\r\n\r\nnamespace CarParkAutomatisation\r\n{\r\n    public partial class YeniUye : Form\r\n    {\r\n        private string sorguCumlesi;\r\n        private string uyeOlParametreler;\r\n        private int plakaid;\r\n        public YeniUye()\r\n        {\r\n            InitializeComponent();\r\n        }\r\n\r\n        private void uyeOlButton_Click(object sender, EventArgs e)\r\n        {\r\n            sorguCumlesi = \"insert into plakalar (plaka) values (@plaka)\";\r\n            Veritabani.PlakaEkle(sorguCumlesi,uyelikPlakaTxt.Text);\r\n            sorguCumlesi = \"select plakaId from plakalar where plaka=\" + \"'\"+uyelikPlakaTxt.Text+\"'\";\r\n            plakaid = Veritabani.PlakaGetir(sorguCumlesi);\r\n            sorguCumlesi =\r\n                \"insert into uyeler (uyeSifre, ad, soyad, telno, uyelikbaslangici, plakaId) values(@uyeSifre, @ad, @soyad, @telno, @uyelikbaslangici, @plakaId);\";\r\n            uyeOlParametreler = uyelikSifreTxt.Text + \" \" + uyelikAdTxt.Text + \" \" + uyelikSoyadTxt.Text + \" \"+uyelikTelTxt.Text+\" \" +DateTime.Now + \" \" + plakaid;\r\n            MessageBox.Show(uyeOlParametreler);\r\n            Veritabani.KayitOlInsert(sorguCumlesi, uyeOlParametreler);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CarParkAutomatisation/YeniUye.cs	(revision 6ac5721259eef85ca8eb86f5c4fc9bc8fa4ca389)
++++ CarParkAutomatisation/YeniUye.cs	(date 1589979863911)
+@@ -31,6 +31,7 @@
+             uyeOlParametreler = uyelikSifreTxt.Text + " " + uyelikAdTxt.Text + " " + uyelikSoyadTxt.Text + " "+uyelikTelTxt.Text+" " +DateTime.Now + " " + plakaid;
+             MessageBox.Show(uyeOlParametreler);
+             Veritabani.KayitOlInsert(sorguCumlesi, uyeOlParametreler);
++            
+         }
+     }
+ }
+Index: CarParkAutomatisation/PersonelForm.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Windows.Forms;\r\n\r\nnamespace CarParkAutomatisation\r\n{\r\n    public partial class PersonelForm : Form\r\n    {\r\n        private string sorgu;\r\n        public PersonelForm()\r\n        {\r\n            InitializeComponent();\r\n        }\r\n\r\n        private void sifreGosterButton_Click(object sender, EventArgs e)\r\n        {\r\n            sifreGosterButton.Text = personelSifreTxt.UseSystemPasswordChar ? \"Gizle\" : \"Göster\";\r\n        }\r\n\r\n        private void personelGirisButton_Click(object sender, EventArgs e)\r\n        {\r\n            // textboxlara girilen veriler veritabani ile karşılaştırılacak\r\n            //sorguCumlesi = \"select plakaId from plakalar where plaka=\" + \"'\"+uyelikPlakaTxt.Text+\"'\";\r\n            sorgu = \"select perId from personel where perId=\" + \"'\"+personelIdTxt.Text+\"'\";\r\n           \r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CarParkAutomatisation/PersonelForm.cs	(revision 6ac5721259eef85ca8eb86f5c4fc9bc8fa4ca389)
++++ CarParkAutomatisation/PersonelForm.cs	(date 1589981109686)
+@@ -18,10 +18,11 @@
+ 
+         private void personelGirisButton_Click(object sender, EventArgs e)
+         {
+-            // textboxlara girilen veriler veritabani ile karşılaştırılacak
+-            //sorguCumlesi = "select plakaId from plakalar where plaka=" + "'"+uyelikPlakaTxt.Text+"'";
+-            sorgu = "select perId from personel where perId=" + "'"+personelIdTxt.Text+"'";
+-           
++            // "select product_price from product where product_name='"+x+"';";
++            sorgu = "select perId from personel where perSifre=" + "'" + personelSifreTxt.Text + "'";
++            // sorgu = "select perId from personel where perId=" + "'"+personelIdTxt.Text+"'";
++
++
+         }
+     }
+ }
+\ No newline at end of file
+Index: .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ContentModelStore\">\r\n    <e p=\"C:\\Users\\PC\\AppData\\local\\JetBrains\\Rider2020.1\\extResources\" t=\"IncludeRecursive\" />\r\n    <e p=\"C:\\Users\\PC\\AppData\\local\\JetBrains\\Rider2020.1\\resharper-host\\local\\Transient\\ReSharperHost\\v201\\SolutionCaches\\_CarParkAutomatisation.1018619674.00\" t=\"ExcludeRecursive\" />\r\n    <e p=\"D:\\zahid\\bsm\\jbRiderProjects\\vtProje\" t=\"IncludeFlat\">\r\n      <e p=\"CarParkAutomatisation\" t=\"IncludeRecursive\">\r\n        <e p=\"App.config\" t=\"Include\" />\r\n        <e p=\"bin\" t=\"ExcludeRecursive\" />\r\n        <e p=\"CarParkAutomatisation.csproj\" t=\"IncludeRecursive\" />\r\n        <e p=\"Form1.cs\" t=\"Include\" />\r\n        <e p=\"Form1.Designer.cs\" t=\"Include\" />\r\n        <e p=\"Form1.resx\" t=\"Include\" />\r\n        <e p=\"obj\" t=\"ExcludeRecursive\" />\r\n        <e p=\"packages.config\" t=\"Include\" />\r\n        <e p=\"PersonelForm.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.resx\" t=\"Include\" />\r\n        <e p=\"Program.cs\" t=\"Include\" />\r\n        <e p=\"Properties\" t=\"Include\">\r\n          <e p=\"AssemblyInfo.cs\" t=\"Include\" />\r\n          <e p=\"Resources.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Resources.resx\" t=\"Include\" />\r\n          <e p=\"Settings.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Settings.settings\" t=\"Include\" />\r\n        </e>\r\n        <e p=\"UyeGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"Veritabani.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.Designer.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.resx\" t=\"Include\" />\r\n      </e>\r\n      <e p=\"CarParkAutomatisation.sln\" t=\"IncludeFlat\" />\r\n      <e p=\"packages\" t=\"ExcludeRecursive\" />\r\n    </e>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(revision 6ac5721259eef85ca8eb86f5c4fc9bc8fa4ca389)
++++ .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(date 1589981006962)
+@@ -3,6 +3,8 @@
+   <component name="ContentModelStore">
+     <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+     <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_CarParkAutomatisation.1018619674.00" t="ExcludeRecursive" />
++    <e p="C:\Users\PC\AppData\Roaming\JetBrains\Rider2020.1\consoles\db" t="IncludeRecursive" />
++    <e p="C:\Users\PC\AppData\Roaming\JetBrains\Rider2020.1\extensions" t="IncludeRecursive" />
+     <e p="D:\zahid\bsm\jbRiderProjects\vtProje" t="IncludeFlat">
+       <e p="CarParkAutomatisation" t="IncludeRecursive">
+         <e p="App.config" t="Include" />
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_15_03__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_15_03__Default_Changelist_.xml

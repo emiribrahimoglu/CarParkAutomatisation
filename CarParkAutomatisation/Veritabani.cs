@@ -15,15 +15,15 @@ namespace CarParkAutomatisation
 {
     public static class Veritabani
     {
-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=engtrq;database=vtproje";
+        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
         private static MySqlConnection baglanti;
         private static MySqlCommand komut;
         private static MySqlDataAdapter adaptor;
         private static MySqlDataReader dataReader;
         private static DataSet dataSet;
         private static string[] uyeOlDizi;
-        private static int peridTemp;
-        private static string persifreTemp;
+        private static int idTemp;
+        private static string sifreTemp;
 
         public static void Baglan()
         {
@@ -46,12 +46,31 @@ namespace CarParkAutomatisation
             try
             {
                 komut = new MySqlCommand(komutString, baglanti);
-                peridTemp = Convert.ToInt32(komut.ExecuteScalar());
-                if (peridTemp != Convert.ToInt32(personelGirisBilgi[0])) return false;
+                idTemp = Convert.ToInt32(komut.ExecuteScalar());
+                if (idTemp != Convert.ToInt32(personelGirisBilgi[0])) return false;
                 komutString = "select perSifre from personel where perSifre" + "='" + personelGirisBilgi[1] + "'";
                 komut.CommandText = komutString;
-                persifreTemp = komut.ExecuteScalar().ToString();
-                return persifreTemp==personelGirisBilgi[1];
+                sifreTemp = komut.ExecuteScalar().ToString();
+                return sifreTemp==personelGirisBilgi[1];
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return false;
+        }
+        
+        public static bool UyeKontrol(string komutString, string[] uyeGirisBilgi)
+        {
+            try
+            {
+                komut = new MySqlCommand(komutString, baglanti);
+                idTemp = Convert.ToInt32(komut.ExecuteScalar());
+                if (idTemp != Convert.ToInt32(uyeGirisBilgi[0])) return false;
+                komutString = "select uyeSifre from uyeler where uyeSifre" + "='" + uyeGirisBilgi[1] + "'";
+                komut.CommandText = komutString;
+                sifreTemp = komut.ExecuteScalar().ToString();
+                return sifreTemp==uyeGirisBilgi[1];
             }
             catch (Exception e)
             {
@@ -82,7 +101,7 @@ namespace CarParkAutomatisation
             try
             {
                 komut = new MySqlCommand(komutString, baglanti);
-                komut.Parameters.Add("@plaka", MySqlDbType.VarChar).Value = plaka;
+                komut.Parameters.Add("@plaka", MySqlDbType.VarChar).Value = plaka.ToUpper();
                 komut.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -118,7 +137,7 @@ namespace CarParkAutomatisation
                 komut.Parameters.Add("@uyeSifre", MySqlDbType.VarChar).Value = uyeOlDizi[0];
                 komut.Parameters.Add("@ad", MySqlDbType.VarChar).Value = uyeOlDizi[1];
                 komut.Parameters.Add("@soyad", MySqlDbType.VarChar).Value = uyeOlDizi[2];
-                komut.Parameters.Add("@telno", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[3]);
+                komut.Parameters.Add("@telno", MySqlDbType.Int64).Value = Convert.ToInt64(uyeOlDizi[3]);
                 komut.Parameters.Add("@uyelikbaslangici", MySqlDbType.DateTime).Value =
                     Convert.ToDateTime(uyeOlDizi[4]+" "+uyeOlDizi[5]);
                 komut.Parameters.Add("@plakaId", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[6]);

@@ -31,6 +31,7 @@ namespace CarParkAutomatisation
             uyeOlParametreler = uyelikSifreTxt.Text + " " + uyelikAdTxt.Text + " " + uyelikSoyadTxt.Text + " "+uyelikTelTxt.Text+" " +DateTime.Now + " " + plakaid;
             MessageBox.Show(uyeOlParametreler);
             Veritabani.KayitOlInsert(sorguCumlesi, uyeOlParametreler);
+            
         }
     }
 }

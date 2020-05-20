@@ -68,6 +68,7 @@ namespace CarParkAutomatisation
             this.uyeGirisButton.TabIndex = 13;
             this.uyeGirisButton.Text = "GİRİŞ";
             this.uyeGirisButton.UseSelectable = true;
+            this.uyeGirisButton.Click += new System.EventHandler(this.uyeGirisButton_Click);
             // 
             // sifreGosterButton
             // 
