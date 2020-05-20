@@ -1,0 +1,85 @@
+Index: CarParkAutomatisation/UyeGirisForm.Designer.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.ComponentModel;\r\n\r\nnamespace CarParkAutomatisation\r\n{\r\n    partial class UyeGirisForm\r\n    {\r\n        /// <summary>\r\n        /// Required designer variable.\r\n        /// </summary>\r\n        private IContainer components = null;\r\n\r\n        /// <summary>\r\n        /// Clean up any resources being used.\r\n        /// </summary>\r\n        /// <param name=\"disposing\">true if managed resources should be disposed; otherwise, false.</param>\r\n        protected override void Dispose(bool disposing)\r\n        {\r\n            if (disposing && (components != null))\r\n            {\r\n                components.Dispose();\r\n            }\r\n\r\n            base.Dispose(disposing);\r\n        }\r\n\r\n        #region Windows Form Designer generated code\r\n\r\n        /// <summary>\r\n        /// Required method for Designer support - do not modify\r\n        /// the contents of this method with the code editor.\r\n        /// </summary>\r\n        private void InitializeComponent()\r\n        {\r\n            this.uyeIdTxt = new System.Windows.Forms.TextBox();\r\n            this.uyeSifreTxt = new System.Windows.Forms.TextBox();\r\n            this.uyeGirisButton = new MetroFramework.Controls.MetroButton();\r\n            this.sifreGosterButton = new MetroFramework.Controls.MetroButton();\r\n            this.uyeSifreLabel = new System.Windows.Forms.Label();\r\n            this.uyeIdLabel = new System.Windows.Forms.Label();\r\n            this.uyelikAcButton = new MetroFramework.Controls.MetroButton();\r\n            this.SuspendLayout();\r\n            // \r\n            // uyeIdTxt\r\n            // \r\n            this.uyeIdTxt.Font = new System.Drawing.Font(\"Microsoft Sans Serif\", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));\r\n            this.uyeIdTxt.Location = new System.Drawing.Point(192, 152);\r\n            this.uyeIdTxt.Name = \"uyeIdTxt\";\r\n            this.uyeIdTxt.Size = new System.Drawing.Size(169, 26);\r\n            this.uyeIdTxt.TabIndex = 15;\r\n            // \r\n            // uyeSifreTxt\r\n            // \r\n            this.uyeSifreTxt.Font = new System.Drawing.Font(\"Microsoft Sans Serif\", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));\r\n            this.uyeSifreTxt.Location = new System.Drawing.Point(192, 213);\r\n            this.uyeSifreTxt.Name = \"uyeSifreTxt\";\r\n            this.uyeSifreTxt.Size = new System.Drawing.Size(169, 26);\r\n            this.uyeSifreTxt.TabIndex = 14;\r\n            // \r\n            // uyeGirisButton\r\n            // \r\n            this.uyeGirisButton.FontSize = MetroFramework.MetroButtonSize.Tall;\r\n            this.uyeGirisButton.Location = new System.Drawing.Point(152, 340);\r\n            this.uyeGirisButton.Name = \"uyeGirisButton\";\r\n            this.uyeGirisButton.Size = new System.Drawing.Size(199, 70);\r\n            this.uyeGirisButton.TabIndex = 13;\r\n            this.uyeGirisButton.Text = \"GİRİŞ\";\r\n            this.uyeGirisButton.UseSelectable = true;\r\n            // \r\n            // sifreGosterButton\r\n            // \r\n            this.sifreGosterButton.FontSize = MetroFramework.MetroButtonSize.Medium;\r\n            this.sifreGosterButton.Location = new System.Drawing.Point(367, 213);\r\n            this.sifreGosterButton.Name = \"sifreGosterButton\";\r\n            this.sifreGosterButton.Size = new System.Drawing.Size(54, 26);\r\n            this.sifreGosterButton.TabIndex = 12;\r\n            this.sifreGosterButton.Text = \"Göster\";\r\n            this.sifreGosterButton.UseSelectable = true;\r\n            // \r\n            // uyeSifreLabel\r\n            // \r\n            this.uyeSifreLabel.Font = new System.Drawing.Font(\"Microsoft Sans Serif\", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));\r\n            this.uyeSifreLabel.Location = new System.Drawing.Point(59, 209);\r\n            this.uyeSifreLabel.Name = \"uyeSifreLabel\";\r\n            this.uyeSifreLabel.Size = new System.Drawing.Size(127, 34);\r\n            this.uyeSifreLabel.TabIndex = 11;\r\n            this.uyeSifreLabel.Text = \"Üye Şifre\";\r\n            this.uyeSifreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;\r\n            // \r\n            // uyeIdLabel\r\n            // \r\n            this.uyeIdLabel.Font = new System.Drawing.Font(\"Microsoft Sans Serif\", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));\r\n            this.uyeIdLabel.Location = new System.Drawing.Point(81, 148);\r\n            this.uyeIdLabel.Name = \"uyeIdLabel\";\r\n            this.uyeIdLabel.Size = new System.Drawing.Size(105, 34);\r\n            this.uyeIdLabel.TabIndex = 10;\r\n            this.uyeIdLabel.Text = \"Üye ID\";\r\n            this.uyeIdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;\r\n            // \r\n            // uyelikAcButton\r\n            // \r\n            this.uyelikAcButton.BackColor = System.Drawing.Color.Transparent;\r\n            this.uyelikAcButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;\r\n            this.uyelikAcButton.FontSize = MetroFramework.MetroButtonSize.Medium;\r\n            this.uyelikAcButton.FontWeight = MetroFramework.MetroButtonWeight.Regular;\r\n            this.uyelikAcButton.Location = new System.Drawing.Point(192, 245);\r\n            this.uyelikAcButton.Name = \"uyelikAcButton\";\r\n            this.uyelikAcButton.Size = new System.Drawing.Size(165, 27);\r\n            this.uyelikAcButton.Style = MetroFramework.MetroColorStyle.Teal;\r\n            this.uyelikAcButton.TabIndex = 16;\r\n            this.uyelikAcButton.Text = \"Üye Değil misiniz?\";\r\n            this.uyelikAcButton.UseCustomBackColor = true;\r\n            this.uyelikAcButton.UseSelectable = true;\r\n            this.uyelikAcButton.UseStyleColors = true;\r\n            this.uyelikAcButton.Click += new System.EventHandler(this.uyelikAcButton_Click);\r\n            // \r\n            // UyeGirisForm\r\n            // \r\n            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);\r\n            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;\r\n            this.ClientSize = new System.Drawing.Size(503, 462);\r\n            this.Controls.Add(this.uyelikAcButton);\r\n            this.Controls.Add(this.uyeIdTxt);\r\n            this.Controls.Add(this.uyeSifreTxt);\r\n            this.Controls.Add(this.uyeGirisButton);\r\n            this.Controls.Add(this.sifreGosterButton);\r\n            this.Controls.Add(this.uyeSifreLabel);\r\n            this.Controls.Add(this.uyeIdLabel);\r\n            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;\r\n            this.Name = \"UyeGirisForm\";\r\n            this.Text = \"UyeGirisForm\";\r\n            this.ResumeLayout(false);\r\n            this.PerformLayout();\r\n        }\r\n\r\n        private MetroFramework.Controls.MetroButton sifreGosterButton;\r\n        private MetroFramework.Controls.MetroButton uyeGirisButton;\r\n        private System.Windows.Forms.Label uyeIdLabel;\r\n        private System.Windows.Forms.TextBox uyeIdTxt;\r\n        private MetroFramework.Controls.MetroButton uyelikAcButton;\r\n        private System.Windows.Forms.Label uyeSifreLabel;\r\n        private System.Windows.Forms.TextBox uyeSifreTxt;\r\n\r\n        #endregion\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CarParkAutomatisation/UyeGirisForm.Designer.cs	(revision 58dd2ca1274c2a363f53b3b4d639a6c20d633763)
++++ CarParkAutomatisation/UyeGirisForm.Designer.cs	(date 1589926340142)
+@@ -39,25 +39,16 @@
+             this.uyeIdLabel = new System.Windows.Forms.Label();
+             this.uyelikAcButton = new MetroFramework.Controls.MetroButton();
+             this.SuspendLayout();
+-            // 
+-            // uyeIdTxt
+-            // 
+             this.uyeIdTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+             this.uyeIdTxt.Location = new System.Drawing.Point(192, 152);
+             this.uyeIdTxt.Name = "uyeIdTxt";
+             this.uyeIdTxt.Size = new System.Drawing.Size(169, 26);
+             this.uyeIdTxt.TabIndex = 15;
+-            // 
+-            // uyeSifreTxt
+-            // 
+             this.uyeSifreTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+             this.uyeSifreTxt.Location = new System.Drawing.Point(192, 213);
+             this.uyeSifreTxt.Name = "uyeSifreTxt";
+             this.uyeSifreTxt.Size = new System.Drawing.Size(169, 26);
+             this.uyeSifreTxt.TabIndex = 14;
+-            // 
+-            // uyeGirisButton
+-            // 
+             this.uyeGirisButton.FontSize = MetroFramework.MetroButtonSize.Tall;
+             this.uyeGirisButton.Location = new System.Drawing.Point(152, 340);
+             this.uyeGirisButton.Name = "uyeGirisButton";
+@@ -65,9 +56,6 @@
+             this.uyeGirisButton.TabIndex = 13;
+             this.uyeGirisButton.Text = "GİRİŞ";
+             this.uyeGirisButton.UseSelectable = true;
+-            // 
+-            // sifreGosterButton
+-            // 
+             this.sifreGosterButton.FontSize = MetroFramework.MetroButtonSize.Medium;
+             this.sifreGosterButton.Location = new System.Drawing.Point(367, 213);
+             this.sifreGosterButton.Name = "sifreGosterButton";
+@@ -75,9 +63,6 @@
+             this.sifreGosterButton.TabIndex = 12;
+             this.sifreGosterButton.Text = "Göster";
+             this.sifreGosterButton.UseSelectable = true;
+-            // 
+-            // uyeSifreLabel
+-            // 
+             this.uyeSifreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+             this.uyeSifreLabel.Location = new System.Drawing.Point(59, 209);
+             this.uyeSifreLabel.Name = "uyeSifreLabel";
+@@ -85,9 +70,6 @@
+             this.uyeSifreLabel.TabIndex = 11;
+             this.uyeSifreLabel.Text = "Üye Şifre";
+             this.uyeSifreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+-            // 
+-            // uyeIdLabel
+-            // 
+             this.uyeIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+             this.uyeIdLabel.Location = new System.Drawing.Point(81, 148);
+             this.uyeIdLabel.Name = "uyeIdLabel";
+@@ -95,9 +77,6 @@
+             this.uyeIdLabel.TabIndex = 10;
+             this.uyeIdLabel.Text = "Üye ID";
+             this.uyeIdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+-            // 
+-            // uyelikAcButton
+-            // 
+             this.uyelikAcButton.BackColor = System.Drawing.Color.Transparent;
+             this.uyelikAcButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+             this.uyelikAcButton.FontSize = MetroFramework.MetroButtonSize.Medium;
+@@ -112,9 +91,6 @@
+             this.uyelikAcButton.UseSelectable = true;
+             this.uyelikAcButton.UseStyleColors = true;
+             this.uyelikAcButton.Click += new System.EventHandler(this.uyelikAcButton_Click);
+-            // 
+-            // UyeGirisForm
+-            // 
+             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+             this.ClientSize = new System.Drawing.Size(503, 462);

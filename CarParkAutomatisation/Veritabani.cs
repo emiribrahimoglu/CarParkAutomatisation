@@ -15,13 +15,15 @@ namespace CarParkAutomatisation
 {
     public static class Veritabani
     {
-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
+        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=engtrq;database=vtproje";
         private static MySqlConnection baglanti;
         private static MySqlCommand komut;
         private static MySqlDataAdapter adaptor;
         private static MySqlDataReader dataReader;
         private static DataSet dataSet;
         private static string[] uyeOlDizi;
+        private static int peridTemp;
+        private static string persifreTemp;
 
         public static void Baglan()
         {
@@ -37,6 +39,25 @@ namespace CarParkAutomatisation
 
             MessageBox.Show("Veritabanı Bağlantı Durumu: " + baglanti.State);
 
+        }
+
+        public static bool PersonelKontrol(string komutString, string[] personelGirisBilgi)
+        {
+            try
+            {
+                komut = new MySqlCommand(komutString, baglanti);
+                peridTemp = Convert.ToInt32(komut.ExecuteScalar());
+                if (peridTemp != Convert.ToInt32(personelGirisBilgi[0])) return false;
+                komutString = "select perSifre from personel where perSifre" + "='" + personelGirisBilgi[1] + "'";
+                komut.CommandText = komutString;
+                persifreTemp = komut.ExecuteScalar().ToString();
+                return persifreTemp==personelGirisBilgi[1];
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return false;
         }
 
         public static int PlakaGetir(string komutString)
