@@ -42,9 +42,10 @@ namespace CarParkAutomatisation
             // plakaNumLabel
             // 
             this.plakaNumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.plakaNumLabel.Location = new System.Drawing.Point(42, 125);
+            this.plakaNumLabel.Location = new System.Drawing.Point(56, 154);
+            this.plakaNumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.plakaNumLabel.Name = "plakaNumLabel";
-            this.plakaNumLabel.Size = new System.Drawing.Size(149, 34);
+            this.plakaNumLabel.Size = new System.Drawing.Size(199, 42);
             this.plakaNumLabel.TabIndex = 2;
             this.plakaNumLabel.Text = "Plaka Numarası";
             this.plakaNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -52,17 +53,19 @@ namespace CarParkAutomatisation
             // plakaNumTxt
             // 
             this.plakaNumTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
-            this.plakaNumTxt.Location = new System.Drawing.Point(206, 129);
+            this.plakaNumTxt.Location = new System.Drawing.Point(275, 159);
+            this.plakaNumTxt.Margin = new System.Windows.Forms.Padding(4);
             this.plakaNumTxt.Name = "plakaNumTxt";
-            this.plakaNumTxt.Size = new System.Drawing.Size(169, 26);
+            this.plakaNumTxt.Size = new System.Drawing.Size(224, 30);
             this.plakaNumTxt.TabIndex = 9;
             // 
             // uyeliksizGirisButton
             // 
             this.uyeliksizGirisButton.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.uyeliksizGirisButton.Location = new System.Drawing.Point(112, 209);
+            this.uyeliksizGirisButton.Location = new System.Drawing.Point(149, 257);
+            this.uyeliksizGirisButton.Margin = new System.Windows.Forms.Padding(4);
             this.uyeliksizGirisButton.Name = "uyeliksizGirisButton";
-            this.uyeliksizGirisButton.Size = new System.Drawing.Size(199, 70);
+            this.uyeliksizGirisButton.Size = new System.Drawing.Size(265, 86);
             this.uyeliksizGirisButton.TabIndex = 10;
             this.uyeliksizGirisButton.Text = "GİRİŞ";
             this.uyeliksizGirisButton.UseSelectable = true;
@@ -73,9 +76,10 @@ namespace CarParkAutomatisation
             this.uyeliksizGirisFormLabel.BackColor = System.Drawing.Color.Transparent;
             this.uyeliksizGirisFormLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.uyeliksizGirisFormLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.uyeliksizGirisFormLabel.Location = new System.Drawing.Point(55, 9);
+            this.uyeliksizGirisFormLabel.Location = new System.Drawing.Point(73, 11);
+            this.uyeliksizGirisFormLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uyeliksizGirisFormLabel.Name = "uyeliksizGirisFormLabel";
-            this.uyeliksizGirisFormLabel.Size = new System.Drawing.Size(309, 88);
+            this.uyeliksizGirisFormLabel.Size = new System.Drawing.Size(412, 108);
             this.uyeliksizGirisFormLabel.Style = MetroFramework.MetroColorStyle.Green;
             this.uyeliksizGirisFormLabel.TabIndex = 11;
             this.uyeliksizGirisFormLabel.Text = "ÜYELİKSİZ GİRİŞ EKRANI";
@@ -89,23 +93,25 @@ namespace CarParkAutomatisation
             this.homeButton.FlatAppearance.BorderSize = 0;
             this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.homeButton.Image = ((System.Drawing.Image) (resources.GetObject("homeButton.Image")));
-            this.homeButton.Location = new System.Drawing.Point(12, 12);
+            this.homeButton.Location = new System.Drawing.Point(16, 15);
+            this.homeButton.Margin = new System.Windows.Forms.Padding(4);
             this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(67, 62);
+            this.homeButton.Size = new System.Drawing.Size(89, 76);
             this.homeButton.TabIndex = 12;
             this.homeButton.UseVisualStyleBackColor = false;
             // 
             // UyeliksiGirisForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 291);
+            this.ClientSize = new System.Drawing.Size(595, 358);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.uyeliksizGirisFormLabel);
             this.Controls.Add(this.uyeliksizGirisButton);
             this.Controls.Add(this.plakaNumTxt);
             this.Controls.Add(this.plakaNumLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UyeliksiGirisForm";
             this.Text = "UyeliksiGirisForm";
             this.ResumeLayout(false);

@@ -1,0 +1,145 @@
+Index: CarParkAutomatisation/Veritabani.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.ComponentModel;\r\nusing System.Data;\r\nusing System.Drawing;\r\nusing System.Linq;\r\nusing System.Runtime.CompilerServices;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Windows.Forms;\r\nusing MetroFramework;\r\nusing MySql.Data.MySqlClient;\r\n\r\nnamespace CarParkAutomatisation\r\n{\r\n    public static class Veritabani\r\n    {\r\n        private static string baglantiString = \"server=127.0.0.1;uid=root;pwd=engtrq;database=vtproje\";\r\n        private static MySqlConnection baglanti;\r\n        private static MySqlCommand komut;\r\n        private static MySqlDataAdapter adaptor;\r\n        private static MySqlDataReader dataReader;\r\n        private static DataSet dataSet;\r\n\r\n        public static void Baglan()\r\n        {\r\n            try\r\n            {\r\n                baglanti = new MySqlConnection(baglantiString);\r\n                baglanti.Open();\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message);\r\n            }\r\n\r\n            MessageBox.Show(\"Veritabanı Bağlantı Durumu: \" + baglanti.State);\r\n\r\n        }\r\n\r\n        public static DataSet Sorgu(string komutString)\r\n        {\r\n            komut = new MySqlCommand(komutString, baglanti);\r\n            adaptor = new MySqlDataAdapter(komut);\r\n            dataSet = new DataSet();\r\n            adaptor.Fill(dataSet, \"sorguSonuc\");\r\n            return dataSet;\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CarParkAutomatisation/Veritabani.cs	(revision 619a55e91a276b834995eb66af7a8cb130398862)
++++ CarParkAutomatisation/Veritabani.cs	(date 1589840570374)
+@@ -15,7 +15,7 @@
+ {
+     public static class Veritabani
+     {
+-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=engtrq;database=vtproje";
++        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
+         private static MySqlConnection baglanti;
+         private static MySqlCommand komut;
+         private static MySqlDataAdapter adaptor;
+Index: CarParkAutomatisation/Form1.Designer.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace CarParkAutomatisation\r\n{\r\n    partial class Form1\r\n    {\r\n        /// <summary>\r\n        /// Required designer variable.\r\n        /// </summary>\r\n        private System.ComponentModel.IContainer components = null;\r\n\r\n        /// <summary>\r\n        /// Clean up any resources being used.\r\n        /// </summary>\r\n        /// <param name=\"disposing\">true if managed resources should be disposed; otherwise, false.</param>\r\n        protected override void Dispose(bool disposing)\r\n        {\r\n            if (disposing && (components != null))\r\n            {\r\n                components.Dispose();\r\n            }\r\n\r\n            base.Dispose(disposing);\r\n        }\r\n\r\n        #region Windows Form Designer generated code\r\n\r\n        /// <summary>\r\n        /// Required method for Designer support - do not modify\r\n        /// the contents of this method with the code editor.\r\n        /// </summary>\r\n        private void InitializeComponent()\r\n        {\r\n            this.components = new System.ComponentModel.Container();\r\n            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));\r\n            this.saatLabel = new MetroFramework.Controls.MetroLabel();\r\n            this.saatTimer = new System.Windows.Forms.Timer(this.components);\r\n            this.tarihLabel = new MetroFramework.Controls.MetroLabel();\r\n            this.uyeButton = new MetroFramework.Controls.MetroButton();\r\n            this.personelButton = new MetroFramework.Controls.MetroButton();\r\n            this.uyeliksizButton = new MetroFramework.Controls.MetroButton();\r\n            this.SuspendLayout();\r\n            // \r\n            // saatLabel\r\n            // \r\n            this.saatLabel.AutoSize = true;\r\n            this.saatLabel.BackColor = System.Drawing.Color.Cyan;\r\n            this.saatLabel.FontSize = MetroFramework.MetroLabelSize.Tall;\r\n            this.saatLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;\r\n            this.saatLabel.Location = new System.Drawing.Point(16, 11);\r\n            this.saatLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);\r\n            this.saatLabel.Name = \"saatLabel\";\r\n            this.saatLabel.Size = new System.Drawing.Size(134, 25);\r\n            this.saatLabel.TabIndex = 0;\r\n            this.saatLabel.Text = \"VarsayilanSaat\";\r\n            this.saatLabel.UseCustomBackColor = true;\r\n            // \r\n            // saatTimer\r\n            // \r\n            this.saatTimer.Interval = 1000;\r\n            this.saatTimer.Tick += new System.EventHandler(this.saatTimer_Tick);\r\n            // \r\n            // tarihLabel\r\n            // \r\n            this.tarihLabel.AutoSize = true;\r\n            this.tarihLabel.BackColor = System.Drawing.Color.Cyan;\r\n            this.tarihLabel.FontSize = MetroFramework.MetroLabelSize.Tall;\r\n            this.tarihLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;\r\n            this.tarihLabel.Location = new System.Drawing.Point(512, 11);\r\n            this.tarihLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);\r\n            this.tarihLabel.Name = \"tarihLabel\";\r\n            this.tarihLabel.Size = new System.Drawing.Size(139, 25);\r\n            this.tarihLabel.TabIndex = 1;\r\n            this.tarihLabel.Text = \"VarsayilanTarih\";\r\n            this.tarihLabel.UseCustomBackColor = true;\r\n            // \r\n            // uyeButton\r\n            // \r\n            this.uyeButton.FontSize = MetroFramework.MetroButtonSize.Tall;\r\n            this.uyeButton.Location = new System.Drawing.Point(0, 224);\r\n            this.uyeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);\r\n            this.uyeButton.Name = \"uyeButton\";\r\n            this.uyeButton.Size = new System.Drawing.Size(312, 139);\r\n            this.uyeButton.TabIndex = 2;\r\n            this.uyeButton.Text = \"Üye Girişi\";\r\n            this.uyeButton.UseSelectable = true;\r\n            this.uyeButton.Click += new System.EventHandler(this.uyeButton_Click);\r\n            // \r\n            // personelButton\r\n            // \r\n            this.personelButton.Dock = System.Windows.Forms.DockStyle.Bottom;\r\n            this.personelButton.FontSize = MetroFramework.MetroButtonSize.Tall;\r\n            this.personelButton.Location = new System.Drawing.Point(0, 444);\r\n            this.personelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);\r\n            this.personelButton.Name = \"personelButton\";\r\n            this.personelButton.Size = new System.Drawing.Size(692, 102);\r\n            this.personelButton.TabIndex = 3;\r\n            this.personelButton.Text = \"Personel Girişi\";\r\n            this.personelButton.UseSelectable = true;\r\n            this.personelButton.Click += new System.EventHandler(this.personelButton_Click);\r\n            // \r\n            // uyeliksizButton\r\n            // \r\n            this.uyeliksizButton.FontSize = MetroFramework.MetroButtonSize.Tall;\r\n            this.uyeliksizButton.Location = new System.Drawing.Point(364, 224);\r\n            this.uyeliksizButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);\r\n            this.uyeliksizButton.Name = \"uyeliksizButton\";\r\n            this.uyeliksizButton.Size = new System.Drawing.Size(312, 139);\r\n            this.uyeliksizButton.TabIndex = 4;\r\n            this.uyeliksizButton.Text = \"Üyeliksiz Giriş\";\r\n            this.uyeliksizButton.UseSelectable = true;\r\n            this.uyeliksizButton.Click += new System.EventHandler(this.uyeliksizButton_Click);\r\n            // \r\n            // Form1\r\n            // \r\n            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);\r\n            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;\r\n            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject(\"$this.BackgroundImage\")));\r\n            this.ClientSize = new System.Drawing.Size(692, 546);\r\n            this.Controls.Add(this.uyeliksizButton);\r\n            this.Controls.Add(this.personelButton);\r\n            this.Controls.Add(this.uyeButton);\r\n            this.Controls.Add(this.tarihLabel);\r\n            this.Controls.Add(this.saatLabel);\r\n            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;\r\n            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);\r\n            this.Name = \"Form1\";\r\n            this.Text = \"OtoparkOtomasyon\";\r\n            this.Load += new System.EventHandler(this.Form1_Load);\r\n            this.ResumeLayout(false);\r\n            this.PerformLayout();\r\n\r\n        }\r\n\r\n        private MetroFramework.Controls.MetroButton personelButton;\r\n        private MetroFramework.Controls.MetroLabel saatLabel;\r\n        private System.Windows.Forms.Timer saatTimer;\r\n        private MetroFramework.Controls.MetroLabel tarihLabel;\r\n        private MetroFramework.Controls.MetroButton uyeButton;\r\n        private MetroFramework.Controls.MetroButton uyeliksizButton;\r\n\r\n        #endregion\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CarParkAutomatisation/Form1.Designer.cs	(revision 619a55e91a276b834995eb66af7a8cb130398862)
++++ CarParkAutomatisation/Form1.Designer.cs	(date 1589840896782)
+@@ -30,7 +30,7 @@
+         private void InitializeComponent()
+         {
+             this.components = new System.ComponentModel.Container();
+-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
++            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CarParkAutomatisation.Form1));
+             this.saatLabel = new MetroFramework.Controls.MetroLabel();
+             this.saatTimer = new System.Windows.Forms.Timer(this.components);
+             this.tarihLabel = new MetroFramework.Controls.MetroLabel();
+@@ -38,9 +38,6 @@
+             this.personelButton = new MetroFramework.Controls.MetroButton();
+             this.uyeliksizButton = new MetroFramework.Controls.MetroButton();
+             this.SuspendLayout();
+-            // 
+-            // saatLabel
+-            // 
+             this.saatLabel.AutoSize = true;
+             this.saatLabel.BackColor = System.Drawing.Color.Cyan;
+             this.saatLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+@@ -52,14 +49,8 @@
+             this.saatLabel.TabIndex = 0;
+             this.saatLabel.Text = "VarsayilanSaat";
+             this.saatLabel.UseCustomBackColor = true;
+-            // 
+-            // saatTimer
+-            // 
+             this.saatTimer.Interval = 1000;
+             this.saatTimer.Tick += new System.EventHandler(this.saatTimer_Tick);
+-            // 
+-            // tarihLabel
+-            // 
+             this.tarihLabel.AutoSize = true;
+             this.tarihLabel.BackColor = System.Drawing.Color.Cyan;
+             this.tarihLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+@@ -71,49 +62,37 @@
+             this.tarihLabel.TabIndex = 1;
+             this.tarihLabel.Text = "VarsayilanTarih";
+             this.tarihLabel.UseCustomBackColor = true;
+-            // 
+-            // uyeButton
+-            // 
+             this.uyeButton.FontSize = MetroFramework.MetroButtonSize.Tall;
+             this.uyeButton.Location = new System.Drawing.Point(0, 224);
+-            this.uyeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
++            this.uyeButton.Margin = new System.Windows.Forms.Padding(4);
+             this.uyeButton.Name = "uyeButton";
+             this.uyeButton.Size = new System.Drawing.Size(312, 139);
+             this.uyeButton.TabIndex = 2;
+             this.uyeButton.Text = "Üye Girişi";
+             this.uyeButton.UseSelectable = true;
+             this.uyeButton.Click += new System.EventHandler(this.uyeButton_Click);
+-            // 
+-            // personelButton
+-            // 
+             this.personelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+             this.personelButton.FontSize = MetroFramework.MetroButtonSize.Tall;
+             this.personelButton.Location = new System.Drawing.Point(0, 444);
+-            this.personelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
++            this.personelButton.Margin = new System.Windows.Forms.Padding(4);
+             this.personelButton.Name = "personelButton";
+             this.personelButton.Size = new System.Drawing.Size(692, 102);
+             this.personelButton.TabIndex = 3;
+             this.personelButton.Text = "Personel Girişi";
+             this.personelButton.UseSelectable = true;
+             this.personelButton.Click += new System.EventHandler(this.personelButton_Click);
+-            // 
+-            // uyeliksizButton
+-            // 
+             this.uyeliksizButton.FontSize = MetroFramework.MetroButtonSize.Tall;
+             this.uyeliksizButton.Location = new System.Drawing.Point(364, 224);
+-            this.uyeliksizButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
++            this.uyeliksizButton.Margin = new System.Windows.Forms.Padding(4);
+             this.uyeliksizButton.Name = "uyeliksizButton";
+             this.uyeliksizButton.Size = new System.Drawing.Size(312, 139);
+             this.uyeliksizButton.TabIndex = 4;
+             this.uyeliksizButton.Text = "Üyeliksiz Giriş";
+             this.uyeliksizButton.UseSelectable = true;
+             this.uyeliksizButton.Click += new System.EventHandler(this.uyeliksizButton_Click);
+-            // 
+-            // Form1
+-            // 
+             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
++            this.BackgroundImage = ((System.Drawing.Image) (resources.GetObject("$this.BackgroundImage")));
+             this.ClientSize = new System.Drawing.Size(692, 546);
+             this.Controls.Add(this.uyeliksizButton);
+             this.Controls.Add(this.personelButton);
+@@ -127,7 +106,6 @@
+             this.Load += new System.EventHandler(this.Form1_Load);
+             this.ResumeLayout(false);
+             this.PerformLayout();
+-
+         }
+ 
+         private MetroFramework.Controls.MetroButton personelButton;
+Index: .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ContentModelStore\">\r\n    <e p=\"C:\\Users\\Emir\\AppData\\local\\JetBrains\\Rider2020.1\\extResources\" t=\"IncludeRecursive\" />\r\n    <e p=\"C:\\Users\\Emir\\AppData\\local\\JetBrains\\Rider2020.1\\resharper-host\\local\\Transient\\ReSharperHost\\v201\\SolutionCaches\\_CarParkAutomatisation.-331595666.00\" t=\"ExcludeRecursive\" />\r\n    <e p=\"C:\\Users\\Emir\\RiderProjects\\CarParkAutomatisationV11\" t=\"IncludeFlat\">\r\n      <e p=\"CarParkAutomatisation\" t=\"IncludeRecursive\">\r\n        <e p=\"App.config\" t=\"Include\" />\r\n        <e p=\"bin\" t=\"ExcludeRecursive\" />\r\n        <e p=\"CarParkAutomatisation.csproj\" t=\"IncludeRecursive\" />\r\n        <e p=\"Form1.cs\" t=\"Include\" />\r\n        <e p=\"Form1.Designer.cs\" t=\"Include\" />\r\n        <e p=\"Form1.resx\" t=\"Include\" />\r\n        <e p=\"obj\" t=\"ExcludeRecursive\" />\r\n        <e p=\"packages.config\" t=\"Include\" />\r\n        <e p=\"PersonelForm.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.resx\" t=\"Include\" />\r\n        <e p=\"Program.cs\" t=\"Include\" />\r\n        <e p=\"Properties\" t=\"Include\">\r\n          <e p=\"AssemblyInfo.cs\" t=\"Include\" />\r\n          <e p=\"Resources.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Resources.resx\" t=\"Include\" />\r\n          <e p=\"Settings.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Settings.settings\" t=\"Include\" />\r\n        </e>\r\n        <e p=\"UyeGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"Veritabani.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.Designer.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.resx\" t=\"Include\" />\r\n      </e>\r\n      <e p=\"CarParkAutomatisation.sln\" t=\"IncludeFlat\" />\r\n      <e p=\"packages\" t=\"ExcludeRecursive\" />\r\n    </e>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(revision 619a55e91a276b834995eb66af7a8cb130398862)
++++ .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(date 1589840257455)
+@@ -1,9 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ContentModelStore">
+-    <e p="C:\Users\Emir\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+-    <e p="C:\Users\Emir\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_CarParkAutomatisation.-331595666.00" t="ExcludeRecursive" />
+-    <e p="C:\Users\Emir\RiderProjects\CarParkAutomatisationV11" t="IncludeFlat">
++    <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
++    <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_CarParkAutomatisation.1018619674.00" t="ExcludeRecursive" />
++    <e p="D:\zahid\bsm\jbRiderProjects\vtProje" t="IncludeFlat">
+       <e p="CarParkAutomatisation" t="IncludeRecursive">
+         <e p="App.config" t="Include" />
+         <e p="bin" t="ExcludeRecursive" />
