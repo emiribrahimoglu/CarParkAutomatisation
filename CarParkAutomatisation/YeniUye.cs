@@ -32,6 +32,12 @@ namespace CarParkAutomatisation
             MessageBox.Show(uyeOlParametreler);
             Veritabani.KayitOlInsert(sorguCumlesi, uyeOlParametreler);
             
+            //uye olduktan sonra yeniden plaka girdirip ondan sonra otoparkyerlesimini sayfasına oradan gecilecek
+            UyeliksiGirisForm uyeliksiGirisForm = new UyeliksiGirisForm();
+            uyeliksiGirisForm.Show();
+            
+
+
         }
     }
 }

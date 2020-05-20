@@ -37,6 +37,7 @@ namespace CarParkAutomatisation
             this.uyeliksizGirisButton = new MetroFramework.Controls.MetroButton();
             this.uyeliksizGirisFormLabel = new MetroFramework.Controls.MetroLabel();
             this.homeButton = new System.Windows.Forms.Button();
+            this.uyeolLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // plakaNumLabel
@@ -62,7 +63,7 @@ namespace CarParkAutomatisation
             // uyeliksizGirisButton
             // 
             this.uyeliksizGirisButton.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.uyeliksizGirisButton.Location = new System.Drawing.Point(149, 257);
+            this.uyeliksizGirisButton.Location = new System.Drawing.Point(154, 230);
             this.uyeliksizGirisButton.Margin = new System.Windows.Forms.Padding(4);
             this.uyeliksizGirisButton.Name = "uyeliksizGirisButton";
             this.uyeliksizGirisButton.Size = new System.Drawing.Size(265, 86);
@@ -100,11 +101,21 @@ namespace CarParkAutomatisation
             this.homeButton.TabIndex = 12;
             this.homeButton.UseVisualStyleBackColor = false;
             // 
+            // uyeolLbl
+            // 
+            this.uyeolLbl.Location = new System.Drawing.Point(306, 193);
+            this.uyeolLbl.Name = "uyeolLbl";
+            this.uyeolLbl.Size = new System.Drawing.Size(179, 23);
+            this.uyeolLbl.TabIndex = 13;
+            this.uyeolLbl.Text = "Üye Olmak İster Misiniz?";
+            this.uyeolLbl.Click += new System.EventHandler(this.uyeolLbl_Click);
+            // 
             // UyeliksiGirisForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 358);
+            this.Controls.Add(this.uyeolLbl);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.uyeliksizGirisFormLabel);
             this.Controls.Add(this.uyeliksizGirisButton);
@@ -123,6 +134,7 @@ namespace CarParkAutomatisation
         private System.Windows.Forms.TextBox plakaNumTxt;
         private MetroFramework.Controls.MetroButton uyeliksizGirisButton;
         private MetroFramework.Controls.MetroLabel uyeliksizGirisFormLabel;
+        private System.Windows.Forms.Label uyeolLbl;
 
         #endregion
     }

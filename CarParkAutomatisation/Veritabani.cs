@@ -24,6 +24,11 @@ namespace CarParkAutomatisation
         private static string[] uyeOlDizi;
         private static int idTemp;
         private static string sifreTemp;
+        // fatura fonk icin gerekli degiskenler:
+        private static DateTime girisSaati;
+        private static string sorgu1;
+        private static string sorgu2;
+        private static string sorgu3;
 
         public static void Baglan()
         {
@@ -150,6 +155,44 @@ namespace CarParkAutomatisation
             {
                 MessageBox.Show(e.Message + Environment.NewLine + e.Data);
             }
+        }
+
+        public static void Faturalandir(string aracplaka)
+        {
+            
+            int plaka2 = 0;
+            int kisiId = 0;
+            //bu fonksiyon, yer seçimi tiklandiginda acilmasi icin her butonun click olayına eklenecektir
+            girisSaati = DateTime.Now;
+            // sorguCumlesi = "select plakaId from plakalar where plaka" + "='"+plakaNumTxt.Text.ToUpper()+"'";
+            // plakaid = Veritabani.PlakaGetir(sorguCumlesi);
+            UyeliksiGirisForm ugf = new UyeliksiGirisForm();
+            sorgu1 = "select plakaId from plakalar where plaka" + "='"+aracplaka+"'";
+            komut = new MySqlCommand(sorgu1,baglanti);
+            plaka2 = Convert.ToInt32(komut.ExecuteScalar());
+            MessageBox.Show("plaka2:" + plaka2);
+            
+            // kişi üye ise ucretlendirmeler tablosuna gidip ona uygun tarifeyi getirecek
+           // sorgu2 = "select plakaId from plakalar where plaka" + aracplaka; // kişinin plakaId si alındı.
+           // komut = new MySqlCommand(sorgu2,baglanti);
+
+           sorgu3 = "select uyeId from uyeler where plakaId" + "='"+plaka2+"'";
+           komut = new MySqlCommand(sorgu3,baglanti);
+           kisiId = Convert.ToInt32(komut.ExecuteScalar());
+           MessageBox.Show("kişi id:" + kisiId);
+
+           if (kisiId!=0)// uye demektir
+           {
+               // uye ücret tarifesi verilecek
+           }
+           else 
+           {
+               // normal ucret tarifesi verilecek
+           }
+
+
+
+
         }
 
     }

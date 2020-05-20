@@ -14,6 +14,9 @@
         <e p="Form1.Designer.cs" t="Include" />
         <e p="Form1.resx" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
+        <e p="OtoparkYerlesimi.cs" t="Include" />
+        <e p="OtoparkYerlesimi.Designer.cs" t="Include" />
+        <e p="OtoparkYerlesimi.resx" t="Include" />
         <e p="packages.config" t="Include" />
         <e p="PersonelForm.cs" t="Include" />
         <e p="PersonelForm.Designer.cs" t="Include" />
