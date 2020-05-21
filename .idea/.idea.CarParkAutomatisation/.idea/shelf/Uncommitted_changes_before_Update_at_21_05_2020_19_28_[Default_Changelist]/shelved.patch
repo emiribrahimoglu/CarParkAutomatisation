@@ -1,0 +1,26 @@
+Index: .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ContentModelStore\">\r\n    <e p=\"C:\\Users\\PC\\AppData\\local\\JetBrains\\Rider2020.1\\extResources\" t=\"IncludeRecursive\" />\r\n    <e p=\"C:\\Users\\PC\\AppData\\local\\JetBrains\\Rider2020.1\\resharper-host\\local\\Transient\\ReSharperHost\\v201\\SolutionCaches\\_CarParkAutomatisation.1018619674.00\" t=\"ExcludeRecursive\" />\r\n    <e p=\"C:\\Users\\PC\\AppData\\Roaming\\JetBrains\\Rider2020.1\\consoles\\db\" t=\"IncludeRecursive\" />\r\n    <e p=\"C:\\Users\\PC\\AppData\\Roaming\\JetBrains\\Rider2020.1\\extensions\" t=\"IncludeRecursive\" />\r\n    <e p=\"D:\\zahid\\bsm\\jbRiderProjects\\vtProje\" t=\"IncludeFlat\">\r\n      <e p=\"CarParkAutomatisation\" t=\"IncludeRecursive\">\r\n        <e p=\"App.config\" t=\"Include\" />\r\n        <e p=\"bin\" t=\"ExcludeRecursive\" />\r\n        <e p=\"CarParkAutomatisation.csproj\" t=\"IncludeRecursive\" />\r\n        <e p=\"Form1.cs\" t=\"Include\" />\r\n        <e p=\"Form1.Designer.cs\" t=\"Include\" />\r\n        <e p=\"Form1.resx\" t=\"Include\" />\r\n        <e p=\"obj\" t=\"ExcludeRecursive\" />\r\n        <e p=\"packages.config\" t=\"Include\" />\r\n        <e p=\"PersonelForm.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.resx\" t=\"Include\" />\r\n        <e p=\"Program.cs\" t=\"Include\" />\r\n        <e p=\"Properties\" t=\"Include\">\r\n          <e p=\"AssemblyInfo.cs\" t=\"Include\" />\r\n          <e p=\"Resources.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Resources.resx\" t=\"Include\" />\r\n          <e p=\"Settings.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Settings.settings\" t=\"Include\" />\r\n        </e>\r\n        <e p=\"UyeGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"Veritabani.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.Designer.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.resx\" t=\"Include\" />\r\n      </e>\r\n      <e p=\"CarParkAutomatisation.sln\" t=\"IncludeFlat\" />\r\n      <e p=\"packages\" t=\"ExcludeRecursive\" />\r\n    </e>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(revision e3f1aee72b0993cbfd67b9967e685212dc5cb506)
++++ .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(date 1590066633580)
+@@ -1,11 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ContentModelStore">
+-    <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+-    <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_CarParkAutomatisation.1018619674.00" t="ExcludeRecursive" />
+-    <e p="C:\Users\PC\AppData\Roaming\JetBrains\Rider2020.1\consoles\db" t="IncludeRecursive" />
+-    <e p="C:\Users\PC\AppData\Roaming\JetBrains\Rider2020.1\extensions" t="IncludeRecursive" />
+-    <e p="D:\zahid\bsm\jbRiderProjects\vtProje" t="IncludeFlat">
++    <e p="C:\Users\Emir\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
++    <e p="C:\Users\Emir\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_CarParkAutomatisation.-331595666.00" t="ExcludeRecursive" />
++    <e p="C:\Users\Emir\AppData\Roaming\JetBrains\Rider2020.1\consoles\db" t="IncludeRecursive" />
++    <e p="C:\Users\Emir\RiderProjects\CarParkAutomatisationV11" t="IncludeFlat">
+       <e p="CarParkAutomatisation" t="IncludeRecursive">
+         <e p="App.config" t="Include" />
+         <e p="bin" t="ExcludeRecursive" />
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_16_36__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_16_36__Default_Changelist_.xml

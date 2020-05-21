@@ -35,9 +35,6 @@ namespace CarParkAutomatisation
             //uye olduktan sonra yeniden plaka girdirip ondan sonra otoparkyerlesimini sayfasına oradan gecilecek
             UyeliksiGirisForm uyeliksiGirisForm = new UyeliksiGirisForm();
             uyeliksiGirisForm.Show();
-            
-
-
         }
     }
 }

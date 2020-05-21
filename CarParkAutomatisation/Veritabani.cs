@@ -192,7 +192,6 @@ namespace CarParkAutomatisation
                 sorgu2 = "select ucretId from ucretlendirmeler where ucretId=1";
                 komut = new MySqlCommand(sorgu2,baglanti);
                 ucretid = Convert.ToInt32(komut.ExecuteScalar());
-
             }
             else
             {
@@ -224,33 +223,22 @@ namespace CarParkAutomatisation
             komut.Parameters.Add("@girisSaati", MySqlDbType.DateTime).Value = girisSaati;
             komut.Parameters.Add("@ucretId", MySqlDbType.Int32).Value = ucretid;
             komut.ExecuteNonQuery();
-            
-
-
-
-
-
-
-
-
-
-
-
         }
 
-        public static void FaturaKes(string sorgu,DateTime giris)
+        public static void FaturaKes(string sorgu, string aracplaka)
         {
             komut = new MySqlCommand(sorgu,baglanti);
             girisSaati = Convert.ToDateTime(komut.ExecuteScalar());
-            
             if (girisSaati.HasValue)
             {
                 cikisSaati = DateTime.Now; // bu deger alindi, veritabanina girilecek
                 TimeSpan? parkSuresi = cikisSaati - girisSaati;
                 TimeSpan timeSpan = parkSuresi.Value;
-                 // DateTime tmp = Convert.ToDateTime(timeSpan); 
+                
+                // DateTime tmp = Convert.ToDateTime(timeSpan); 
                 // string saat = Convert.ToString(timeSpan.Hours);
                 // string dakika = Convert.ToString(timeSpan.Minutes);
+                
                 double toplamParkSuresi = timeSpan.TotalMinutes; // park suresi de alindi veritabanına girilebilir.
 
                 //komut.CommandText = "insert into girisCikis (cikisSaati, parkSuresi) values(@cikisSaati, @parkSuresi);";
@@ -258,9 +246,9 @@ namespace CarParkAutomatisation
                 //komut.Parameters.Add("@parkSuresi", MySqlDbType.Double).Value = toplamParkSuresi;
                 //komut.ExecuteNonQuery(); // girisCikis tablosu tamamen doldu. 
                 
-               // komut.CommandText = "update girisCikis set cikisSaati" + "="+
-
-
+                 komut.CommandText = "update girisCikis "+"set cikisSuresi="+cikisSaati+", parkSuresi=" +
+                                     toplamParkSuresi+"where faturaId=(select max(faturaId) from girisCikis where plakaId='"+aracplaka+"'";
+                 komut.ExecuteNonQuery();
             }
 
         }
