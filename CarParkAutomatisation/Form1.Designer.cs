@@ -100,7 +100,7 @@
             // uyeliksizButton
             // 
             this.uyeliksizButton.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.uyeliksizButton.Location = new System.Drawing.Point(364, 224);
+            this.uyeliksizButton.Location = new System.Drawing.Point(357, 224);
             this.uyeliksizButton.Margin = new System.Windows.Forms.Padding(4);
             this.uyeliksizButton.Name = "uyeliksizButton";
             this.uyeliksizButton.Size = new System.Drawing.Size(312, 139);

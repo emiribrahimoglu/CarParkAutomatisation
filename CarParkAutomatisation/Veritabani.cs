@@ -25,10 +25,18 @@ namespace CarParkAutomatisation
         private static int idTemp;
         private static string sifreTemp;
         // fatura fonk icin gerekli degiskenler:
-        private static DateTime girisSaati;
+        private static DateTime? girisSaati;
+        private static DateTime? cikisSaati;
         private static string sorgu1;
         private static string sorgu2;
         private static string sorgu3;
+        private static string sorgu4;
+        private static string sorgu5;
+        private static string sorgu6;
+        private static string sorgu7;
+        
+        
+        
 
         public static void Baglan()
         {
@@ -157,41 +165,103 @@ namespace CarParkAutomatisation
             }
         }
 
-        public static void Faturalandir(string aracplaka)
+        public static void Faturalandir(string aracplaka,string yer)
         {
+            //plakaId, parkId, girisSaati, ucret
             
             int plaka2 = 0;
             int kisiId = 0;
+            double ucretid = 0;
+            bool parkyeridurum = true;
+            int parkid = 0;
+            
             //bu fonksiyon, yer seçimi tiklandiginda acilmasi icin her butonun click olayına eklenecektir
             girisSaati = DateTime.Now;
-            // sorguCumlesi = "select plakaId from plakalar where plaka" + "='"+plakaNumTxt.Text.ToUpper()+"'";
-            // plakaid = Veritabani.PlakaGetir(sorguCumlesi);
-            UyeliksiGirisForm ugf = new UyeliksiGirisForm();
             sorgu1 = "select plakaId from plakalar where plaka" + "='"+aracplaka+"'";
             komut = new MySqlCommand(sorgu1,baglanti);
-            plaka2 = Convert.ToInt32(komut.ExecuteScalar());
+            plaka2 = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan aracın plakaId si alindi.
             MessageBox.Show("plaka2:" + plaka2);
             
-            // kişi üye ise ucretlendirmeler tablosuna gidip ona uygun tarifeyi getirecek
-           // sorgu2 = "select plakaId from plakalar where plaka" + aracplaka; // kişinin plakaId si alındı.
-           // komut = new MySqlCommand(sorgu2,baglanti);
+            sorgu3 = "select uyeId from uyeler where plakaId" + "='"+plaka2+"'"; 
+            komut = new MySqlCommand(sorgu3,baglanti);
+            kisiId = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan arac sahibinin  uyeId si alindi.
+            MessageBox.Show("kişi id:" + kisiId);
 
-           sorgu3 = "select uyeId from uyeler where plakaId" + "='"+plaka2+"'";
-           komut = new MySqlCommand(sorgu3,baglanti);
-           kisiId = Convert.ToInt32(komut.ExecuteScalar());
-           MessageBox.Show("kişi id:" + kisiId);
+            if (kisiId!=0) // kisiye kesilecek ucret belirlendi. 
+            {
+                sorgu2 = "select ucretId from ucretlendirmeler where ucretId=1";
+                komut = new MySqlCommand(sorgu2,baglanti);
+                ucretid = Convert.ToInt32(komut.ExecuteScalar());
 
-           if (kisiId!=0)// uye demektir
-           {
-               // uye ücret tarifesi verilecek
-           }
-           else 
-           {
-               // normal ucret tarifesi verilecek
-           }
+            }
+            else
+            {
+                sorgu4 = "select ucretid from ucretlendirmeler where ucretId=2";
+                komut = new MySqlCommand(sorgu4,baglanti);
+                ucretid = Convert.ToInt32(komut.ExecuteScalar());
+            }
+            
+            //parkyerleri tablosuna park yerini ve park durumunu dolu olarak gir.
+
+            sorgu5 = "insert into parkyerleri (parkyeri, parkyeridurum) values(@parkyeri, @parkyeridurum);";
+            komut = new MySqlCommand(sorgu5,baglanti);
+            komut.Parameters.Add("@parkyeri", MySqlDbType.VarChar).Value = yer;
+            komut.Parameters.Add("@parkyeridurum", MySqlDbType.UInt16).Value = parkyeridurum;
+            komut.ExecuteNonQuery();
+            
+            // park yeri girildi. simdi o park yerine ait id alınacak.
+            sorgu6 = "select parkId from parkyerleri where parkyeri" + "='"+yer+"'";
+            komut = new MySqlCommand(sorgu6,baglanti);
+            parkid = Convert.ToInt32(komut.ExecuteScalar()); // aracın park edildigi id alindi.
+            
+            // toplanan bilgileri o plakaId sayesinde giriscikis tablosuna gir.
+
+            sorgu7 =
+                "insert into giriscikis (plakaId, parkId, girisSaati, ucretId) values(@plakaId, @parkId, @girisSaati, @ucretId);";
+            komut = new MySqlCommand(sorgu7,baglanti);
+            komut.Parameters.Add("@plakaId", MySqlDbType.Int32).Value = plaka2;
+            komut.Parameters.Add("@parkId", MySqlDbType.Int32).Value = parkid;
+            komut.Parameters.Add("@girisSaati", MySqlDbType.DateTime).Value = girisSaati;
+            komut.Parameters.Add("@ucretId", MySqlDbType.Int32).Value = ucretid;
+            komut.ExecuteNonQuery();
+            
 
 
 
+
+
+
+
+
+
+
+
+        }
+
+        public static void FaturaKes(string sorgu,DateTime giris)
+        {
+            komut = new MySqlCommand(sorgu,baglanti);
+            girisSaati = Convert.ToDateTime(komut.ExecuteScalar());
+            
+            if (girisSaati.HasValue)
+            {
+                cikisSaati = DateTime.Now; // bu deger alindi, veritabanina girilecek
+                TimeSpan? parkSuresi = cikisSaati - girisSaati;
+                TimeSpan timeSpan = parkSuresi.Value;
+                 // DateTime tmp = Convert.ToDateTime(timeSpan); 
+                // string saat = Convert.ToString(timeSpan.Hours);
+                // string dakika = Convert.ToString(timeSpan.Minutes);
+                double toplamParkSuresi = timeSpan.TotalMinutes; // park suresi de alindi veritabanına girilebilir.
+
+                //komut.CommandText = "insert into girisCikis (cikisSaati, parkSuresi) values(@cikisSaati, @parkSuresi);";
+                //komut.Parameters.Add("@cikisSaati", MySqlDbType.DateTime).Value = cikisSaati;
+                //komut.Parameters.Add("@parkSuresi", MySqlDbType.Double).Value = toplamParkSuresi;
+                //komut.ExecuteNonQuery(); // girisCikis tablosu tamamen doldu. 
+                
+               // komut.CommandText = "update girisCikis set cikisSaati" + "="+
+
+
+            }
 
         }
 

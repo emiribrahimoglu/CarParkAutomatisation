@@ -28,7 +28,7 @@ namespace CarParkAutomatisation
 
 
 
-
+            // faturalandirilacak plakayı tutmak icin
             UyeliksiGirisForm.duzplaka = plakaNumTxt.Text.ToUpper();
             
             sorguCumlesi = "select plakaId from plakalar where plaka" + "='"+plakaNumTxt.Text.ToUpper()+"'";
