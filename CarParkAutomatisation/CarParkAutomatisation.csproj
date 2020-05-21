@@ -116,6 +116,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FaturaGoster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FaturaGoster.Designer.cs">
+      <DependentUpon>FaturaGoster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     <Compile Include="YeniUye.Designer.cs">
       <DependentUpon>YeniUye.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FaturaGoster.resx">
+      <DependentUpon>FaturaGoster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

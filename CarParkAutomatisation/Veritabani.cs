@@ -35,9 +35,9 @@ namespace CarParkAutomatisation
         private static string sorgu6;
         private static string sorgu7;
         
+        // faturagoster icin gerekli degiskenler
+        private static string parkyeri;
         
-        
-
         public static void Baglan()
         {
             try
@@ -233,22 +233,39 @@ namespace CarParkAutomatisation
             {
                 cikisSaati = DateTime.Now; // bu deger alindi, veritabanina girilecek
                 TimeSpan? parkSuresi = cikisSaati - girisSaati;
+                MessageBox.Show("?parksuresi: "+ parkSuresi);
                 TimeSpan timeSpan = parkSuresi.Value;
+                MessageBox.Show("timespan degeri: "+ timeSpan);
                 
                 // DateTime tmp = Convert.ToDateTime(timeSpan); 
                 // string saat = Convert.ToString(timeSpan.Hours);
                 // string dakika = Convert.ToString(timeSpan.Minutes);
                 
-                double toplamParkSuresi = timeSpan.TotalMinutes; // park suresi de alindi veritabanına girilebilir.
+                double toplamParkSuresi = timeSpan.Minutes; // park suresi de alindi veritabanına girilebilir.
 
                 //komut.CommandText = "insert into girisCikis (cikisSaati, parkSuresi) values(@cikisSaati, @parkSuresi);";
                 //komut.Parameters.Add("@cikisSaati", MySqlDbType.DateTime).Value = cikisSaati;
                 //komut.Parameters.Add("@parkSuresi", MySqlDbType.Double).Value = toplamParkSuresi;
                 //komut.ExecuteNonQuery(); // girisCikis tablosu tamamen doldu. 
                 
-                 komut.CommandText = "update girisCikis "+"set cikisSuresi="+cikisSaati+", parkSuresi=" +
-                                     toplamParkSuresi+"where faturaId=(select max(faturaId) from girisCikis where plakaId='"+aracplaka+"'";
+                 komut.CommandText = "update girisCikis "+"set cikisSaati='"+cikisSaati+"' and parkSuresi=" +
+                                     toplamParkSuresi+" where faturaId=(select max(faturaId) from girisCikis where plakaId='"+aracplaka+"';";
+                 MessageBox.Show(komut.CommandText);
                  komut.ExecuteNonQuery();
+                 
+                 komut.CommandText =
+                     "select ucret from ucretlendirmeler,girisCikis where girisCikis.faturaId"+"="+"(select "+"max(faturaId) "+"from girisCikis "+
+                     "where plakaId=" + "'" + aracplaka + "') and girisCikis.ucretId=ucretlendirmeler.ucretId;";
+                 MessageBox.Show(komut.CommandText);
+                 double tarife = Convert.ToDouble(komut.ExecuteScalar());
+                 double ucret = (toplamParkSuresi / 60) * tarife;
+                 if (toplamParkSuresi%60>30)
+                 {
+                     ucret += tarife / 2;
+                 }
+                 
+                 FaturaGoster faturaGoster = new FaturaGoster(aracplaka,parkyeri,girisSaati.Value,cikisSaati.Value,toplamParkSuresi,ucret);
+                 faturaGoster.Show();
             }
 
         }
