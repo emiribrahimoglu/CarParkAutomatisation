@@ -58,6 +58,7 @@ namespace CarParkAutomatisation
             //otoparkyerlesimi sayfasına gecis
             OtoparkYerlesimi otoparkYerlesimi = new OtoparkYerlesimi();
             otoparkYerlesimi.Show();
+            Close();
             // su anda plakami girdim ve yer secimi yapicam .
             // yer secimi yaptiktan sonra tiklanan her buton ayni fonksiyona gitsin ve
             // fonksiyonun icinde

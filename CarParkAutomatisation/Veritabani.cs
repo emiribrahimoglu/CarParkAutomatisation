@@ -218,9 +218,9 @@ namespace CarParkAutomatisation
             if (girisSaati != DateTime.MinValue)
             {
                 DateTime cikisSaati = DateTime.Now; // bu deger alindi, veritabanina girilecek
-                MessageBox.Show("Çıkış saati:: " + cikisSaati + Environment.NewLine + "Giriş Saati: "+ girisSaati);
+                MessageBox.Show("Giriş Saati: " + girisSaati + Environment.NewLine + "Çıkış Saati: "+ cikisSaati);
                 cikisSaati = cikisSaati.AddHours(2).AddMinutes(30);
-                double parkSuresi = cikisSaati.Subtract(girisSaati).TotalMinutes;
+                int parkSuresi = Convert.ToInt32(cikisSaati.Subtract(girisSaati).TotalMinutes);
                 MessageBox.Show("Dakika tipinde park süresi: " + parkSuresi);
                 
                 komut.CommandText = "select plakaId from plakalar where plaka=@aracplaka";
@@ -242,13 +242,13 @@ namespace CarParkAutomatisation
                      "select ucret from ucretlendirmeler,girisCikis where girisCikis.faturaId=(select max(faturaId) from girisCikis where plakaId=@aracplakaid and girisCikis.ucretId=ucretlendirmeler.ucretId)";
                 MessageBox.Show("Select Komutu:: "+komut.CommandText);
                 double tarife = Convert.ToDouble(komut.ExecuteScalar());
-                double ucret = (parkSuresi / 60) * tarife;
+                double ucret = Convert.ToDouble(parkSuresi) / 60 * tarife;
                 if (parkSuresi%60>30)
                 {
-                     ucret += tarife / 2;
+                     ucret += Convert.ToInt32(tarife / 2);
                 }
                  
-                FaturaGoster faturaGoster = new FaturaGoster(aracplakaid,parkyeri,girisSaati,cikisSaati,parkSuresi,ucret);
+                FaturaGoster faturaGoster = new FaturaGoster(aracplaka,parkyeri,girisSaati,cikisSaati,parkSuresi,ucret);
                 faturaGoster.Show();
             }
 

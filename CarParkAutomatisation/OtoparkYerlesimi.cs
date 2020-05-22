@@ -15,10 +15,11 @@ namespace CarParkAutomatisation
         {
             string yer = a1Btn.Text;
             Veritabani.Faturalandir(aracplaka,yer);
+            Close();
             // faturanın cikis saati ve parksureis haric tum bilgileri dolduruldu.
             //simdi butona tıklandıktan sonra tekrardan ilk ekrana donülecek.
-            Form1 form1 = new Form1();
-            form1.Show();
+            //Form1 form1 = new Form1();
+            //form1.Show();
             // buradan "otoparktan çıkış" butonuna basılınca da cikis islemi baslayacak.
         }
 
@@ -29,6 +30,7 @@ namespace CarParkAutomatisation
             int aracplakaid = Veritabani.PlakaGetir(sorgu);
             sorgu = "select girisSaati from girisCikis where faturaId" + "=(select max(faturaId) from girisCikis where plakaId"+"='"+aracplakaid+"')";
             Veritabani.FaturaKes(sorgu, aracplaka);
+            Close();
         }
     }
     
