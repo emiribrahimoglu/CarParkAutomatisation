@@ -248,7 +248,7 @@ namespace CarParkAutomatisation
                      ucret += Convert.ToInt32(tarife / 2);
                 }
                  
-                FaturaGoster faturaGoster = new FaturaGoster(aracplaka,parkyeri,girisSaati,cikisSaati,parkSuresi,ucret);
+                FaturaGoster faturaGoster = new FaturaGoster(aracplaka,parkyeri,girisSaati,cikisSaati, parkSuresi,ucret);
                 faturaGoster.Show();
             }
 
