@@ -15,7 +15,7 @@ namespace CarParkAutomatisation
 {
     public static class Veritabani
     {
-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=engtrq;database=vtproje";
+        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
         private static MySqlConnection baglanti;
         private static MySqlCommand komut;
         private static MySqlDataAdapter adaptor;
@@ -24,6 +24,10 @@ namespace CarParkAutomatisation
         private static string[] uyeOlDizi;
         private static int idTemp;
         private static string sifreTemp;
+        
+        //
+        private static string sorgu1;
+        private static string sorgu2;
         
         // faturagoster icin gerekli degiskenler
         private static string parkyeri;
@@ -189,16 +193,14 @@ namespace CarParkAutomatisation
                 ucretid = Convert.ToInt32(komut.ExecuteScalar());
             }
             
-            //parkyerleri tablosuna park yerini ve park durumunu dolu olarak gir.
-
-            komut.CommandText = "insert into parkyerleri (parkyeri, parkyeridurum) values(@parkyeri, @parkyeridurum);";
-            komut.Parameters.Add("@parkyeri", MySqlDbType.VarChar).Value = yer;
-            komut.Parameters.Add("@parkyeridurum", MySqlDbType.UInt16).Value = parkyeridurum;
-            komut.ExecuteNonQuery();
             
+            
+           
             // park yeri girildi. simdi o park yerine ait id alınacak.
             komut.CommandText = "select parkId from parkyerleri where parkyeri" + "='"+yer+"'";
             parkid = Convert.ToInt32(komut.ExecuteScalar()); // aracın park edildigi id alindi.
+
+            
             
             // toplanan bilgileri o plakaId sayesinde giriscikis tablosuna gir.
 
@@ -209,6 +211,7 @@ namespace CarParkAutomatisation
             komut.Parameters.Add("@girisSaati", MySqlDbType.DateTime).Value = girisSaati;
             komut.Parameters.Add("@ucretId", MySqlDbType.Int32).Value = ucretid;
             komut.ExecuteNonQuery();
+            
         }
 
         public static void FaturaKes(string sorgu, string aracplaka)
@@ -253,6 +256,24 @@ namespace CarParkAutomatisation
             }
 
         }
+
+        public static void AraciCek(string sorgu,int cekilenid,int parkid)
+        {
+            komut = new MySqlCommand(sorgu,baglanti);
+            komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
+            komut.Parameters.Add("@cekilenid", MySqlDbType.Int32).Value = cekilenid;
+            komut.ExecuteNonQuery();
+        }
+
+        public static int ParkIdGetir(string sorgu)
+        {
+            komut = new MySqlCommand(sorgu,baglanti);
+            return Convert.ToInt32(komut.ExecuteScalar());
+
+        }
+        
+
+        
 
     }
 }

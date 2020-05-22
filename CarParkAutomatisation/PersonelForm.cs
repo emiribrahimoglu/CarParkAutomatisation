@@ -34,6 +34,9 @@ namespace CarParkAutomatisation
                 MetroMessageBox.Show(this, "ID VEYA ŞİFRE HATALI GİRİLDİ", "GİRİŞ BAŞARISIZ", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            AracCek aracCek = new AracCek();
+            aracCek.Show();
+            Close();
             
         }
     }
