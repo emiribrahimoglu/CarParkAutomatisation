@@ -34,8 +34,6 @@ namespace CarParkAutomatisation
             {
                 MetroMessageBox.Show(this, "GİRİŞ BAŞARILI! TEKRAR HOŞGELDİNİZ", "PLAKA SİSTEMDE MEVCUT",
                     MessageBoxButtons.OK, MessageBoxIcon.Information, 100);
-                
-                //sorguCumlesi = "select plakaId from uyeler where uyeler.plakaId" + "='"+plakaNumTxt.Text.ToUpper()+"'";
                 // plakalardaki plaka idlerden uyelerdeki plaka id eslesiyorsa o adam uyedir
                 // plkaid degiskeniyle bi plaka getirdik. eger bu plakaid uyeler tablsounda varsa uyedir
 

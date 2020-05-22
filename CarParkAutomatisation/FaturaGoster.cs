@@ -10,15 +10,16 @@ namespace CarParkAutomatisation
             InitializeComponent();
         }
         
-        public FaturaGoster(string aracplaka, string yeri, DateTime gsaati, DateTime csaati, double parksuresi, double toplamucret)
+        public FaturaGoster(int aracplakaid, string yeri, DateTime gsaati, DateTime csaati, double parksuresi, double toplamucret)
         {
-            plakaLabel.Text += " "+aracplaka;
-            parkLabel.Text += " " + yeri;
-            girisLabel.Text += " " + gsaati;
-            cikisLabel.Text += " " + csaati;
-            sureLabel.Text += " " + parksuresi + "Dakika";
-            ucretLabel.Text += " " + toplamucret + "TL";
-
+            InitializeComponent();
+            plakaLabel.Text += @" "+aracplakaid;
+            parkLabel.Text += @" " + yeri;
+            girisLabel.Text += @" " + gsaati;
+            cikisLabel.Text += @" " + csaati;
+            sureLabel.Text += @" " + parksuresi.ToString("F") + " Dakika";
+            ucretLabel.Text += @" " + toplamucret.ToString("F") + " TL";
+            
         }  
             
 

@@ -43,9 +43,10 @@ namespace CarParkAutomatisation
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.label1.Location = new System.Drawing.Point(71, 34);
+            this.label1.Location = new System.Drawing.Point(53, 28);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(407, 57);
+            this.label1.Size = new System.Drawing.Size(305, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "FATURA";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -53,9 +54,10 @@ namespace CarParkAutomatisation
             // plakaLabel
             // 
             this.plakaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.plakaLabel.Location = new System.Drawing.Point(12, 174);
+            this.plakaLabel.Location = new System.Drawing.Point(9, 141);
+            this.plakaLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.plakaLabel.Name = "plakaLabel";
-            this.plakaLabel.Size = new System.Drawing.Size(349, 57);
+            this.plakaLabel.Size = new System.Drawing.Size(558, 46);
             this.plakaLabel.TabIndex = 1;
             this.plakaLabel.Text = "PLAKA: ";
             this.plakaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -63,9 +65,10 @@ namespace CarParkAutomatisation
             // parkLabel
             // 
             this.parkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.parkLabel.Location = new System.Drawing.Point(12, 231);
+            this.parkLabel.Location = new System.Drawing.Point(9, 188);
+            this.parkLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.parkLabel.Name = "parkLabel";
-            this.parkLabel.Size = new System.Drawing.Size(349, 57);
+            this.parkLabel.Size = new System.Drawing.Size(558, 46);
             this.parkLabel.TabIndex = 2;
             this.parkLabel.Text = "PARK YERİ: ";
             this.parkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -73,9 +76,10 @@ namespace CarParkAutomatisation
             // girisLabel
             // 
             this.girisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.girisLabel.Location = new System.Drawing.Point(12, 288);
+            this.girisLabel.Location = new System.Drawing.Point(9, 234);
+            this.girisLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.girisLabel.Name = "girisLabel";
-            this.girisLabel.Size = new System.Drawing.Size(349, 57);
+            this.girisLabel.Size = new System.Drawing.Size(558, 46);
             this.girisLabel.TabIndex = 3;
             this.girisLabel.Text = "GIRIS SAATI: ";
             this.girisLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -83,9 +87,10 @@ namespace CarParkAutomatisation
             // cikisLabel
             // 
             this.cikisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.cikisLabel.Location = new System.Drawing.Point(12, 345);
+            this.cikisLabel.Location = new System.Drawing.Point(9, 280);
+            this.cikisLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.cikisLabel.Name = "cikisLabel";
-            this.cikisLabel.Size = new System.Drawing.Size(349, 57);
+            this.cikisLabel.Size = new System.Drawing.Size(558, 46);
             this.cikisLabel.TabIndex = 4;
             this.cikisLabel.Text = "CIKIS SAATI: ";
             this.cikisLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -93,9 +98,10 @@ namespace CarParkAutomatisation
             // ucretLabel
             // 
             this.ucretLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.ucretLabel.Location = new System.Drawing.Point(12, 459);
+            this.ucretLabel.Location = new System.Drawing.Point(9, 373);
+            this.ucretLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ucretLabel.Name = "ucretLabel";
-            this.ucretLabel.Size = new System.Drawing.Size(349, 57);
+            this.ucretLabel.Size = new System.Drawing.Size(558, 46);
             this.ucretLabel.TabIndex = 5;
             this.ucretLabel.Text = "UCRET: ";
             this.ucretLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -103,18 +109,19 @@ namespace CarParkAutomatisation
             // sureLabel
             // 
             this.sureLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.sureLabel.Location = new System.Drawing.Point(12, 402);
+            this.sureLabel.Location = new System.Drawing.Point(9, 327);
+            this.sureLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.sureLabel.Name = "sureLabel";
-            this.sureLabel.Size = new System.Drawing.Size(349, 57);
+            this.sureLabel.Size = new System.Drawing.Size(558, 46);
             this.sureLabel.TabIndex = 6;
             this.sureLabel.Text = "PARK SURESI: ";
             this.sureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FaturaGoster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 612);
+            this.ClientSize = new System.Drawing.Size(597, 497);
             this.Controls.Add(this.sureLabel);
             this.Controls.Add(this.ucretLabel);
             this.Controls.Add(this.cikisLabel);
@@ -122,6 +129,7 @@ namespace CarParkAutomatisation
             this.Controls.Add(this.parkLabel);
             this.Controls.Add(this.plakaLabel);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FaturaGoster";
             this.Text = "FaturaGoster";
             this.ResumeLayout(false);
