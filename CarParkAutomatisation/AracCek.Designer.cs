@@ -42,7 +42,7 @@ namespace CarParkAutomatisation
             // araccekLabel
             // 
             this.araccekLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.araccekLabel.Location = new System.Drawing.Point(160, 27);
+            this.araccekLabel.Location = new System.Drawing.Point(122, 22);
             this.araccekLabel.Name = "araccekLabel";
             this.araccekLabel.Size = new System.Drawing.Size(220, 64);
             this.araccekLabel.TabIndex = 0;
@@ -62,7 +62,7 @@ namespace CarParkAutomatisation
             this.plakaLabel.Name = "plakaLabel";
             this.plakaLabel.Size = new System.Drawing.Size(100, 23);
             this.plakaLabel.TabIndex = 2;
-            this.plakaLabel.Text = "Plaka ID:";
+            this.plakaLabel.Text = "Plaka:";
             // 
             // yeniyerLabel
             // 
@@ -81,7 +81,7 @@ namespace CarParkAutomatisation
             // 
             // aracCekBtn
             // 
-            this.aracCekBtn.Location = new System.Drawing.Point(134, 230);
+            this.aracCekBtn.Location = new System.Drawing.Point(143, 227);
             this.aracCekBtn.Name = "aracCekBtn";
             this.aracCekBtn.Size = new System.Drawing.Size(190, 45);
             this.aracCekBtn.TabIndex = 5;
@@ -93,7 +93,7 @@ namespace CarParkAutomatisation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 450);
+            this.ClientSize = new System.Drawing.Size(415, 304);
             this.Controls.Add(this.aracCekBtn);
             this.Controls.Add(this.yeniyerTxt);
             this.Controls.Add(this.yeniyerLabel);

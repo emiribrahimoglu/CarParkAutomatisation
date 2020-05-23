@@ -73,10 +73,10 @@ namespace CarParkAutomatisation
             // 
             // b2Btn
             // 
-            this.b2Btn.Location = new System.Drawing.Point(168, 117);
-            this.b2Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.b2Btn.Location = new System.Drawing.Point(224, 144);
+            this.b2Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.b2Btn.Name = "b2Btn";
-            this.b2Btn.Size = new System.Drawing.Size(76, 36);
+            this.b2Btn.Size = new System.Drawing.Size(101, 44);
             this.b2Btn.TabIndex = 8;
             this.b2Btn.Text = "B2";
             this.b2Btn.UseSelectable = true;
@@ -84,10 +84,10 @@ namespace CarParkAutomatisation
             // 
             // b1Btn
             // 
-            this.b1Btn.Location = new System.Drawing.Point(70, 117);
-            this.b1Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.b1Btn.Location = new System.Drawing.Point(93, 144);
+            this.b1Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.b1Btn.Name = "b1Btn";
-            this.b1Btn.Size = new System.Drawing.Size(76, 36);
+            this.b1Btn.Size = new System.Drawing.Size(101, 44);
             this.b1Btn.TabIndex = 7;
             this.b1Btn.Text = "B1";
             this.b1Btn.UseSelectable = true;
@@ -95,10 +95,10 @@ namespace CarParkAutomatisation
             // 
             // a2Btn
             // 
-            this.a2Btn.Location = new System.Drawing.Point(168, 65);
-            this.a2Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.a2Btn.Location = new System.Drawing.Point(224, 80);
+            this.a2Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.a2Btn.Name = "a2Btn";
-            this.a2Btn.Size = new System.Drawing.Size(76, 36);
+            this.a2Btn.Size = new System.Drawing.Size(101, 44);
             this.a2Btn.TabIndex = 2;
             this.a2Btn.Text = "A2";
             this.a2Btn.UseSelectable = true;
@@ -106,10 +106,10 @@ namespace CarParkAutomatisation
             // 
             // a1Btn
             // 
-            this.a1Btn.Location = new System.Drawing.Point(70, 65);
-            this.a1Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.a1Btn.Location = new System.Drawing.Point(93, 80);
+            this.a1Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.a1Btn.Name = "a1Btn";
-            this.a1Btn.Size = new System.Drawing.Size(76, 36);
+            this.a1Btn.Size = new System.Drawing.Size(101, 44);
             this.a1Btn.TabIndex = 1;
             this.a1Btn.Text = "A1";
             this.a1Btn.UseSelectable = true;
@@ -117,10 +117,10 @@ namespace CarParkAutomatisation
             // 
             // a3Btn
             // 
-            this.a3Btn.Location = new System.Drawing.Point(268, 65);
-            this.a3Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.a3Btn.Location = new System.Drawing.Point(357, 80);
+            this.a3Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.a3Btn.Name = "a3Btn";
-            this.a3Btn.Size = new System.Drawing.Size(76, 36);
+            this.a3Btn.Size = new System.Drawing.Size(101, 44);
             this.a3Btn.TabIndex = 3;
             this.a3Btn.Text = "A3";
             this.a3Btn.UseSelectable = true;
@@ -128,10 +128,10 @@ namespace CarParkAutomatisation
             // 
             // a4Btn
             // 
-            this.a4Btn.Location = new System.Drawing.Point(366, 65);
-            this.a4Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.a4Btn.Location = new System.Drawing.Point(488, 80);
+            this.a4Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.a4Btn.Name = "a4Btn";
-            this.a4Btn.Size = new System.Drawing.Size(76, 36);
+            this.a4Btn.Size = new System.Drawing.Size(101, 44);
             this.a4Btn.TabIndex = 4;
             this.a4Btn.Text = "A4";
             this.a4Btn.UseSelectable = true;
@@ -139,10 +139,10 @@ namespace CarParkAutomatisation
             // 
             // b3Btn
             // 
-            this.b3Btn.Location = new System.Drawing.Point(268, 117);
-            this.b3Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.b3Btn.Location = new System.Drawing.Point(357, 144);
+            this.b3Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.b3Btn.Name = "b3Btn";
-            this.b3Btn.Size = new System.Drawing.Size(76, 36);
+            this.b3Btn.Size = new System.Drawing.Size(101, 44);
             this.b3Btn.TabIndex = 9;
             this.b3Btn.Text = "B3";
             this.b3Btn.UseSelectable = true;
@@ -150,10 +150,10 @@ namespace CarParkAutomatisation
             // 
             // b4Btn
             // 
-            this.b4Btn.Location = new System.Drawing.Point(366, 117);
-            this.b4Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.b4Btn.Location = new System.Drawing.Point(488, 144);
+            this.b4Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.b4Btn.Name = "b4Btn";
-            this.b4Btn.Size = new System.Drawing.Size(76, 36);
+            this.b4Btn.Size = new System.Drawing.Size(101, 44);
             this.b4Btn.TabIndex = 10;
             this.b4Btn.Text = "B4";
             this.b4Btn.UseSelectable = true;
@@ -161,10 +161,10 @@ namespace CarParkAutomatisation
             // 
             // a5Btn
             // 
-            this.a5Btn.Location = new System.Drawing.Point(463, 65);
-            this.a5Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.a5Btn.Location = new System.Drawing.Point(617, 80);
+            this.a5Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.a5Btn.Name = "a5Btn";
-            this.a5Btn.Size = new System.Drawing.Size(76, 36);
+            this.a5Btn.Size = new System.Drawing.Size(101, 44);
             this.a5Btn.TabIndex = 5;
             this.a5Btn.Text = "A5";
             this.a5Btn.UseSelectable = true;
@@ -172,10 +172,10 @@ namespace CarParkAutomatisation
             // 
             // a6Btn
             // 
-            this.a6Btn.Location = new System.Drawing.Point(561, 65);
-            this.a6Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.a6Btn.Location = new System.Drawing.Point(748, 80);
+            this.a6Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.a6Btn.Name = "a6Btn";
-            this.a6Btn.Size = new System.Drawing.Size(76, 36);
+            this.a6Btn.Size = new System.Drawing.Size(101, 44);
             this.a6Btn.TabIndex = 6;
             this.a6Btn.Text = "A6";
             this.a6Btn.UseSelectable = true;
@@ -183,10 +183,10 @@ namespace CarParkAutomatisation
             // 
             // b5Btn
             // 
-            this.b5Btn.Location = new System.Drawing.Point(463, 117);
-            this.b5Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.b5Btn.Location = new System.Drawing.Point(617, 144);
+            this.b5Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.b5Btn.Name = "b5Btn";
-            this.b5Btn.Size = new System.Drawing.Size(76, 36);
+            this.b5Btn.Size = new System.Drawing.Size(101, 44);
             this.b5Btn.TabIndex = 11;
             this.b5Btn.Text = "B5";
             this.b5Btn.UseSelectable = true;
@@ -194,10 +194,10 @@ namespace CarParkAutomatisation
             // 
             // b6Btn
             // 
-            this.b6Btn.Location = new System.Drawing.Point(561, 117);
-            this.b6Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.b6Btn.Location = new System.Drawing.Point(748, 144);
+            this.b6Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.b6Btn.Name = "b6Btn";
-            this.b6Btn.Size = new System.Drawing.Size(76, 36);
+            this.b6Btn.Size = new System.Drawing.Size(101, 44);
             this.b6Btn.TabIndex = 12;
             this.b6Btn.Text = "B6";
             this.b6Btn.UseSelectable = true;
@@ -205,10 +205,10 @@ namespace CarParkAutomatisation
             // 
             // c5Btn
             // 
-            this.c5Btn.Location = new System.Drawing.Point(463, 169);
-            this.c5Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.c5Btn.Location = new System.Drawing.Point(617, 208);
+            this.c5Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c5Btn.Name = "c5Btn";
-            this.c5Btn.Size = new System.Drawing.Size(76, 36);
+            this.c5Btn.Size = new System.Drawing.Size(101, 44);
             this.c5Btn.TabIndex = 17;
             this.c5Btn.Text = "C5";
             this.c5Btn.UseSelectable = true;
@@ -216,10 +216,10 @@ namespace CarParkAutomatisation
             // 
             // c6Btn
             // 
-            this.c6Btn.Location = new System.Drawing.Point(561, 169);
-            this.c6Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.c6Btn.Location = new System.Drawing.Point(748, 208);
+            this.c6Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c6Btn.Name = "c6Btn";
-            this.c6Btn.Size = new System.Drawing.Size(76, 36);
+            this.c6Btn.Size = new System.Drawing.Size(101, 44);
             this.c6Btn.TabIndex = 18;
             this.c6Btn.Text = "C6";
             this.c6Btn.UseSelectable = true;
@@ -227,10 +227,10 @@ namespace CarParkAutomatisation
             // 
             // d5Btn
             // 
-            this.d5Btn.Location = new System.Drawing.Point(463, 221);
-            this.d5Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.d5Btn.Location = new System.Drawing.Point(617, 272);
+            this.d5Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.d5Btn.Name = "d5Btn";
-            this.d5Btn.Size = new System.Drawing.Size(76, 36);
+            this.d5Btn.Size = new System.Drawing.Size(101, 44);
             this.d5Btn.TabIndex = 23;
             this.d5Btn.Text = "D5";
             this.d5Btn.UseSelectable = true;
@@ -238,10 +238,10 @@ namespace CarParkAutomatisation
             // 
             // d6Btn
             // 
-            this.d6Btn.Location = new System.Drawing.Point(561, 221);
-            this.d6Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.d6Btn.Location = new System.Drawing.Point(748, 272);
+            this.d6Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.d6Btn.Name = "d6Btn";
-            this.d6Btn.Size = new System.Drawing.Size(76, 36);
+            this.d6Btn.Size = new System.Drawing.Size(101, 44);
             this.d6Btn.TabIndex = 24;
             this.d6Btn.Text = "D6";
             this.d6Btn.UseSelectable = true;
@@ -250,10 +250,10 @@ namespace CarParkAutomatisation
             // c3Btn
             // 
             this.c3Btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.c3Btn.Location = new System.Drawing.Point(268, 169);
-            this.c3Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.c3Btn.Location = new System.Drawing.Point(357, 208);
+            this.c3Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c3Btn.Name = "c3Btn";
-            this.c3Btn.Size = new System.Drawing.Size(76, 36);
+            this.c3Btn.Size = new System.Drawing.Size(101, 44);
             this.c3Btn.TabIndex = 15;
             this.c3Btn.Text = "C3";
             this.c3Btn.UseSelectable = true;
@@ -261,10 +261,10 @@ namespace CarParkAutomatisation
             // 
             // c4Btn
             // 
-            this.c4Btn.Location = new System.Drawing.Point(366, 169);
-            this.c4Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.c4Btn.Location = new System.Drawing.Point(488, 208);
+            this.c4Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c4Btn.Name = "c4Btn";
-            this.c4Btn.Size = new System.Drawing.Size(76, 36);
+            this.c4Btn.Size = new System.Drawing.Size(101, 44);
             this.c4Btn.TabIndex = 16;
             this.c4Btn.Text = "C4";
             this.c4Btn.UseSelectable = true;
@@ -272,10 +272,10 @@ namespace CarParkAutomatisation
             // 
             // d3Btn
             // 
-            this.d3Btn.Location = new System.Drawing.Point(268, 221);
-            this.d3Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.d3Btn.Location = new System.Drawing.Point(357, 272);
+            this.d3Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.d3Btn.Name = "d3Btn";
-            this.d3Btn.Size = new System.Drawing.Size(76, 36);
+            this.d3Btn.Size = new System.Drawing.Size(101, 44);
             this.d3Btn.TabIndex = 21;
             this.d3Btn.Text = "D3";
             this.d3Btn.UseSelectable = true;
@@ -283,10 +283,10 @@ namespace CarParkAutomatisation
             // 
             // d4Btn
             // 
-            this.d4Btn.Location = new System.Drawing.Point(366, 221);
-            this.d4Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.d4Btn.Location = new System.Drawing.Point(488, 272);
+            this.d4Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.d4Btn.Name = "d4Btn";
-            this.d4Btn.Size = new System.Drawing.Size(76, 36);
+            this.d4Btn.Size = new System.Drawing.Size(101, 44);
             this.d4Btn.TabIndex = 22;
             this.d4Btn.Text = "D4";
             this.d4Btn.UseSelectable = true;
@@ -294,10 +294,10 @@ namespace CarParkAutomatisation
             // 
             // c1Btn
             // 
-            this.c1Btn.Location = new System.Drawing.Point(70, 169);
-            this.c1Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.c1Btn.Location = new System.Drawing.Point(93, 208);
+            this.c1Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c1Btn.Name = "c1Btn";
-            this.c1Btn.Size = new System.Drawing.Size(76, 36);
+            this.c1Btn.Size = new System.Drawing.Size(101, 44);
             this.c1Btn.TabIndex = 13;
             this.c1Btn.Text = "C1";
             this.c1Btn.UseSelectable = true;
@@ -305,10 +305,10 @@ namespace CarParkAutomatisation
             // 
             // c2Btn
             // 
-            this.c2Btn.Location = new System.Drawing.Point(168, 169);
-            this.c2Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.c2Btn.Location = new System.Drawing.Point(224, 208);
+            this.c2Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c2Btn.Name = "c2Btn";
-            this.c2Btn.Size = new System.Drawing.Size(76, 36);
+            this.c2Btn.Size = new System.Drawing.Size(101, 44);
             this.c2Btn.TabIndex = 14;
             this.c2Btn.Text = "C2";
             this.c2Btn.UseSelectable = true;
@@ -316,10 +316,10 @@ namespace CarParkAutomatisation
             // 
             // d1Btn
             // 
-            this.d1Btn.Location = new System.Drawing.Point(70, 221);
-            this.d1Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.d1Btn.Location = new System.Drawing.Point(93, 272);
+            this.d1Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.d1Btn.Name = "d1Btn";
-            this.d1Btn.Size = new System.Drawing.Size(76, 36);
+            this.d1Btn.Size = new System.Drawing.Size(101, 44);
             this.d1Btn.TabIndex = 19;
             this.d1Btn.Text = "D1";
             this.d1Btn.UseSelectable = true;
@@ -327,10 +327,10 @@ namespace CarParkAutomatisation
             // 
             // d2Btn
             // 
-            this.d2Btn.Location = new System.Drawing.Point(168, 221);
-            this.d2Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.d2Btn.Location = new System.Drawing.Point(224, 272);
+            this.d2Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.d2Btn.Name = "d2Btn";
-            this.d2Btn.Size = new System.Drawing.Size(76, 36);
+            this.d2Btn.Size = new System.Drawing.Size(101, 44);
             this.d2Btn.TabIndex = 20;
             this.d2Btn.Text = "D2";
             this.d2Btn.UseSelectable = true;
@@ -338,10 +338,10 @@ namespace CarParkAutomatisation
             // 
             // e5Btn
             // 
-            this.e5Btn.Location = new System.Drawing.Point(463, 271);
-            this.e5Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.e5Btn.Location = new System.Drawing.Point(617, 334);
+            this.e5Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.e5Btn.Name = "e5Btn";
-            this.e5Btn.Size = new System.Drawing.Size(76, 36);
+            this.e5Btn.Size = new System.Drawing.Size(101, 44);
             this.e5Btn.TabIndex = 29;
             this.e5Btn.Text = "E5";
             this.e5Btn.UseSelectable = true;
@@ -349,10 +349,10 @@ namespace CarParkAutomatisation
             // 
             // e6Btn
             // 
-            this.e6Btn.Location = new System.Drawing.Point(561, 271);
-            this.e6Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.e6Btn.Location = new System.Drawing.Point(748, 334);
+            this.e6Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.e6Btn.Name = "e6Btn";
-            this.e6Btn.Size = new System.Drawing.Size(76, 36);
+            this.e6Btn.Size = new System.Drawing.Size(101, 44);
             this.e6Btn.TabIndex = 30;
             this.e6Btn.Text = "E6";
             this.e6Btn.UseSelectable = true;
@@ -360,10 +360,10 @@ namespace CarParkAutomatisation
             // 
             // f5Btn
             // 
-            this.f5Btn.Location = new System.Drawing.Point(463, 323);
-            this.f5Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.f5Btn.Location = new System.Drawing.Point(617, 398);
+            this.f5Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.f5Btn.Name = "f5Btn";
-            this.f5Btn.Size = new System.Drawing.Size(76, 36);
+            this.f5Btn.Size = new System.Drawing.Size(101, 44);
             this.f5Btn.TabIndex = 35;
             this.f5Btn.Text = "F5";
             this.f5Btn.UseSelectable = true;
@@ -371,10 +371,10 @@ namespace CarParkAutomatisation
             // 
             // f6Btn
             // 
-            this.f6Btn.Location = new System.Drawing.Point(561, 323);
-            this.f6Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.f6Btn.Location = new System.Drawing.Point(748, 398);
+            this.f6Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.f6Btn.Name = "f6Btn";
-            this.f6Btn.Size = new System.Drawing.Size(76, 36);
+            this.f6Btn.Size = new System.Drawing.Size(101, 44);
             this.f6Btn.TabIndex = 36;
             this.f6Btn.Text = "F6";
             this.f6Btn.UseSelectable = true;
@@ -382,10 +382,10 @@ namespace CarParkAutomatisation
             // 
             // e3Btn
             // 
-            this.e3Btn.Location = new System.Drawing.Point(268, 271);
-            this.e3Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.e3Btn.Location = new System.Drawing.Point(357, 334);
+            this.e3Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.e3Btn.Name = "e3Btn";
-            this.e3Btn.Size = new System.Drawing.Size(76, 36);
+            this.e3Btn.Size = new System.Drawing.Size(101, 44);
             this.e3Btn.TabIndex = 27;
             this.e3Btn.Text = "E3";
             this.e3Btn.UseSelectable = true;
@@ -393,10 +393,10 @@ namespace CarParkAutomatisation
             // 
             // e4Btn
             // 
-            this.e4Btn.Location = new System.Drawing.Point(366, 271);
-            this.e4Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.e4Btn.Location = new System.Drawing.Point(488, 334);
+            this.e4Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.e4Btn.Name = "e4Btn";
-            this.e4Btn.Size = new System.Drawing.Size(76, 36);
+            this.e4Btn.Size = new System.Drawing.Size(101, 44);
             this.e4Btn.TabIndex = 28;
             this.e4Btn.Text = "E4";
             this.e4Btn.UseSelectable = true;
@@ -404,10 +404,10 @@ namespace CarParkAutomatisation
             // 
             // f3Btn
             // 
-            this.f3Btn.Location = new System.Drawing.Point(268, 323);
-            this.f3Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.f3Btn.Location = new System.Drawing.Point(357, 398);
+            this.f3Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.f3Btn.Name = "f3Btn";
-            this.f3Btn.Size = new System.Drawing.Size(76, 36);
+            this.f3Btn.Size = new System.Drawing.Size(101, 44);
             this.f3Btn.TabIndex = 33;
             this.f3Btn.Text = "F3";
             this.f3Btn.UseSelectable = true;
@@ -415,10 +415,10 @@ namespace CarParkAutomatisation
             // 
             // f4Btn
             // 
-            this.f4Btn.Location = new System.Drawing.Point(366, 323);
-            this.f4Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.f4Btn.Location = new System.Drawing.Point(488, 398);
+            this.f4Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.f4Btn.Name = "f4Btn";
-            this.f4Btn.Size = new System.Drawing.Size(76, 36);
+            this.f4Btn.Size = new System.Drawing.Size(101, 44);
             this.f4Btn.TabIndex = 34;
             this.f4Btn.Text = "F4";
             this.f4Btn.UseSelectable = true;
@@ -426,10 +426,10 @@ namespace CarParkAutomatisation
             // 
             // e1Btn
             // 
-            this.e1Btn.Location = new System.Drawing.Point(70, 271);
-            this.e1Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.e1Btn.Location = new System.Drawing.Point(93, 334);
+            this.e1Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.e1Btn.Name = "e1Btn";
-            this.e1Btn.Size = new System.Drawing.Size(76, 36);
+            this.e1Btn.Size = new System.Drawing.Size(101, 44);
             this.e1Btn.TabIndex = 25;
             this.e1Btn.Text = "E1";
             this.e1Btn.UseSelectable = true;
@@ -437,10 +437,10 @@ namespace CarParkAutomatisation
             // 
             // e2Btn
             // 
-            this.e2Btn.Location = new System.Drawing.Point(168, 271);
-            this.e2Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.e2Btn.Location = new System.Drawing.Point(224, 334);
+            this.e2Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.e2Btn.Name = "e2Btn";
-            this.e2Btn.Size = new System.Drawing.Size(76, 36);
+            this.e2Btn.Size = new System.Drawing.Size(101, 44);
             this.e2Btn.TabIndex = 26;
             this.e2Btn.Text = "E2";
             this.e2Btn.UseSelectable = true;
@@ -448,10 +448,10 @@ namespace CarParkAutomatisation
             // 
             // f1Btn
             // 
-            this.f1Btn.Location = new System.Drawing.Point(70, 323);
-            this.f1Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.f1Btn.Location = new System.Drawing.Point(93, 398);
+            this.f1Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.f1Btn.Name = "f1Btn";
-            this.f1Btn.Size = new System.Drawing.Size(76, 36);
+            this.f1Btn.Size = new System.Drawing.Size(101, 44);
             this.f1Btn.TabIndex = 31;
             this.f1Btn.Text = "F1";
             this.f1Btn.UseSelectable = true;
@@ -459,10 +459,10 @@ namespace CarParkAutomatisation
             // 
             // f2Btn
             // 
-            this.f2Btn.Location = new System.Drawing.Point(168, 323);
-            this.f2Btn.Margin = new System.Windows.Forms.Padding(2);
+            this.f2Btn.Location = new System.Drawing.Point(224, 398);
+            this.f2Btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.f2Btn.Name = "f2Btn";
-            this.f2Btn.Size = new System.Drawing.Size(76, 36);
+            this.f2Btn.Size = new System.Drawing.Size(101, 44);
             this.f2Btn.TabIndex = 32;
             this.f2Btn.Text = "F2";
             this.f2Btn.UseSelectable = true;
@@ -472,19 +472,18 @@ namespace CarParkAutomatisation
             // 
             this.otoparkYerlesimiLbl.BackColor = System.Drawing.Color.Transparent;
             this.otoparkYerlesimiLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.otoparkYerlesimiLbl.Location = new System.Drawing.Point(146, 27);
-            this.otoparkYerlesimiLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.otoparkYerlesimiLbl.Location = new System.Drawing.Point(195, 33);
             this.otoparkYerlesimiLbl.Name = "otoparkYerlesimiLbl";
-            this.otoparkYerlesimiLbl.Size = new System.Drawing.Size(470, 24);
+            this.otoparkYerlesimiLbl.Size = new System.Drawing.Size(627, 30);
             this.otoparkYerlesimiLbl.TabIndex = 42;
             this.otoparkYerlesimiLbl.Text = "HOŞGELDİNİZ. PARK ETMEK İSTEDİĞİNİZ YERİ SEÇİNİZ.";
             // 
             // otoparktanCikisBtn
             // 
-            this.otoparktanCikisBtn.Location = new System.Drawing.Point(246, 379);
-            this.otoparktanCikisBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.otoparktanCikisBtn.Location = new System.Drawing.Point(328, 466);
+            this.otoparktanCikisBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.otoparktanCikisBtn.Name = "otoparktanCikisBtn";
-            this.otoparktanCikisBtn.Size = new System.Drawing.Size(209, 46);
+            this.otoparktanCikisBtn.Size = new System.Drawing.Size(279, 57);
             this.otoparktanCikisBtn.TabIndex = 43;
             this.otoparktanCikisBtn.Text = "Otoparktan Çıkış";
             this.otoparktanCikisBtn.UseSelectable = true;
@@ -492,9 +491,9 @@ namespace CarParkAutomatisation
             // 
             // OtoparkYerlesimi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 435);
+            this.ClientSize = new System.Drawing.Size(941, 535);
             this.Controls.Add(this.otoparktanCikisBtn);
             this.Controls.Add(this.otoparkYerlesimiLbl);
             this.Controls.Add(this.e5Btn);
@@ -533,7 +532,7 @@ namespace CarParkAutomatisation
             this.Controls.Add(this.a2Btn);
             this.Controls.Add(this.b1Btn);
             this.Controls.Add(this.b2Btn);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "OtoparkYerlesimi";
             this.Text = "OtoparkYerlesimi";
             this.ResumeLayout(false);

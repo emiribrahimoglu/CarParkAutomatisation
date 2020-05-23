@@ -15,7 +15,7 @@ namespace CarParkAutomatisation
 {
     public static class Veritabani
     {
-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=engtrq;database=vtproje";
+        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
         private static MySqlConnection baglanti;
         private static MySqlCommand komut;
         private static MySqlDataAdapter adaptor;
@@ -193,23 +193,31 @@ namespace CarParkAutomatisation
             komut = new MySqlCommand(sorgu, baglanti);
             if (komut.ExecuteScalar() != null)
             {
-                komut = new MySqlCommand();
-                komut.Connection = baglanti;
-                sorgu = "select max(cekmeId) from cekilenaraclar where plakaId" + "='" + plaka2 + "'";
-                komut.CommandText = sorgu;
-                cekmeid = Convert.ToInt32(komut.ExecuteScalar());
-                komut.CommandText = "select parkid from cekilenaraclar where cekmeId" + "='" + cekmeid + "'";
-                parkid = Convert.ToInt32(komut.ExecuteScalar());
-                komut.CommandText = "select parkyeridurum from parkyerleri where parkid" + "='" + parkid + "'";
-                parkyeridurumint = Convert.ToByte(komut.ExecuteScalar());
-                if (parkyeridurumint == 1)
+                try
                 {
                     komut = new MySqlCommand();
                     komut.Connection = baglanti;
-                    komut.CommandText = "update parkyerleri set parkyeridurum=0 where parkId=@parkid";
-                    komut.Parameters.Add("@parkid", MySqlDbType.UByte).Value = parkid;
-                    komut.ExecuteNonQuery();
+                    sorgu = "select max(cekmeId) from cekilenaraclar where plakaId" + "='" + plaka2 + "'";
+                    komut.CommandText = sorgu;
+                    cekmeid = Convert.ToInt32(komut.ExecuteScalar());
+                    komut.CommandText = "select parkid from cekilenaraclar where cekmeId" + "='" + cekmeid + "'";
+                    parkid = Convert.ToInt32(komut.ExecuteScalar());
+                    komut.CommandText = "select parkyeridurum from parkyerleri where parkid" + "='" + parkid + "'";
+                    parkyeridurumint = Convert.ToByte(komut.ExecuteScalar());
+                    if (parkyeridurumint == 1)
+                    {
+                        komut = new MySqlCommand();
+                        komut.Connection = baglanti;
+                        komut.CommandText = "update parkyerleri set parkyeridurum=0 where parkId=@parkid";
+                        komut.Parameters.Add("@parkid", MySqlDbType.UByte).Value = parkid;
+                        komut.ExecuteNonQuery();
+                    }
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Bilgilendirme: Girdiğiniz plakanın çekildiğine dair bir bilgi yOktUr!");
+                }
+                
             }
             
             // Önceden çekildiği parkyeri varsa temizleyen kod parçası bitişi
@@ -282,7 +290,7 @@ namespace CarParkAutomatisation
                 komut.Parameters.Add("@aracplakaid", MySqlDbType.Int32).Value = aracplakaid;
                 int parkid = Convert.ToInt32(komut.ExecuteScalar());
                 komut.CommandText = "update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid";
-                komut.Parameters.Add("@parkyeridurum", MySqlDbType.TinyBlob).Value = 1;
+                komut.Parameters.Add("@parkyeridurum", MySqlDbType.TinyBlob).Value = 0;
                 komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
                 komut.ExecuteNonQuery();
                 
@@ -302,7 +310,11 @@ namespace CarParkAutomatisation
                 {
                      ucret += Convert.ToInt32(tarife / 2);
                 }
-                 
+                komut = new MySqlCommand();
+                komut.Connection = baglanti;
+                komut.CommandText = "select parkyeri from parkyerleri where parkId=@parkid";
+                komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
+                parkyeri = Convert.ToString(komut.ExecuteScalar());
                 FaturaGoster faturaGoster = new FaturaGoster(aracplaka,parkyeri,girisSaati,cikisSaati, parkSuresi,ucret);
                 faturaGoster.Show();
             }
