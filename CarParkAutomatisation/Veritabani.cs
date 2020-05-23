@@ -189,21 +189,27 @@ namespace CarParkAutomatisation
             MessageBox.Show("plaka2:" + plaka2);
             
             // Önceden çekildiği parkyeri varsa temizleyen kod parçası başlangıcı
-            
-            sorgu = "select max(cekmeId) from cekilenaraclar where plakaId" + "='" + plaka2 + "'";
-            komut.CommandText = sorgu;
-            cekmeid = Convert.ToInt32(komut.ExecuteScalar());
-            komut.CommandText = "select parkid from cekilenaraclar where cekmeId" + "='" + cekmeid + "'";
-            parkid = Convert.ToInt32(komut.ExecuteScalar());
-            komut.CommandText = "select parkyeridurum from parkyerleri where parkid" + "='" + parkid + "'";
-            parkyeridurumint = Convert.ToByte(komut.ExecuteScalar());
-            if (parkyeridurumint == 1)
+            sorgu = "Select * from cekilenaraclar";
+            komut = new MySqlCommand(sorgu, baglanti);
+            if (komut.ExecuteScalar() != null)
             {
                 komut = new MySqlCommand();
                 komut.Connection = baglanti;
-                komut.CommandText = "update parkyerleri set parkyeridurum=0 where parkId=@parkid";
-                komut.Parameters.Add("@parkid", MySqlDbType.UByte).Value = parkid;
-                komut.ExecuteNonQuery();
+                sorgu = "select max(cekmeId) from cekilenaraclar where plakaId" + "='" + plaka2 + "'";
+                komut.CommandText = sorgu;
+                cekmeid = Convert.ToInt32(komut.ExecuteScalar());
+                komut.CommandText = "select parkid from cekilenaraclar where cekmeId" + "='" + cekmeid + "'";
+                parkid = Convert.ToInt32(komut.ExecuteScalar());
+                komut.CommandText = "select parkyeridurum from parkyerleri where parkid" + "='" + parkid + "'";
+                parkyeridurumint = Convert.ToByte(komut.ExecuteScalar());
+                if (parkyeridurumint == 1)
+                {
+                    komut = new MySqlCommand();
+                    komut.Connection = baglanti;
+                    komut.CommandText = "update parkyerleri set parkyeridurum=0 where parkId=@parkid";
+                    komut.Parameters.Add("@parkid", MySqlDbType.UByte).Value = parkid;
+                    komut.ExecuteNonQuery();
+                }
             }
             
             // Önceden çekildiği parkyeri varsa temizleyen kod parçası bitişi
