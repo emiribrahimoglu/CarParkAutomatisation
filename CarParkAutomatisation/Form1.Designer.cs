@@ -30,7 +30,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.saatLabel = new MetroFramework.Controls.MetroLabel();
             this.saatTimer = new System.Windows.Forms.Timer(this.components);
             this.tarihLabel = new MetroFramework.Controls.MetroLabel();
@@ -45,10 +44,9 @@
             this.saatLabel.BackColor = System.Drawing.Color.Cyan;
             this.saatLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.saatLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.saatLabel.Location = new System.Drawing.Point(16, 11);
-            this.saatLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.saatLabel.Location = new System.Drawing.Point(12, 9);
             this.saatLabel.Name = "saatLabel";
-            this.saatLabel.Size = new System.Drawing.Size(134, 25);
+            this.saatLabel.Size = new System.Drawing.Size(124, 25);
             this.saatLabel.TabIndex = 0;
             this.saatLabel.Text = "VarsayilanSaat";
             this.saatLabel.UseCustomBackColor = true;
@@ -64,10 +62,9 @@
             this.tarihLabel.BackColor = System.Drawing.Color.Cyan;
             this.tarihLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.tarihLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.tarihLabel.Location = new System.Drawing.Point(512, 11);
-            this.tarihLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tarihLabel.Location = new System.Drawing.Point(384, 9);
             this.tarihLabel.Name = "tarihLabel";
-            this.tarihLabel.Size = new System.Drawing.Size(139, 25);
+            this.tarihLabel.Size = new System.Drawing.Size(126, 25);
             this.tarihLabel.TabIndex = 1;
             this.tarihLabel.Text = "VarsayilanTarih";
             this.tarihLabel.UseCustomBackColor = true;
@@ -75,10 +72,9 @@
             // uyeButton
             // 
             this.uyeButton.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.uyeButton.Location = new System.Drawing.Point(0, 224);
-            this.uyeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.uyeButton.Location = new System.Drawing.Point(0, 182);
             this.uyeButton.Name = "uyeButton";
-            this.uyeButton.Size = new System.Drawing.Size(312, 139);
+            this.uyeButton.Size = new System.Drawing.Size(234, 113);
             this.uyeButton.TabIndex = 2;
             this.uyeButton.Text = "Üye Girişi";
             this.uyeButton.UseSelectable = true;
@@ -88,10 +84,9 @@
             // 
             this.personelButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.personelButton.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.personelButton.Location = new System.Drawing.Point(0, 444);
-            this.personelButton.Margin = new System.Windows.Forms.Padding(4);
+            this.personelButton.Location = new System.Drawing.Point(0, 361);
             this.personelButton.Name = "personelButton";
-            this.personelButton.Size = new System.Drawing.Size(692, 102);
+            this.personelButton.Size = new System.Drawing.Size(519, 83);
             this.personelButton.TabIndex = 3;
             this.personelButton.Text = "Personel Girişi";
             this.personelButton.UseSelectable = true;
@@ -100,10 +95,9 @@
             // uyeliksizButton
             // 
             this.uyeliksizButton.FontSize = MetroFramework.MetroButtonSize.Tall;
-            this.uyeliksizButton.Location = new System.Drawing.Point(357, 224);
-            this.uyeliksizButton.Margin = new System.Windows.Forms.Padding(4);
+            this.uyeliksizButton.Location = new System.Drawing.Point(268, 182);
             this.uyeliksizButton.Name = "uyeliksizButton";
-            this.uyeliksizButton.Size = new System.Drawing.Size(312, 139);
+            this.uyeliksizButton.Size = new System.Drawing.Size(234, 113);
             this.uyeliksizButton.TabIndex = 4;
             this.uyeliksizButton.Text = "Üyeliksiz Giriş";
             this.uyeliksizButton.UseSelectable = true;
@@ -111,17 +105,16 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image) (resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(692, 546);
+            this.ClientSize = new System.Drawing.Size(519, 444);
             this.Controls.Add(this.uyeliksizButton);
             this.Controls.Add(this.personelButton);
             this.Controls.Add(this.uyeButton);
             this.Controls.Add(this.tarihLabel);
             this.Controls.Add(this.saatLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "OtoparkOtomasyon";
             this.Load += new System.EventHandler(this.Form1_Load);

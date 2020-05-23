@@ -15,7 +15,7 @@ namespace CarParkAutomatisation
 {
     public static class Veritabani
     {
-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
+        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=engtrq;database=vtproje";
         private static MySqlConnection baglanti;
         private static MySqlCommand komut;
         private static MySqlDataAdapter adaptor;
@@ -24,7 +24,7 @@ namespace CarParkAutomatisation
         private static string[] uyeOlDizi;
         private static int idTemp;
         private static string sifreTemp;
-        
+
         //
         private static string sorgu1;
         private static string sorgu2;
@@ -45,7 +45,13 @@ namespace CarParkAutomatisation
             }
 
             MessageBox.Show("Veritabanı Bağlantı Durumu: " + baglanti.State);
+            
+        }
 
+        public static int Personelid // PersonelId için Get Set Property
+        {
+            get;
+            set;
         }
 
         public static bool PersonelKontrol(string komutString, string[] personelGirisBilgi)
@@ -149,9 +155,6 @@ namespace CarParkAutomatisation
                     Convert.ToDateTime(uyeOlDizi[4]+" "+uyeOlDizi[5]);
                 komut.Parameters.Add("@plakaId", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[6]);
                 komut.ExecuteNonQuery();
-                /*adaptor = new MySqlDataAdapter(komut);
-                dataSet = new DataSet();
-                adaptor.Fill(dataSet, "sorguSonuc");*/
             }
             catch (Exception e)
             {
@@ -167,9 +170,16 @@ namespace CarParkAutomatisation
             int kisiId = 0;
             double ucretid = 0;
             bool parkyeridurum = true;
+            int parkyeridurumint;
             int parkid = 0;
+            int cekmeid;
             string sorgu;
             parkyeri = yer;
+            
+            // plaka id'ye göre max cekmeid al
+            //max cekmeid'ye göre parkid al
+            //parkid'ye ait olan park yeri durumunu al ve doluysa boşalt
+            // Üstteki üç yorum satırı temizlenebilir
             
             //bu fonksiyon, yer seçimi tiklandiginda acilmasi icin her butonun click olayına eklenecektir
             DateTime girisSaati = DateTime.Now;
@@ -178,6 +188,28 @@ namespace CarParkAutomatisation
             plaka2 = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan aracın plakaId si alindi.
             MessageBox.Show("plaka2:" + plaka2);
             
+            // Önceden çekildiği parkyeri varsa temizleyen kod parçası başlangıcı
+            
+            sorgu = "select max(cekmeId) from cekilenaraclar where plakaId" + "='" + plaka2 + "'";
+            komut.CommandText = sorgu;
+            cekmeid = Convert.ToInt32(komut.ExecuteScalar());
+            komut.CommandText = "select parkid from cekilenaraclar where cekmeId" + "='" + cekmeid + "'";
+            parkid = Convert.ToInt32(komut.ExecuteScalar());
+            komut.CommandText = "select parkyeridurum from parkyerleri where parkid" + "='" + parkid + "'";
+            parkyeridurumint = Convert.ToByte(komut.ExecuteScalar());
+            if (parkyeridurumint == 1)
+            {
+                komut = new MySqlCommand();
+                komut.Connection = baglanti;
+                komut.CommandText = "update parkyerleri set parkyeridurum=0 where parkId=@parkid";
+                komut.Parameters.Add("@parkid", MySqlDbType.UByte).Value = parkid;
+                komut.ExecuteNonQuery();
+            }
+            
+            // Önceden çekildiği parkyeri varsa temizleyen kod parçası bitişi
+            
+            komut = new MySqlCommand();
+            komut.Connection = baglanti;
             komut.CommandText = "select uyeId from uyeler where plakaId" + "='"+plaka2+"'";
             kisiId = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan arac sahibinin  uyeId si alindi.
             MessageBox.Show("kişi id:" + kisiId);
@@ -211,7 +243,10 @@ namespace CarParkAutomatisation
             komut.Parameters.Add("@girisSaati", MySqlDbType.DateTime).Value = girisSaati;
             komut.Parameters.Add("@ucretId", MySqlDbType.Int32).Value = ucretid;
             komut.ExecuteNonQuery();
-            
+            komut.CommandText = "update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid";
+            komut.Parameters.Add("@parkyeridurum", MySqlDbType.TinyBlob).Value = 1;
+            komut.ExecuteNonQuery();
+
         }
 
         public static void FaturaKes(string sorgu, string aracplaka)
@@ -257,12 +292,39 @@ namespace CarParkAutomatisation
 
         }
 
-        public static void AraciCek(string sorgu,int cekilenid,int parkid)
+        public static void AraciCek(string sorgu,int cekilenid,int parkid, int eskiparkid, string sorgu2)
         {
+            // Düzenlenen son park yerlerinden vesaire emin olmak için ve çekilmeden önceki park yerini boş hale getiriyor ve yeni park yerini dolu hale getiriyor
+            DateTime cekmeSaati = DateTime.Now;
+            komut = new MySqlCommand(sorgu2, baglanti);
+            string maxfaturaid = Convert.ToString(komut.ExecuteScalar());
+            komut.CommandText = "select parkid from giriscikis where faturaId" + "='" + maxfaturaid + "'";
+            eskiparkid = Convert.ToInt32(komut.ExecuteScalar());
+            MessageBox.Show(
+                "Sırayla: Çekilen ID, Park ID, Eski Park ID = " + cekilenid + @" " + parkid + @" " + eskiparkid);
             komut = new MySqlCommand(sorgu,baglanti);
             komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
-            komut.Parameters.Add("@cekilenid", MySqlDbType.Int32).Value = cekilenid;
+            komut.Parameters.Add("@faturaid", MySqlDbType.Int32).Value = maxfaturaid;
             komut.ExecuteNonQuery();
+            sorgu = "update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid";
+            komut = new MySqlCommand(sorgu, baglanti);
+            komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
+            komut.Parameters.Add("@parkyeridurum", MySqlDbType.UByte).Value = 1;
+            komut.ExecuteNonQuery();
+            sorgu =
+                "insert into cekilenaraclar (parkId, plakaId, perId, cekilmeTarihi) values (@parkid, @cekilenid, @perid, @cekilmetarihi)";
+            komut = new MySqlCommand(sorgu, baglanti);
+            komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
+            komut.Parameters.Add("@cekilenid", MySqlDbType.Int32).Value = cekilenid;
+            komut.Parameters.Add("@perid", MySqlDbType.Int32).Value = Personelid;
+            komut.Parameters.Add("@cekilmetarihi", MySqlDbType.DateTime).Value = cekmeSaati;
+            komut.ExecuteNonQuery();
+            sorgu = "update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid";
+            komut = new MySqlCommand(sorgu, baglanti);
+            komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = eskiparkid;
+            komut.Parameters.Add("@parkyeridurum", MySqlDbType.UByte).Value = 0;
+            komut.ExecuteNonQuery();
+
         }
 
         public static int ParkIdGetir(string sorgu)
