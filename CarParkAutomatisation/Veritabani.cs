@@ -243,9 +243,9 @@ namespace CarParkAutomatisation
             // toplanan bilgileri o plakaId sayesinde giriscikis tablosuna gir.
 
             komut.CommandText =
-                "insert into giriscikis (plakaId, parkId, girisSaati, ucretId) values(@plakaId, @parkId, @girisSaati, @ucretId);";
+                "insert into giriscikis (plakaId, parkId, girisSaati, ucretId) values(@plakaId, @parkid, @girisSaati, @ucretId);";
             komut.Parameters.Add("@plakaId", MySqlDbType.Int32).Value = plaka2;
-            komut.Parameters.Add("@parkId", MySqlDbType.Int32).Value = parkid;
+            komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
             komut.Parameters.Add("@girisSaati", MySqlDbType.DateTime).Value = girisSaati;
             komut.Parameters.Add("@ucretId", MySqlDbType.Int32).Value = ucretid;
             komut.ExecuteNonQuery();
@@ -274,12 +274,23 @@ namespace CarParkAutomatisation
                 komut.Parameters.Add("@aracplakaid", MySqlDbType.Int32).Value = aracplakaid;
                 string maxfaturaid = Convert.ToString(komut.ExecuteScalar());
                 MessageBox.Show("Max Fatura ID:: " + maxfaturaid);
+                komut = new MySqlCommand();
+                komut.Connection = baglanti;
+                komut.CommandText =
+                    "select parkid from giriscikis where faturaId=@maxfaturaid";
+                komut.Parameters.Add("@maxfaturaid", MySqlDbType.VarChar).Value = maxfaturaid;
+                komut.Parameters.Add("@aracplakaid", MySqlDbType.Int32).Value = aracplakaid;
+                int parkid = Convert.ToInt32(komut.ExecuteScalar());
+                komut.CommandText = "update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid";
+                komut.Parameters.Add("@parkyeridurum", MySqlDbType.TinyBlob).Value = 1;
+                komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
+                komut.ExecuteNonQuery();
                 
                 komut.CommandText = "update girisCikis set cikisSaati=@cikisSaati, parkSuresi=@toplamParkSuresi where faturaId=@maxfaturaid";
                 MessageBox.Show("Update Komutu:: "+komut.CommandText);
                 komut.Parameters.Add("@cikisSaati", MySqlDbType.DateTime).Value = cikisSaati;
                 komut.Parameters.Add("@toplamParkSuresi", MySqlDbType.Double).Value = parkSuresi;
-                komut.Parameters.Add("@maxfaturaid", MySqlDbType.VarChar).Value = maxfaturaid;
+                //komut.Parameters.Add("@maxfaturaid", MySqlDbType.VarChar).Value = maxfaturaid;
                 komut.ExecuteNonQuery();
                  
                 komut.CommandText =
