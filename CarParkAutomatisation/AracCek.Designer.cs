@@ -77,14 +77,14 @@ namespace CarParkAutomatisation
             this.yeniyerTxt.Location = new System.Drawing.Point(134, 151);
             this.yeniyerTxt.Name = "yeniyerTxt";
             this.yeniyerTxt.Size = new System.Drawing.Size(208, 22);
-            this.yeniyerTxt.TabIndex = 4;
+            this.yeniyerTxt.TabIndex = 2;
             // 
             // aracCekBtn
             // 
             this.aracCekBtn.Location = new System.Drawing.Point(143, 227);
             this.aracCekBtn.Name = "aracCekBtn";
             this.aracCekBtn.Size = new System.Drawing.Size(190, 45);
-            this.aracCekBtn.TabIndex = 5;
+            this.aracCekBtn.TabIndex = 3;
             this.aracCekBtn.Text = "Araç Çek";
             this.aracCekBtn.UseSelectable = true;
             this.aracCekBtn.Click += new System.EventHandler(this.aracCekBtn_Click);
@@ -93,6 +93,7 @@ namespace CarParkAutomatisation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(415, 304);
             this.Controls.Add(this.aracCekBtn);
             this.Controls.Add(this.yeniyerTxt);

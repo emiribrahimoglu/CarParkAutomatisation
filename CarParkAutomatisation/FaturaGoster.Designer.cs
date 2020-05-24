@@ -114,7 +114,8 @@ namespace CarParkAutomatisation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 612);
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClientSize = new System.Drawing.Size(775, 521);
             this.Controls.Add(this.sureLabel);
             this.Controls.Add(this.ucretLabel);
             this.Controls.Add(this.cikisLabel);

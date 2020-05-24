@@ -283,6 +283,8 @@ namespace CarParkAutomatisation
             Veritabani.Faturalandir(aracplaka,yer);
             Close();
         }
+
+        
     }
     
 }

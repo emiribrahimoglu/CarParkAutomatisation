@@ -51,7 +51,7 @@
             this.uyelikAdTxt.Margin = new System.Windows.Forms.Padding(4);
             this.uyelikAdTxt.Name = "uyelikAdTxt";
             this.uyelikAdTxt.Size = new System.Drawing.Size(224, 30);
-            this.uyelikAdTxt.TabIndex = 16;
+            this.uyelikAdTxt.TabIndex = 1;
             // 
             // uyelikSoyadTxt
             // 
@@ -60,7 +60,7 @@
             this.uyelikSoyadTxt.Margin = new System.Windows.Forms.Padding(4);
             this.uyelikSoyadTxt.Name = "uyelikSoyadTxt";
             this.uyelikSoyadTxt.Size = new System.Drawing.Size(224, 30);
-            this.uyelikSoyadTxt.TabIndex = 17;
+            this.uyelikSoyadTxt.TabIndex = 2;
             // 
             // uyelikPlakaTxt
             // 
@@ -69,7 +69,7 @@
             this.uyelikPlakaTxt.Margin = new System.Windows.Forms.Padding(4);
             this.uyelikPlakaTxt.Name = "uyelikPlakaTxt";
             this.uyelikPlakaTxt.Size = new System.Drawing.Size(224, 30);
-            this.uyelikPlakaTxt.TabIndex = 18;
+            this.uyelikPlakaTxt.TabIndex = 4;
             // 
             // uyelikTelTxt
             // 
@@ -78,7 +78,7 @@
             this.uyelikTelTxt.Margin = new System.Windows.Forms.Padding(4);
             this.uyelikTelTxt.Name = "uyelikTelTxt";
             this.uyelikTelTxt.Size = new System.Drawing.Size(224, 30);
-            this.uyelikTelTxt.TabIndex = 19;
+            this.uyelikTelTxt.TabIndex = 5;
             // 
             // uyelikAdLabel
             // 
@@ -142,7 +142,7 @@
             this.uyelikSifreTxt.Margin = new System.Windows.Forms.Padding(4);
             this.uyelikSifreTxt.Name = "uyelikSifreTxt";
             this.uyelikSifreTxt.Size = new System.Drawing.Size(224, 30);
-            this.uyelikSifreTxt.TabIndex = 25;
+            this.uyelikSifreTxt.TabIndex = 3;
             // 
             // uyeOlButton
             // 
@@ -151,7 +151,7 @@
             this.uyeOlButton.Margin = new System.Windows.Forms.Padding(4);
             this.uyeOlButton.Name = "uyeOlButton";
             this.uyeOlButton.Size = new System.Drawing.Size(189, 66);
-            this.uyeOlButton.TabIndex = 26;
+            this.uyeOlButton.TabIndex = 6;
             this.uyeOlButton.Text = "ÜYE OL";
             this.uyeOlButton.UseSelectable = true;
             this.uyeOlButton.Click += new System.EventHandler(this.uyeOlButton_Click);
@@ -165,7 +165,7 @@
             this.YeniUyeFormLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.YeniUyeFormLabel.Name = "YeniUyeFormLabel";
             this.YeniUyeFormLabel.Size = new System.Drawing.Size(224, 89);
-            this.YeniUyeFormLabel.Style = MetroFramework.MetroColorStyle.Green;
+            this.YeniUyeFormLabel.Style = MetroFramework.MetroColorStyle.Black;
             this.YeniUyeFormLabel.TabIndex = 27;
             this.YeniUyeFormLabel.Text = "Yeni Üye";
             this.YeniUyeFormLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -189,6 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(420, 494);
             this.Controls.Add(this.homeButton);
             this.Controls.Add(this.YeniUyeFormLabel);

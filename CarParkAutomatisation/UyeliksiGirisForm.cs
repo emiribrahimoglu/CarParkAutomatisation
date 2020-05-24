@@ -77,5 +77,7 @@ namespace CarParkAutomatisation
             YeniUye yeniUye = new YeniUye();
             yeniUye.Show();
         }
+
+        
     }
 }

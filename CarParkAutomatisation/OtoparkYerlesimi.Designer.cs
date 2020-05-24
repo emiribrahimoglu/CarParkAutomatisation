@@ -472,6 +472,7 @@ namespace CarParkAutomatisation
             // 
             this.otoparkYerlesimiLbl.BackColor = System.Drawing.Color.Transparent;
             this.otoparkYerlesimiLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
+            this.otoparkYerlesimiLbl.ForeColor = System.Drawing.Color.Black;
             this.otoparkYerlesimiLbl.Location = new System.Drawing.Point(195, 33);
             this.otoparkYerlesimiLbl.Name = "otoparkYerlesimiLbl";
             this.otoparkYerlesimiLbl.Size = new System.Drawing.Size(627, 30);
@@ -484,7 +485,7 @@ namespace CarParkAutomatisation
             this.otoparktanCikisBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.otoparktanCikisBtn.Name = "otoparktanCikisBtn";
             this.otoparktanCikisBtn.Size = new System.Drawing.Size(279, 57);
-            this.otoparktanCikisBtn.TabIndex = 43;
+            this.otoparktanCikisBtn.TabIndex = 37;
             this.otoparktanCikisBtn.Text = "Otoparktan Çıkış";
             this.otoparktanCikisBtn.UseSelectable = true;
             this.otoparktanCikisBtn.Click += new System.EventHandler(this.otoparktanCikisBtn_Click);
@@ -493,6 +494,7 @@ namespace CarParkAutomatisation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(941, 535);
             this.Controls.Add(this.otoparktanCikisBtn);
             this.Controls.Add(this.otoparkYerlesimiLbl);

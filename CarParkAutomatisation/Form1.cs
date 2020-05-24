@@ -46,11 +46,7 @@ namespace CarParkAutomatisation
             //this.Hide();
         }
 
-        private void uyeButton_Click(object sender, EventArgs e)
-        {
-            UyeGirisForm uyeGirisForm = new UyeGirisForm();
-            uyeGirisForm.Show();
-        }
+        
 
         
     }
