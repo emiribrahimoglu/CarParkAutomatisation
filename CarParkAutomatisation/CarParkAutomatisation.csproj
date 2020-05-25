@@ -148,17 +148,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UyeGirisForm.cs">
+    <Compile Include="GirisForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UyeGirisForm.Designer.cs">
-      <DependentUpon>UyeGirisForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UyeliksiGirisForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UyeliksiGirisForm.Designer.cs">
-      <DependentUpon>UyeliksiGirisForm.cs</DependentUpon>
+    <Compile Include="GirisForm.Designer.cs">
+      <DependentUpon>GirisForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Veritabani.cs" />
     <Compile Include="YeniUye.cs">
@@ -191,11 +185,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UyeGirisForm.resx">
-      <DependentUpon>UyeGirisForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UyeliksiGirisForm.resx">
-      <DependentUpon>UyeliksiGirisForm.cs</DependentUpon>
+    <EmbeddedResource Include="GirisForm.resx">
+      <DependentUpon>GirisForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="YeniUye.resx">
       <DependentUpon>YeniUye.cs</DependentUpon>

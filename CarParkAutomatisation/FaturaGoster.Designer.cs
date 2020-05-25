@@ -43,7 +43,7 @@ namespace CarParkAutomatisation
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.label1.Location = new System.Drawing.Point(71, 34);
+            this.label1.Location = new System.Drawing.Point(167, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(407, 57);
             this.label1.TabIndex = 0;

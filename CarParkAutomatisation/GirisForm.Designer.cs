@@ -75,13 +75,13 @@ namespace CarParkAutomatisation
             this.uyeliksizGirisFormLabel.BackColor = System.Drawing.Color.Transparent;
             this.uyeliksizGirisFormLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.uyeliksizGirisFormLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.uyeliksizGirisFormLabel.Location = new System.Drawing.Point(170, 15);
+            this.uyeliksizGirisFormLabel.Location = new System.Drawing.Point(87, 9);
             this.uyeliksizGirisFormLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.uyeliksizGirisFormLabel.Name = "uyeliksizGirisFormLabel";
             this.uyeliksizGirisFormLabel.Size = new System.Drawing.Size(412, 108);
             this.uyeliksizGirisFormLabel.Style = MetroFramework.MetroColorStyle.Black;
             this.uyeliksizGirisFormLabel.TabIndex = 11;
-            this.uyeliksizGirisFormLabel.Text = "ÜYELİKSİZ GİRİŞ EKRANI";
+            this.uyeliksizGirisFormLabel.Text = "GİRİŞ";
             this.uyeliksizGirisFormLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.uyeliksizGirisFormLabel.UseCustomBackColor = true;
             this.uyeliksizGirisFormLabel.UseStyleColors = true;

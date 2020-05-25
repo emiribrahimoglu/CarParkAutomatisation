@@ -19,6 +19,9 @@
         <e p="Form1.cs" t="Include" />
         <e p="Form1.Designer.cs" t="Include" />
         <e p="Form1.resx" t="Include" />
+        <e p="GirisForm.cs" t="Include" />
+        <e p="GirisForm.Designer.cs" t="Include" />
+        <e p="GirisForm.resx" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="OtoparkYerlesimi.cs" t="Include" />
         <e p="OtoparkYerlesimi.Designer.cs" t="Include" />
@@ -35,12 +38,6 @@
           <e p="Settings.Designer.cs" t="Include" />
           <e p="Settings.settings" t="Include" />
         </e>
-        <e p="UyeGirisForm.cs" t="Include" />
-        <e p="UyeGirisForm.Designer.cs" t="Include" />
-        <e p="UyeGirisForm.resx" t="Include" />
-        <e p="UyeliksiGirisForm.cs" t="Include" />
-        <e p="UyeliksiGirisForm.Designer.cs" t="Include" />
-        <e p="UyeliksiGirisForm.resx" t="Include" />
         <e p="Veritabani.cs" t="Include" />
         <e p="YeniUye.cs" t="Include" />
         <e p="YeniUye.Designer.cs" t="Include" />

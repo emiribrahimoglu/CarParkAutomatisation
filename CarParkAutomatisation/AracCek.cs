@@ -9,19 +9,9 @@ namespace CarParkAutomatisation
         public AracCek()
         {
             InitializeComponent();
-            /*int plaka = Convert.ToInt32(UyeliksiGirisForm.PlakaVer());
-            sorgu = "select plakaId from girisCikis where plakaId" + "='"+plaka+"'";
-            int plaka2 = Veritabani.PlakaGetir(sorgu);cekilecek aracın plakası alındı*/
-            //--ust gereksız olabilir
+            
         }
         
-        /* girilen plaka id ye ait gerekli bilgiler cekilecek
-           aracın park edildigi yer (giriscikis tablosundaki park id) degistirilecek
-           yani textbox a girdigimiz yeni yerin id si ile degistirilecek
-           aracı yeni yerine cekilmis olacak
-         */
-
-
         private void aracCekBtn_Click(object sender, EventArgs e)
         {
             //Aracı çekmeden önce yeni-eski parkid'leri plaka id'si vesaire alınıp gönderiliyor,

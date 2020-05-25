@@ -100,7 +100,7 @@
             // baslikLabel
             // 
             this.baslikLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
-            this.baslikLabel.Location = new System.Drawing.Point(226, 79);
+            this.baslikLabel.Location = new System.Drawing.Point(240, 78);
             this.baslikLabel.Name = "baslikLabel";
             this.baslikLabel.Size = new System.Drawing.Size(224, 57);
             this.baslikLabel.TabIndex = 3;

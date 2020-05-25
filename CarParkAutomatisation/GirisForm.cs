@@ -43,16 +43,7 @@ namespace CarParkAutomatisation
                 //komut = new MySqlCommand(komutString, baglanti);
                 //plakaid = Convert.ToInt32(komut.ExecuteScalar());
                 
-                if (plaka1!=0)
-                {
-                    MetroMessageBox.Show(this, "ÜYESİNİZ", "ÜYESİNİZ!",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information, 100);
-                }
-                else
-                {
-                    MetroMessageBox.Show(this, "üye degilsiniz", "uye değil",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information, 100);
-                }
+                
             }
             
             //otoparkyerlesimi sayfasına gecis
