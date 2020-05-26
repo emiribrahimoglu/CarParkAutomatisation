@@ -58,8 +58,6 @@ namespace CarParkAutomatisation
 
         public static string PlakaVer()
         {
-            
-            MessageBox.Show("plaka ver:" + duzplaka);
             return duzplaka;
         }
 

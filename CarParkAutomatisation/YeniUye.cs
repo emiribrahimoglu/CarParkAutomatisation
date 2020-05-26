@@ -29,7 +29,6 @@ namespace CarParkAutomatisation
             sorguCumlesi =
                 "insert into uyeler (uyeSifre, ad, soyad, telno, uyelikbaslangici, plakaId) values(@uyeSifre, @ad, @soyad, @telno, @uyelikbaslangici, @plakaId);";
             uyeOlParametreler = uyelikSifreTxt.Text + " " + uyelikAdTxt.Text + " " + uyelikSoyadTxt.Text + " "+uyelikTelTxt.Text+" " +DateTime.Now + " " + plakaid;
-            MessageBox.Show(uyeOlParametreler);
             Veritabani.KayitOlInsert(sorguCumlesi, uyeOlParametreler);
             
             //uye olduktan sonra yeniden plaka girdirip ondan sonra otoparkyerlesimini sayfasına oradan gecilecek

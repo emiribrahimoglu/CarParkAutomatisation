@@ -1,0 +1,1400 @@
+Index: CarParkAutomatisation/Veritabani.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.ComponentModel;\r\nusing System.Data;\r\nusing System.Drawing;\r\nusing System.Linq;\r\nusing System.Runtime.CompilerServices;\r\nusing System.Text;\r\nusing System.Threading.Tasks;\r\nusing System.Windows.Forms;\r\nusing MetroFramework;\r\nusing MySql.Data.MySqlClient;\r\n\r\nnamespace CarParkAutomatisation\r\n{\r\n    public static class Veritabani\r\n    {\r\n        private static string baglantiString = \"server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje\";\r\n        private static MySqlConnection baglanti;\r\n        private static MySqlCommand komut;\r\n        private static MySqlDataAdapter adaptor;\r\n        private static MySqlDataReader dataReader;\r\n        private static DataSet dataSet;\r\n        private static string[] uyeOlDizi;\r\n        private static int idTemp;\r\n        private static string sifreTemp;\r\n\r\n        //\r\n        private static string sorgu1;\r\n        private static string sorgu2;\r\n        \r\n        // faturagoster icin gerekli degiskenler\r\n        private static string parkyeri;\r\n        \r\n        public static void Baglan()\r\n        {\r\n            try\r\n            {\r\n                baglanti = new MySqlConnection(baglantiString);\r\n                baglanti.Open();\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message);\r\n            }\r\n\r\n            MessageBox.Show(\"Veritabanı Bağlantı Durumu: \" + baglanti.State);\r\n            \r\n        }\r\n\r\n        public static int Personelid // PersonelId için Get Set Property\r\n        {\r\n            get;\r\n            set;\r\n        }\r\n\r\n        public static bool PersonelKontrol(string komutString, string[] personelGirisBilgi)\r\n        {\r\n            try\r\n            {\r\n                komut = new MySqlCommand(komutString, baglanti);\r\n                idTemp = Convert.ToInt32(komut.ExecuteScalar());\r\n                if (idTemp != Convert.ToInt32(personelGirisBilgi[0])) return false;\r\n                komutString = \"select perSifre from personel where perSifre\" + \"='\" + personelGirisBilgi[1] + \"'\";\r\n                komut.CommandText = komutString;\r\n                sifreTemp = komut.ExecuteScalar().ToString();\r\n                return sifreTemp==personelGirisBilgi[1];\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message);\r\n            }\r\n            return false;\r\n        }\r\n        \r\n        public static bool UyeKontrol(string komutString, string[] uyeGirisBilgi)\r\n        {\r\n            try\r\n            {\r\n                komut = new MySqlCommand(komutString, baglanti);\r\n                idTemp = Convert.ToInt32(komut.ExecuteScalar());\r\n                if (idTemp != Convert.ToInt32(uyeGirisBilgi[0])) return false;\r\n                komutString = \"select uyeSifre from uyeler where uyeSifre\" + \"='\" + uyeGirisBilgi[1] + \"'\";\r\n                komut.CommandText = komutString;\r\n                sifreTemp = komut.ExecuteScalar().ToString();\r\n                return sifreTemp==uyeGirisBilgi[1];\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message);\r\n            }\r\n            return false;\r\n        }\r\n\r\n        public static int PlakaGetir(string komutString)\r\n        {\r\n            int plakaid = 0;\r\n            \r\n            try\r\n            {\r\n                komut = new MySqlCommand(komutString, baglanti);\r\n                plakaid = Convert.ToInt32(komut.ExecuteScalar());\r\n                return plakaid;\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message);\r\n                return plakaid;\r\n            }\r\n        }\r\n\r\n        public static void PlakaEkle(string komutString, string plaka)\r\n        {\r\n            try\r\n            {\r\n                komut = new MySqlCommand(komutString, baglanti);\r\n                komut.Parameters.Add(\"@plaka\", MySqlDbType.VarChar).Value = plaka.ToUpper();\r\n                komut.ExecuteNonQuery();\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message);\r\n            }\r\n        }\r\n\r\n        public static DataSet Sorgu(string komutString)\r\n        {\r\n            try\r\n            {\r\n                komut = new MySqlCommand(komutString, baglanti);\r\n                adaptor = new MySqlDataAdapter(komut);\r\n                dataSet = new DataSet();\r\n                adaptor.Fill(dataSet, \"sorguSonuc\");\r\n                return dataSet;\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message);\r\n                return new DataSet();\r\n            }\r\n            \r\n        }\r\n\r\n        public static void KayitOlInsert(string komutString, string parametreler)\r\n        {\r\n            try\r\n            {\r\n                komut = new MySqlCommand(komutString, baglanti);\r\n                uyeOlDizi = parametreler.Split(' ');\r\n                komut.Parameters.Add(\"@uyeSifre\", MySqlDbType.VarChar).Value = uyeOlDizi[0];\r\n                komut.Parameters.Add(\"@ad\", MySqlDbType.VarChar).Value = uyeOlDizi[1];\r\n                komut.Parameters.Add(\"@soyad\", MySqlDbType.VarChar).Value = uyeOlDizi[2];\r\n                komut.Parameters.Add(\"@telno\", MySqlDbType.Int64).Value = Convert.ToInt64(uyeOlDizi[3]);\r\n                komut.Parameters.Add(\"@uyelikbaslangici\", MySqlDbType.DateTime).Value =\r\n                    Convert.ToDateTime(uyeOlDizi[4]+\" \"+uyeOlDizi[5]);\r\n                komut.Parameters.Add(\"@plakaId\", MySqlDbType.Int32).Value = Convert.ToInt32(uyeOlDizi[6]);\r\n                komut.ExecuteNonQuery();\r\n            }\r\n            catch (Exception e)\r\n            {\r\n                MessageBox.Show(e.Message + Environment.NewLine + e.Data);\r\n            }\r\n        }\r\n\r\n        public static void Faturalandir(string aracplaka,string yer)\r\n        {\r\n            //plakaId, parkId, girisSaati, ucret\r\n            \r\n            int plaka2 = 0;\r\n            int kisiId = 0;\r\n            double ucretid = 0;\r\n            bool parkyeridurum = true;\r\n            int parkyeridurumint;\r\n            int parkid = 0;\r\n            int cekmeid;\r\n            string sorgu;\r\n            parkyeri = yer;\r\n            \r\n            // plaka id'ye göre max cekmeid al\r\n            //max cekmeid'ye göre parkid al\r\n            //parkid'ye ait olan park yeri durumunu al ve doluysa boşalt\r\n            // Üstteki üç yorum satırı temizlenebilir\r\n            \r\n            //bu fonksiyon, yer seçimi tiklandiginda acilmasi icin her butonun click olayına eklenecektir\r\n            DateTime girisSaati = DateTime.Now;\r\n            sorgu = \"select plakaId from plakalar where plaka\" + \"='\"+aracplaka+\"'\";\r\n            komut = new MySqlCommand(sorgu,baglanti);\r\n            plaka2 = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan aracın plakaId si alindi.\r\n            MessageBox.Show(\"plaka2:\" + plaka2);\r\n            \r\n            // Önceden çekildiği parkyeri varsa temizleyen kod parçası başlangıcı\r\n            sorgu = \"Select * from cekilenaraclar\";\r\n            komut = new MySqlCommand(sorgu, baglanti);\r\n            if (komut.ExecuteScalar() != null)\r\n            {\r\n                try\r\n                {\r\n                    komut = new MySqlCommand();\r\n                    komut.Connection = baglanti;\r\n                    sorgu = \"select max(cekmeId) from cekilenaraclar where plakaId\" + \"='\" + plaka2 + \"'\";\r\n                    komut.CommandText = sorgu;\r\n                    cekmeid = Convert.ToInt32(komut.ExecuteScalar());\r\n                    komut.CommandText = \"select parkid from cekilenaraclar where cekmeId\" + \"='\" + cekmeid + \"'\";\r\n                    parkid = Convert.ToInt32(komut.ExecuteScalar());\r\n                    komut.CommandText = \"select parkyeridurum from parkyerleri where parkid\" + \"='\" + parkid + \"'\";\r\n                    parkyeridurumint = Convert.ToByte(komut.ExecuteScalar());\r\n                    if (parkyeridurumint == 1)\r\n                    {\r\n                        komut = new MySqlCommand();\r\n                        komut.Connection = baglanti;\r\n                        komut.CommandText = \"update parkyerleri set parkyeridurum=0 where parkId=@parkid\";\r\n                        komut.Parameters.Add(\"@parkid\", MySqlDbType.UByte).Value = parkid;\r\n                        komut.ExecuteNonQuery();\r\n                    }\r\n                }\r\n                catch (Exception e)\r\n                {\r\n                    MessageBox.Show(\"Bilgilendirme: Girdiğiniz plakanın çekildiğine dair bir bilgi yOktUr!\");\r\n                }\r\n                \r\n            }\r\n            \r\n            // Önceden çekildiği parkyeri varsa temizleyen kod parçası bitişi\r\n            \r\n            komut = new MySqlCommand();\r\n            komut.Connection = baglanti;\r\n            komut.CommandText = \"select uyeId from uyeler where plakaId\" + \"='\"+plaka2+\"'\";\r\n            kisiId = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan arac sahibinin  uyeId si alindi.\r\n            MessageBox.Show(\"kişi id:\" + kisiId);\r\n\r\n            if (kisiId!=0) // kisiye kesilecek ucret belirlendi. \r\n            {\r\n                komut.CommandText = \"select ucretId from ucretlendirmeler where ucretId=1\";\r\n                ucretid = Convert.ToInt32(komut.ExecuteScalar());\r\n            }\r\n            else\r\n            {\r\n                komut.CommandText = \"select ucretid from ucretlendirmeler where ucretId=2\";\r\n                ucretid = Convert.ToInt32(komut.ExecuteScalar());\r\n            }\r\n            \r\n            \r\n            \r\n           \r\n            // park yeri girildi. simdi o park yerine ait id alınacak.\r\n            komut.CommandText = \"select parkId from parkyerleri where parkyeri\" + \"='\"+yer+\"'\";\r\n            parkid = Convert.ToInt32(komut.ExecuteScalar()); // aracın park edildigi id alindi.\r\n\r\n            \r\n            \r\n            // toplanan bilgileri o plakaId sayesinde giriscikis tablosuna gir.\r\n\r\n            komut.CommandText =\r\n                \"insert into giriscikis (plakaId, parkId, girisSaati, ucretId) values(@plakaId, @parkid, @girisSaati, @ucretId);\";\r\n            komut.Parameters.Add(\"@plakaId\", MySqlDbType.Int32).Value = plaka2;\r\n            komut.Parameters.Add(\"@parkid\", MySqlDbType.Int32).Value = parkid;\r\n            komut.Parameters.Add(\"@girisSaati\", MySqlDbType.DateTime).Value = girisSaati;\r\n            komut.Parameters.Add(\"@ucretId\", MySqlDbType.Int32).Value = ucretid;\r\n            komut.ExecuteNonQuery();\r\n            komut.CommandText = \"update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid\";\r\n            komut.Parameters.Add(\"@parkyeridurum\", MySqlDbType.TinyBlob).Value = 1;\r\n            komut.ExecuteNonQuery();\r\n\r\n        }\r\n\r\n        public static void FaturaKes(string sorgu, string aracplaka)\r\n        {\r\n            komut = new MySqlCommand(sorgu,baglanti);\r\n            DateTime girisSaati = Convert.ToDateTime(komut.ExecuteScalar());\r\n            if (girisSaati != DateTime.MinValue)\r\n            {\r\n                DateTime cikisSaati = DateTime.Now; // bu deger alindi, veritabanina girilecek\r\n                MessageBox.Show(\"Giriş Saati: \" + girisSaati + Environment.NewLine + \"Çıkış Saati: \"+ cikisSaati);\r\n                cikisSaati = cikisSaati.AddHours(2).AddMinutes(30);\r\n                int parkSuresi = Convert.ToInt32(cikisSaati.Subtract(girisSaati).TotalMinutes);\r\n                MessageBox.Show(\"Dakika tipinde park süresi: \" + parkSuresi);\r\n                \r\n                komut.CommandText = \"select plakaId from plakalar where plaka=@aracplaka\";\r\n                komut.Parameters.Add(\"@aracplaka\", MySqlDbType.VarChar).Value = aracplaka;\r\n                int aracplakaid = Convert.ToInt32(komut.ExecuteScalar());\r\n                komut.CommandText = \"select max(faturaId) from girisCikis where plakaId=@aracplakaid\";\r\n                komut.Parameters.Add(\"@aracplakaid\", MySqlDbType.Int32).Value = aracplakaid;\r\n                string maxfaturaid = Convert.ToString(komut.ExecuteScalar());\r\n                MessageBox.Show(\"Max Fatura ID:: \" + maxfaturaid);\r\n                komut = new MySqlCommand();\r\n                komut.Connection = baglanti;\r\n                komut.CommandText =\r\n                    \"select parkid from giriscikis where faturaId=@maxfaturaid\";\r\n                komut.Parameters.Add(\"@maxfaturaid\", MySqlDbType.VarChar).Value = maxfaturaid;\r\n                komut.Parameters.Add(\"@aracplakaid\", MySqlDbType.Int32).Value = aracplakaid;\r\n                int parkid = Convert.ToInt32(komut.ExecuteScalar());\r\n                komut.CommandText = \"update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid\";\r\n                komut.Parameters.Add(\"@parkyeridurum\", MySqlDbType.TinyBlob).Value = 0;\r\n                komut.Parameters.Add(\"@parkid\", MySqlDbType.Int32).Value = parkid;\r\n                komut.ExecuteNonQuery();\r\n                \r\n                komut.CommandText = \"update girisCikis set cikisSaati=@cikisSaati, parkSuresi=@toplamParkSuresi where faturaId=@maxfaturaid\";\r\n                MessageBox.Show(\"Update Komutu:: \"+komut.CommandText);\r\n                komut.Parameters.Add(\"@cikisSaati\", MySqlDbType.DateTime).Value = cikisSaati;\r\n                komut.Parameters.Add(\"@toplamParkSuresi\", MySqlDbType.Double).Value = parkSuresi;\r\n                //komut.Parameters.Add(\"@maxfaturaid\", MySqlDbType.VarChar).Value = maxfaturaid;\r\n                komut.ExecuteNonQuery();\r\n                 \r\n                komut.CommandText =\r\n                     \"select ucret from ucretlendirmeler,girisCikis where girisCikis.faturaId=(select max(faturaId) from girisCikis where plakaId=@aracplakaid and girisCikis.ucretId=ucretlendirmeler.ucretId)\";\r\n                MessageBox.Show(\"Select Komutu:: \"+komut.CommandText);\r\n                double tarife = Convert.ToDouble(komut.ExecuteScalar());\r\n                double ucret = Convert.ToDouble(parkSuresi) / 60 * tarife;\r\n                if (parkSuresi%60>30)\r\n                {\r\n                     ucret += Convert.ToInt32(tarife / 2);\r\n                }\r\n                komut = new MySqlCommand();\r\n                komut.Connection = baglanti;\r\n                komut.CommandText = \"select parkyeri from parkyerleri where parkId=@parkid\";\r\n                komut.Parameters.Add(\"@parkid\", MySqlDbType.Int32).Value = parkid;\r\n                parkyeri = Convert.ToString(komut.ExecuteScalar());\r\n                FaturaGoster faturaGoster = new FaturaGoster(aracplaka,parkyeri,girisSaati,cikisSaati, parkSuresi,ucret);\r\n                faturaGoster.Show();\r\n            }\r\n\r\n        }\r\n\r\n        public static void AraciCek(string sorgu,int cekilenid,int parkid, int eskiparkid, string sorgu2)\r\n        {\r\n            // Düzenlenen son park yerlerinden vesaire emin olmak için ve çekilmeden önceki park yerini boş hale getiriyor ve yeni park yerini dolu hale getiriyor\r\n            DateTime cekmeSaati = DateTime.Now;\r\n            komut = new MySqlCommand(sorgu2, baglanti);\r\n            string maxfaturaid = Convert.ToString(komut.ExecuteScalar());\r\n            komut.CommandText = \"select parkid from giriscikis where faturaId\" + \"='\" + maxfaturaid + \"'\";\r\n            eskiparkid = Convert.ToInt32(komut.ExecuteScalar());\r\n            MessageBox.Show(\r\n                \"Sırayla: Çekilen ID, Park ID, Eski Park ID = \" + cekilenid + @\" \" + parkid + @\" \" + eskiparkid);\r\n            komut = new MySqlCommand(sorgu,baglanti);\r\n            komut.Parameters.Add(\"@parkid\", MySqlDbType.Int32).Value = parkid;\r\n            komut.Parameters.Add(\"@faturaid\", MySqlDbType.Int32).Value = maxfaturaid;\r\n            komut.ExecuteNonQuery();\r\n            sorgu = \"update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid\";\r\n            komut = new MySqlCommand(sorgu, baglanti);\r\n            komut.Parameters.Add(\"@parkid\", MySqlDbType.Int32).Value = parkid;\r\n            komut.Parameters.Add(\"@parkyeridurum\", MySqlDbType.UByte).Value = 1;\r\n            komut.ExecuteNonQuery();\r\n            sorgu =\r\n                \"insert into cekilenaraclar (parkId, plakaId, perId, cekilmeTarihi) values (@parkid, @cekilenid, @perid, @cekilmetarihi)\";\r\n            komut = new MySqlCommand(sorgu, baglanti);\r\n            komut.Parameters.Add(\"@parkid\", MySqlDbType.Int32).Value = parkid;\r\n            komut.Parameters.Add(\"@cekilenid\", MySqlDbType.Int32).Value = cekilenid;\r\n            komut.Parameters.Add(\"@perid\", MySqlDbType.Int32).Value = Personelid;\r\n            komut.Parameters.Add(\"@cekilmetarihi\", MySqlDbType.DateTime).Value = cekmeSaati;\r\n            komut.ExecuteNonQuery();\r\n            sorgu = \"update parkyerleri set parkyeridurum=@parkyeridurum where parkId=@parkid\";\r\n            komut = new MySqlCommand(sorgu, baglanti);\r\n            komut.Parameters.Add(\"@parkid\", MySqlDbType.Int32).Value = eskiparkid;\r\n            komut.Parameters.Add(\"@parkyeridurum\", MySqlDbType.UByte).Value = 0;\r\n            komut.ExecuteNonQuery();\r\n\r\n        }\r\n\r\n        public static int ParkIdGetir(string sorgu)\r\n        {\r\n            komut = new MySqlCommand(sorgu,baglanti);\r\n            return Convert.ToInt32(komut.ExecuteScalar());\r\n\r\n        }\r\n        \r\n\r\n        \r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CarParkAutomatisation/Veritabani.cs	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
++++ CarParkAutomatisation/Veritabani.cs	(date 1590417997412)
+@@ -15,7 +15,7 @@
+ {
+     public static class Veritabani
+     {
+-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
++        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=120zatura120;database=vtproje";
+         private static MySqlConnection baglanti;
+         private static MySqlCommand komut;
+         private static MySqlDataAdapter adaptor;
+Index: .idea/.idea.CarParkAutomatisation/.idea/dataSources/9ea39ffd-945f-4c9d-8823-1b191de89516.xml
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/dataSources/9ea39ffd-945f-4c9d-8823-1b191de89516.xml	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
++++ .idea/.idea.CarParkAutomatisation/.idea/dataSources/9ea39ffd-945f-4c9d-8823-1b191de89516.xml	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
+@@ -1,1201 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<dataSource name="@veritabani">
+-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.18">
+-    <root id="1">
+-      <ServerVersion>8.0.19</ServerVersion>
+-      <DefaultEngine>InnoDB</DefaultEngine>
+-      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+-      <DefaultCasing>lower/lower</DefaultCasing>
+-    </root>
+-    <schema id="2" parent="1" name="covid1">
+-      <Current>1</Current>
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="3" parent="1" name="information_schema">
+-      <Collation>utf8_general_ci</Collation>
+-    </schema>
+-    <schema id="4" parent="1" name="mysql">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="5" parent="1" name="odev4">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="6" parent="1" name="odev5">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="7" parent="1" name="performance_schema">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="8" parent="1" name="sakila">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="9" parent="1" name="sys">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="10" parent="1" name="vtodev1">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="11" parent="1" name="vtproje">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="12" parent="1" name="vtysodev1">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <schema id="13" parent="1" name="world">
+-      <Collation>utf8mb4_0900_ai_ci</Collation>
+-    </schema>
+-    <collation id="14" parent="1" name="armscii8_bin">
+-      <Charset>armscii8</Charset>
+-    </collation>
+-    <collation id="15" parent="1" name="armscii8_general_ci">
+-      <Charset>armscii8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="16" parent="1" name="ascii_bin">
+-      <Charset>ascii</Charset>
+-    </collation>
+-    <collation id="17" parent="1" name="ascii_general_ci">
+-      <Charset>ascii</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="18" parent="1" name="big5_bin">
+-      <Charset>big5</Charset>
+-    </collation>
+-    <collation id="19" parent="1" name="big5_chinese_ci">
+-      <Charset>big5</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="20" parent="1" name="binary">
+-      <Charset>binary</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="21" parent="1" name="cp1250_bin">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="22" parent="1" name="cp1250_croatian_ci">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="23" parent="1" name="cp1250_czech_cs">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="24" parent="1" name="cp1250_general_ci">
+-      <Charset>cp1250</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="25" parent="1" name="cp1250_polish_ci">
+-      <Charset>cp1250</Charset>
+-    </collation>
+-    <collation id="26" parent="1" name="cp1251_bin">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="27" parent="1" name="cp1251_bulgarian_ci">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="28" parent="1" name="cp1251_general_ci">
+-      <Charset>cp1251</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="29" parent="1" name="cp1251_general_cs">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="30" parent="1" name="cp1251_ukrainian_ci">
+-      <Charset>cp1251</Charset>
+-    </collation>
+-    <collation id="31" parent="1" name="cp1256_bin">
+-      <Charset>cp1256</Charset>
+-    </collation>
+-    <collation id="32" parent="1" name="cp1256_general_ci">
+-      <Charset>cp1256</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="33" parent="1" name="cp1257_bin">
+-      <Charset>cp1257</Charset>
+-    </collation>
+-    <collation id="34" parent="1" name="cp1257_general_ci">
+-      <Charset>cp1257</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="35" parent="1" name="cp1257_lithuanian_ci">
+-      <Charset>cp1257</Charset>
+-    </collation>
+-    <collation id="36" parent="1" name="cp850_bin">
+-      <Charset>cp850</Charset>
+-    </collation>
+-    <collation id="37" parent="1" name="cp850_general_ci">
+-      <Charset>cp850</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="38" parent="1" name="cp852_bin">
+-      <Charset>cp852</Charset>
+-    </collation>
+-    <collation id="39" parent="1" name="cp852_general_ci">
+-      <Charset>cp852</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="40" parent="1" name="cp866_bin">
+-      <Charset>cp866</Charset>
+-    </collation>
+-    <collation id="41" parent="1" name="cp866_general_ci">
+-      <Charset>cp866</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="42" parent="1" name="cp932_bin">
+-      <Charset>cp932</Charset>
+-    </collation>
+-    <collation id="43" parent="1" name="cp932_japanese_ci">
+-      <Charset>cp932</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="44" parent="1" name="dec8_bin">
+-      <Charset>dec8</Charset>
+-    </collation>
+-    <collation id="45" parent="1" name="dec8_swedish_ci">
+-      <Charset>dec8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="46" parent="1" name="eucjpms_bin">
+-      <Charset>eucjpms</Charset>
+-    </collation>
+-    <collation id="47" parent="1" name="eucjpms_japanese_ci">
+-      <Charset>eucjpms</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="48" parent="1" name="euckr_bin">
+-      <Charset>euckr</Charset>
+-    </collation>
+-    <collation id="49" parent="1" name="euckr_korean_ci">
+-      <Charset>euckr</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="50" parent="1" name="gb18030_bin">
+-      <Charset>gb18030</Charset>
+-    </collation>
+-    <collation id="51" parent="1" name="gb18030_chinese_ci">
+-      <Charset>gb18030</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="52" parent="1" name="gb18030_unicode_520_ci">
+-      <Charset>gb18030</Charset>
+-    </collation>
+-    <collation id="53" parent="1" name="gb2312_bin">
+-      <Charset>gb2312</Charset>
+-    </collation>
+-    <collation id="54" parent="1" name="gb2312_chinese_ci">
+-      <Charset>gb2312</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="55" parent="1" name="gbk_bin">
+-      <Charset>gbk</Charset>
+-    </collation>
+-    <collation id="56" parent="1" name="gbk_chinese_ci">
+-      <Charset>gbk</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="57" parent="1" name="geostd8_bin">
+-      <Charset>geostd8</Charset>
+-    </collation>
+-    <collation id="58" parent="1" name="geostd8_general_ci">
+-      <Charset>geostd8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="59" parent="1" name="greek_bin">
+-      <Charset>greek</Charset>
+-    </collation>
+-    <collation id="60" parent="1" name="greek_general_ci">
+-      <Charset>greek</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="61" parent="1" name="hebrew_bin">
+-      <Charset>hebrew</Charset>
+-    </collation>
+-    <collation id="62" parent="1" name="hebrew_general_ci">
+-      <Charset>hebrew</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="63" parent="1" name="hp8_bin">
+-      <Charset>hp8</Charset>
+-    </collation>
+-    <collation id="64" parent="1" name="hp8_english_ci">
+-      <Charset>hp8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="65" parent="1" name="keybcs2_bin">
+-      <Charset>keybcs2</Charset>
+-    </collation>
+-    <collation id="66" parent="1" name="keybcs2_general_ci">
+-      <Charset>keybcs2</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="67" parent="1" name="koi8r_bin">
+-      <Charset>koi8r</Charset>
+-    </collation>
+-    <collation id="68" parent="1" name="koi8r_general_ci">
+-      <Charset>koi8r</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="69" parent="1" name="koi8u_bin">
+-      <Charset>koi8u</Charset>
+-    </collation>
+-    <collation id="70" parent="1" name="koi8u_general_ci">
+-      <Charset>koi8u</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="71" parent="1" name="latin1_bin">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="72" parent="1" name="latin1_danish_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="73" parent="1" name="latin1_general_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="74" parent="1" name="latin1_general_cs">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="75" parent="1" name="latin1_german1_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="76" parent="1" name="latin1_german2_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="77" parent="1" name="latin1_spanish_ci">
+-      <Charset>latin1</Charset>
+-    </collation>
+-    <collation id="78" parent="1" name="latin1_swedish_ci">
+-      <Charset>latin1</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="79" parent="1" name="latin2_bin">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="80" parent="1" name="latin2_croatian_ci">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="81" parent="1" name="latin2_czech_cs">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="82" parent="1" name="latin2_general_ci">
+-      <Charset>latin2</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="83" parent="1" name="latin2_hungarian_ci">
+-      <Charset>latin2</Charset>
+-    </collation>
+-    <collation id="84" parent="1" name="latin5_bin">
+-      <Charset>latin5</Charset>
+-    </collation>
+-    <collation id="85" parent="1" name="latin5_turkish_ci">
+-      <Charset>latin5</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="86" parent="1" name="latin7_bin">
+-      <Charset>latin7</Charset>
+-    </collation>
+-    <collation id="87" parent="1" name="latin7_estonian_cs">
+-      <Charset>latin7</Charset>
+-    </collation>
+-    <collation id="88" parent="1" name="latin7_general_ci">
+-      <Charset>latin7</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="89" parent="1" name="latin7_general_cs">
+-      <Charset>latin7</Charset>
+-    </collation>
+-    <collation id="90" parent="1" name="macce_bin">
+-      <Charset>macce</Charset>
+-    </collation>
+-    <collation id="91" parent="1" name="macce_general_ci">
+-      <Charset>macce</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="92" parent="1" name="macroman_bin">
+-      <Charset>macroman</Charset>
+-    </collation>
+-    <collation id="93" parent="1" name="macroman_general_ci">
+-      <Charset>macroman</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="94" parent="1" name="sjis_bin">
+-      <Charset>sjis</Charset>
+-    </collation>
+-    <collation id="95" parent="1" name="sjis_japanese_ci">
+-      <Charset>sjis</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="96" parent="1" name="swe7_bin">
+-      <Charset>swe7</Charset>
+-    </collation>
+-    <collation id="97" parent="1" name="swe7_swedish_ci">
+-      <Charset>swe7</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="98" parent="1" name="tis620_bin">
+-      <Charset>tis620</Charset>
+-    </collation>
+-    <collation id="99" parent="1" name="tis620_thai_ci">
+-      <Charset>tis620</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="100" parent="1" name="ucs2_bin">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="101" parent="1" name="ucs2_croatian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="102" parent="1" name="ucs2_czech_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="103" parent="1" name="ucs2_danish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="104" parent="1" name="ucs2_esperanto_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="105" parent="1" name="ucs2_estonian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="106" parent="1" name="ucs2_general_ci">
+-      <Charset>ucs2</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="107" parent="1" name="ucs2_general_mysql500_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="108" parent="1" name="ucs2_german2_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="109" parent="1" name="ucs2_hungarian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="110" parent="1" name="ucs2_icelandic_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="111" parent="1" name="ucs2_latvian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="112" parent="1" name="ucs2_lithuanian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="113" parent="1" name="ucs2_persian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="114" parent="1" name="ucs2_polish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="115" parent="1" name="ucs2_roman_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="116" parent="1" name="ucs2_romanian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="117" parent="1" name="ucs2_sinhala_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="118" parent="1" name="ucs2_slovak_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="119" parent="1" name="ucs2_slovenian_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="120" parent="1" name="ucs2_spanish2_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="121" parent="1" name="ucs2_spanish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="122" parent="1" name="ucs2_swedish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="123" parent="1" name="ucs2_turkish_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="124" parent="1" name="ucs2_unicode_520_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="125" parent="1" name="ucs2_unicode_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="126" parent="1" name="ucs2_vietnamese_ci">
+-      <Charset>ucs2</Charset>
+-    </collation>
+-    <collation id="127" parent="1" name="ujis_bin">
+-      <Charset>ujis</Charset>
+-    </collation>
+-    <collation id="128" parent="1" name="ujis_japanese_ci">
+-      <Charset>ujis</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="129" parent="1" name="utf16_bin">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="130" parent="1" name="utf16_croatian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="131" parent="1" name="utf16_czech_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="132" parent="1" name="utf16_danish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="133" parent="1" name="utf16_esperanto_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="134" parent="1" name="utf16_estonian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="135" parent="1" name="utf16_general_ci">
+-      <Charset>utf16</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="136" parent="1" name="utf16_german2_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="137" parent="1" name="utf16_hungarian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="138" parent="1" name="utf16_icelandic_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="139" parent="1" name="utf16_latvian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="140" parent="1" name="utf16_lithuanian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="141" parent="1" name="utf16_persian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="142" parent="1" name="utf16_polish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="143" parent="1" name="utf16_roman_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="144" parent="1" name="utf16_romanian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="145" parent="1" name="utf16_sinhala_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="146" parent="1" name="utf16_slovak_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="147" parent="1" name="utf16_slovenian_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="148" parent="1" name="utf16_spanish2_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="149" parent="1" name="utf16_spanish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="150" parent="1" name="utf16_swedish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="151" parent="1" name="utf16_turkish_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="152" parent="1" name="utf16_unicode_520_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="153" parent="1" name="utf16_unicode_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="154" parent="1" name="utf16_vietnamese_ci">
+-      <Charset>utf16</Charset>
+-    </collation>
+-    <collation id="155" parent="1" name="utf16le_bin">
+-      <Charset>utf16le</Charset>
+-    </collation>
+-    <collation id="156" parent="1" name="utf16le_general_ci">
+-      <Charset>utf16le</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="157" parent="1" name="utf32_bin">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="158" parent="1" name="utf32_croatian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="159" parent="1" name="utf32_czech_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="160" parent="1" name="utf32_danish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="161" parent="1" name="utf32_esperanto_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="162" parent="1" name="utf32_estonian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="163" parent="1" name="utf32_general_ci">
+-      <Charset>utf32</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="164" parent="1" name="utf32_german2_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="165" parent="1" name="utf32_hungarian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="166" parent="1" name="utf32_icelandic_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="167" parent="1" name="utf32_latvian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="168" parent="1" name="utf32_lithuanian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="169" parent="1" name="utf32_persian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="170" parent="1" name="utf32_polish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="171" parent="1" name="utf32_roman_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="172" parent="1" name="utf32_romanian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="173" parent="1" name="utf32_sinhala_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="174" parent="1" name="utf32_slovak_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="175" parent="1" name="utf32_slovenian_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="176" parent="1" name="utf32_spanish2_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="177" parent="1" name="utf32_spanish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="178" parent="1" name="utf32_swedish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="179" parent="1" name="utf32_turkish_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="180" parent="1" name="utf32_unicode_520_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="181" parent="1" name="utf32_unicode_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="182" parent="1" name="utf32_vietnamese_ci">
+-      <Charset>utf32</Charset>
+-    </collation>
+-    <collation id="183" parent="1" name="utf8_bin">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="184" parent="1" name="utf8_croatian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="185" parent="1" name="utf8_czech_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="186" parent="1" name="utf8_danish_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="187" parent="1" name="utf8_esperanto_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="188" parent="1" name="utf8_estonian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="189" parent="1" name="utf8_general_ci">
+-      <Charset>utf8</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="190" parent="1" name="utf8_general_mysql500_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="191" parent="1" name="utf8_german2_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="192" parent="1" name="utf8_hungarian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="193" parent="1" name="utf8_icelandic_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="194" parent="1" name="utf8_latvian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="195" parent="1" name="utf8_lithuanian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="196" parent="1" name="utf8_persian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="197" parent="1" name="utf8_polish_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="198" parent="1" name="utf8_roman_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="199" parent="1" name="utf8_romanian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="200" parent="1" name="utf8_sinhala_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="201" parent="1" name="utf8_slovak_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="202" parent="1" name="utf8_slovenian_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="203" parent="1" name="utf8_spanish2_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="204" parent="1" name="utf8_spanish_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="205" parent="1" name="utf8_swedish_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="206" parent="1" name="utf8_tolower_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="207" parent="1" name="utf8_turkish_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="208" parent="1" name="utf8_unicode_520_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="209" parent="1" name="utf8_unicode_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="210" parent="1" name="utf8_vietnamese_ci">
+-      <Charset>utf8</Charset>
+-    </collation>
+-    <collation id="211" parent="1" name="utf8mb4_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-      <DefaultForCharset>1</DefaultForCharset>
+-    </collation>
+-    <collation id="212" parent="1" name="utf8mb4_0900_as_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="213" parent="1" name="utf8mb4_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="214" parent="1" name="utf8mb4_0900_bin">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="215" parent="1" name="utf8mb4_bin">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="216" parent="1" name="utf8mb4_croatian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="217" parent="1" name="utf8mb4_cs_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="218" parent="1" name="utf8mb4_cs_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="219" parent="1" name="utf8mb4_czech_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="220" parent="1" name="utf8mb4_da_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="221" parent="1" name="utf8mb4_da_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="222" parent="1" name="utf8mb4_danish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="223" parent="1" name="utf8mb4_de_pb_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="224" parent="1" name="utf8mb4_de_pb_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="225" parent="1" name="utf8mb4_eo_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="226" parent="1" name="utf8mb4_eo_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="227" parent="1" name="utf8mb4_es_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="228" parent="1" name="utf8mb4_es_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="229" parent="1" name="utf8mb4_es_trad_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="230" parent="1" name="utf8mb4_es_trad_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="231" parent="1" name="utf8mb4_esperanto_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="232" parent="1" name="utf8mb4_estonian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="233" parent="1" name="utf8mb4_et_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="234" parent="1" name="utf8mb4_et_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="235" parent="1" name="utf8mb4_general_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="236" parent="1" name="utf8mb4_german2_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="237" parent="1" name="utf8mb4_hr_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="238" parent="1" name="utf8mb4_hr_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="239" parent="1" name="utf8mb4_hu_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="240" parent="1" name="utf8mb4_hu_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="241" parent="1" name="utf8mb4_hungarian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="242" parent="1" name="utf8mb4_icelandic_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="243" parent="1" name="utf8mb4_is_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="244" parent="1" name="utf8mb4_is_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="245" parent="1" name="utf8mb4_ja_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="246" parent="1" name="utf8mb4_ja_0900_as_cs_ks">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="247" parent="1" name="utf8mb4_la_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="248" parent="1" name="utf8mb4_la_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="249" parent="1" name="utf8mb4_latvian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="250" parent="1" name="utf8mb4_lithuanian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="251" parent="1" name="utf8mb4_lt_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="252" parent="1" name="utf8mb4_lt_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="253" parent="1" name="utf8mb4_lv_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="254" parent="1" name="utf8mb4_lv_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="255" parent="1" name="utf8mb4_persian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="256" parent="1" name="utf8mb4_pl_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="257" parent="1" name="utf8mb4_pl_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="258" parent="1" name="utf8mb4_polish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="259" parent="1" name="utf8mb4_ro_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="260" parent="1" name="utf8mb4_ro_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="261" parent="1" name="utf8mb4_roman_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="262" parent="1" name="utf8mb4_romanian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="263" parent="1" name="utf8mb4_ru_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="264" parent="1" name="utf8mb4_ru_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="265" parent="1" name="utf8mb4_sinhala_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="266" parent="1" name="utf8mb4_sk_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="267" parent="1" name="utf8mb4_sk_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="268" parent="1" name="utf8mb4_sl_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="269" parent="1" name="utf8mb4_sl_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="270" parent="1" name="utf8mb4_slovak_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="271" parent="1" name="utf8mb4_slovenian_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="272" parent="1" name="utf8mb4_spanish2_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="273" parent="1" name="utf8mb4_spanish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="274" parent="1" name="utf8mb4_sv_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="275" parent="1" name="utf8mb4_sv_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="276" parent="1" name="utf8mb4_swedish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="277" parent="1" name="utf8mb4_tr_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="278" parent="1" name="utf8mb4_tr_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="279" parent="1" name="utf8mb4_turkish_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="280" parent="1" name="utf8mb4_unicode_520_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="281" parent="1" name="utf8mb4_unicode_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="282" parent="1" name="utf8mb4_vi_0900_ai_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="283" parent="1" name="utf8mb4_vi_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="284" parent="1" name="utf8mb4_vietnamese_ci">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <collation id="285" parent="1" name="utf8mb4_zh_0900_as_cs">
+-      <Charset>utf8mb4</Charset>
+-    </collation>
+-    <user id="286" parent="1" name="mysql.infoschema">
+-      <Host>localhost</Host>
+-    </user>
+-    <user id="287" parent="1" name="mysql.session">
+-      <Host>localhost</Host>
+-    </user>
+-    <user id="288" parent="1" name="mysql.sys">
+-      <Host>localhost</Host>
+-    </user>
+-    <user id="289" parent="1" name="root">
+-      <Host>localhost</Host>
+-    </user>
+-    <table id="290" parent="11" name="cekilenaraclar"/>
+-    <table id="291" parent="11" name="giriscikis"/>
+-    <table id="292" parent="11" name="parkyerleri"/>
+-    <table id="293" parent="11" name="personel"/>
+-    <table id="294" parent="11" name="plakalar"/>
+-    <table id="295" parent="11" name="ucretlendirmeler"/>
+-    <table id="296" parent="11" name="uyeler"/>
+-    <column id="297" parent="290" name="cekmeId">
+-      <Position>1</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <SequenceIdentity>1</SequenceIdentity>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="298" parent="290" name="parkId">
+-      <Position>2</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="299" parent="290" name="plakaId">
+-      <Position>3</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="300" parent="290" name="perId">
+-      <Position>4</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="301" parent="290" name="cekilmeTarihi">
+-      <Position>5</Position>
+-      <DataType>datetime|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <index id="302" parent="290" name="parkId">
+-      <ColNames>parkId</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <index id="303" parent="290" name="plakaId">
+-      <ColNames>plakaId</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <index id="304" parent="290" name="perId">
+-      <ColNames>perId</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <key id="305" parent="290" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <ColNames>cekmeId</ColNames>
+-      <Primary>1</Primary>
+-    </key>
+-    <foreign-key id="306" parent="290" name="cekilenaraclar_ibfk_1">
+-      <ColNames>parkId</ColNames>
+-      <RefTableName>parkyerleri</RefTableName>
+-      <RefColNames>parkId</RefColNames>
+-    </foreign-key>
+-    <foreign-key id="307" parent="290" name="cekilenaraclar_ibfk_2">
+-      <ColNames>plakaId</ColNames>
+-      <RefTableName>plakalar</RefTableName>
+-      <RefColNames>plakaId</RefColNames>
+-    </foreign-key>
+-    <foreign-key id="308" parent="290" name="cekilenaraclar_ibfk_3">
+-      <ColNames>perId</ColNames>
+-      <RefTableName>personel</RefTableName>
+-      <RefColNames>perId</RefColNames>
+-    </foreign-key>
+-    <column id="309" parent="291" name="faturaId">
+-      <Position>1</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <SequenceIdentity>1</SequenceIdentity>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="310" parent="291" name="plakaId">
+-      <Position>2</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="311" parent="291" name="parkId">
+-      <Position>3</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="312" parent="291" name="girisSaati">
+-      <Position>4</Position>
+-      <DataType>datetime|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="313" parent="291" name="cikisSaati">
+-      <Position>5</Position>
+-      <DataType>datetime|0s</DataType>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="314" parent="291" name="parkSuresi">
+-      <Position>6</Position>
+-      <DataType>double|0s</DataType>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="315" parent="291" name="ucretId">
+-      <Position>7</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <index id="316" parent="291" name="plakaId">
+-      <ColNames>plakaId</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <index id="317" parent="291" name="parkId">
+-      <ColNames>parkId</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <index id="318" parent="291" name="ucretId">
+-      <ColNames>ucretId</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <key id="319" parent="291" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <ColNames>faturaId</ColNames>
+-      <Primary>1</Primary>
+-    </key>
+-    <foreign-key id="320" parent="291" name="giriscikis_ibfk_1">
+-      <ColNames>plakaId</ColNames>
+-      <RefTableName>plakalar</RefTableName>
+-      <RefColNames>plakaId</RefColNames>
+-    </foreign-key>
+-    <foreign-key id="321" parent="291" name="giriscikis_ibfk_2">
+-      <ColNames>parkId</ColNames>
+-      <RefTableName>parkyerleri</RefTableName>
+-      <RefColNames>parkId</RefColNames>
+-    </foreign-key>
+-    <foreign-key id="322" parent="291" name="giriscikis_ibfk_3">
+-      <ColNames>ucretId</ColNames>
+-      <RefTableName>ucretlendirmeler</RefTableName>
+-      <RefColNames>ucretId</RefColNames>
+-    </foreign-key>
+-    <column id="323" parent="292" name="parkId">
+-      <Position>1</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <SequenceIdentity>1</SequenceIdentity>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="324" parent="292" name="parkyeri">
+-      <Position>2</Position>
+-      <DataType>varchar(20)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="325" parent="292" name="parkyeridurum">
+-      <Position>3</Position>
+-      <DataType>tinyint(1)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <key id="326" parent="292" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <ColNames>parkId</ColNames>
+-      <Primary>1</Primary>
+-    </key>
+-    <column id="327" parent="293" name="perId">
+-      <Position>1</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <SequenceIdentity>1</SequenceIdentity>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="328" parent="293" name="perSifre">
+-      <Position>2</Position>
+-      <DataType>varchar(50)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <key id="329" parent="293" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <ColNames>perId</ColNames>
+-      <Primary>1</Primary>
+-    </key>
+-    <column id="330" parent="294" name="plakaId">
+-      <Position>1</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <SequenceIdentity>1</SequenceIdentity>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="331" parent="294" name="plaka">
+-      <Position>2</Position>
+-      <DataType>varchar(30)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <key id="332" parent="294" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <ColNames>plakaId</ColNames>
+-      <Primary>1</Primary>
+-    </key>
+-    <column id="333" parent="295" name="ucretId">
+-      <Position>1</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <SequenceIdentity>1</SequenceIdentity>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="334" parent="295" name="tarife">
+-      <Position>2</Position>
+-      <DataType>varchar(30)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="335" parent="295" name="ucret">
+-      <Position>3</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <key id="336" parent="295" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <ColNames>ucretId</ColNames>
+-      <Primary>1</Primary>
+-    </key>
+-    <column id="337" parent="296" name="uyeId">
+-      <Position>1</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <SequenceIdentity>1</SequenceIdentity>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="338" parent="296" name="uyeSifre">
+-      <Position>2</Position>
+-      <DataType>varchar(50)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="339" parent="296" name="ad">
+-      <Position>3</Position>
+-      <DataType>varchar(35)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="340" parent="296" name="soyad">
+-      <Position>4</Position>
+-      <DataType>varchar(35)|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="341" parent="296" name="telno">
+-      <Position>5</Position>
+-      <DataType>bigint|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="342" parent="296" name="uyelikbaslangici">
+-      <Position>6</Position>
+-      <DataType>datetime|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <column id="343" parent="296" name="plakaId">
+-      <Position>7</Position>
+-      <DataType>int|0s</DataType>
+-      <NotNull>1</NotNull>
+-      <ColumnKind>normal</ColumnKind>
+-    </column>
+-    <index id="344" parent="296" name="plakaId">
+-      <ColNames>plakaId</ColNames>
+-      <Type>btree</Type>
+-    </index>
+-    <key id="345" parent="296" name="PRIMARY">
+-      <NameSurrogate>1</NameSurrogate>
+-      <ColNames>uyeId</ColNames>
+-      <Primary>1</Primary>
+-    </key>
+-    <foreign-key id="346" parent="296" name="uyeler_ibfk_1">
+-      <ColNames>plakaId</ColNames>
+-      <RefTableName>plakalar</RefTableName>
+-      <RefColNames>plakaId</RefColNames>
+-    </foreign-key>
+-  </database-model>
+-</dataSource>
+\ No newline at end of file
+Index: .idea/.idea.CarParkAutomatisation/.idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/dataSources.xml	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
++++ .idea/.idea.CarParkAutomatisation/.idea/dataSources.xml	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+-    <data-source source="LOCAL" name="@veritabani" uuid="9ea39ffd-945f-4c9d-8823-1b191de89516">
+-      <driver-ref>mysql.8</driver-ref>
+-      <synchronize>true</synchronize>
+-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+-      <jdbc-url>jdbc:mysql://127.0.0.1:3306</jdbc-url>
+-      <driver-properties>
+-        <property name="serverTimezone" value="UTC" />
+-      </driver-properties>
+-    </data-source>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/.idea.CarParkAutomatisation/.idea/dataSources/9ea39ffd-945f-4c9d-8823-1b191de89516/storage_v2/_src_/schema/information_schema.FNRwLQ.meta
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/dataSources/9ea39ffd-945f-4c9d-8823-1b191de89516/storage_v2/_src_/schema/information_schema.FNRwLQ.meta	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
++++ .idea/.idea.CarParkAutomatisation/.idea/dataSources/9ea39ffd-945f-4c9d-8823-1b191de89516/storage_v2/_src_/schema/information_schema.FNRwLQ.meta	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
+@@ -1,2 +0,0 @@
+-#n:information_schema
+-!<md> [null, 0, null, null, -2147483648, -2147483648]
+Index: .idea/.idea.CarParkAutomatisation/.idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"dataSourceStorageLocal\">\r\n    <data-source name=\"@veritabani\" uuid=\"9ea39ffd-945f-4c9d-8823-1b191de89516\">\r\n      <database-info product=\"MySQL\" version=\"8.0.19\" jdbc-version=\"4.2\" driver-name=\"MySQL Connector/J\" driver-version=\"mysql-connector-java-8.0.15 (Revision: 79a4336f140499bd22dd07f02b708e163844e3d5)\" dbms=\"MYSQL\" exact-version=\"8.0.19\" exact-driver-version=\"8.0\">\r\n        <extra-name-characters>#@</extra-name-characters>\r\n        <identifier-quote-string>`</identifier-quote-string>\r\n      </database-info>\r\n      <case-sensitivity plain-identifiers=\"lower\" quoted-identifiers=\"lower\" />\r\n      <secret-storage>master_key</secret-storage>\r\n      <user-name>root</user-name>\r\n      <schema-mapping>\r\n        <introspection-scope>\r\n          <node kind=\"schema\" qname=\"vtproje\" />\r\n        </introspection-scope>\r\n      </schema-mapping>\r\n    </data-source>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/dataSources.local.xml	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
++++ .idea/.idea.CarParkAutomatisation/.idea/dataSources.local.xml	(date 1590419115366)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="dataSourceStorageLocal">
+-    <data-source name="@veritabani" uuid="9ea39ffd-945f-4c9d-8823-1b191de89516">
++    <data-source name="@vtproje" uuid="430bfd1e-12bc-4dd3-99b2-a25c4ea4a04b">
+       <database-info product="MySQL" version="8.0.19" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.15 (Revision: 79a4336f140499bd22dd07f02b708e163844e3d5)" dbms="MYSQL" exact-version="8.0.19" exact-driver-version="8.0">
+         <extra-name-characters>#@</extra-name-characters>
+         <identifier-quote-string>`</identifier-quote-string>
+Index: CarParkAutomatisation/Form1.Designer.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>namespace CarParkAutomatisation\r\n{\r\n    partial class Form1\r\n    {\r\n        /// <summary>\r\n        /// Required designer variable.\r\n        /// </summary>\r\n        private System.ComponentModel.IContainer components = null;\r\n\r\n        /// <summary>\r\n        /// Clean up any resources being used.\r\n        /// </summary>\r\n        /// <param name=\"disposing\">true if managed resources should be disposed; otherwise, false.</param>\r\n        protected override void Dispose(bool disposing)\r\n        {\r\n            if (disposing && (components != null))\r\n            {\r\n                components.Dispose();\r\n            }\r\n\r\n            base.Dispose(disposing);\r\n        }\r\n\r\n        #region Windows Form Designer generated code\r\n\r\n        /// <summary>\r\n        /// Required method for Designer support - do not modify\r\n        /// the contents of this method with the code editor.\r\n        /// </summary>\r\n        private void InitializeComponent()\r\n        {\r\n            this.components = new System.ComponentModel.Container();\r\n            this.saatLabel = new MetroFramework.Controls.MetroLabel();\r\n            this.saatTimer = new System.Windows.Forms.Timer(this.components);\r\n            this.tarihLabel = new MetroFramework.Controls.MetroLabel();\r\n            this.personelButton = new MetroFramework.Controls.MetroButton();\r\n            this.uyeliksizButton = new MetroFramework.Controls.MetroButton();\r\n            this.baslikLabel = new System.Windows.Forms.Label();\r\n            this.SuspendLayout();\r\n            // \r\n            // saatLabel\r\n            // \r\n            this.saatLabel.AutoSize = true;\r\n            this.saatLabel.BackColor = System.Drawing.Color.Transparent;\r\n            this.saatLabel.FontSize = MetroFramework.MetroLabelSize.Tall;\r\n            this.saatLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;\r\n            this.saatLabel.Location = new System.Drawing.Point(16, 11);\r\n            this.saatLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);\r\n            this.saatLabel.Name = \"saatLabel\";\r\n            this.saatLabel.Size = new System.Drawing.Size(134, 25);\r\n            this.saatLabel.TabIndex = 0;\r\n            this.saatLabel.Text = \"VarsayilanSaat\";\r\n            this.saatLabel.UseCustomBackColor = true;\r\n            // \r\n            // saatTimer\r\n            // \r\n            this.saatTimer.Interval = 1000;\r\n            this.saatTimer.Tick += new System.EventHandler(this.saatTimer_Tick);\r\n            // \r\n            // tarihLabel\r\n            // \r\n            this.tarihLabel.AutoSize = true;\r\n            this.tarihLabel.BackColor = System.Drawing.Color.Transparent;\r\n            this.tarihLabel.FontSize = MetroFramework.MetroLabelSize.Tall;\r\n            this.tarihLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;\r\n            this.tarihLabel.Location = new System.Drawing.Point(385, 11);\r\n            this.tarihLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);\r\n            this.tarihLabel.Name = \"tarihLabel\";\r\n            this.tarihLabel.Size = new System.Drawing.Size(139, 25);\r\n            this.tarihLabel.TabIndex = 1;\r\n            this.tarihLabel.Text = \"VarsayilanTarih\";\r\n            this.tarihLabel.UseCustomBackColor = true;\r\n            // \r\n            // personelButton\r\n            // \r\n            this.personelButton.FontSize = MetroFramework.MetroButtonSize.Tall;\r\n            this.personelButton.Location = new System.Drawing.Point(188, 304);\r\n            this.personelButton.Margin = new System.Windows.Forms.Padding(4);\r\n            this.personelButton.Name = \"personelButton\";\r\n            this.personelButton.Size = new System.Drawing.Size(312, 139);\r\n            this.personelButton.TabIndex = 2;\r\n            this.personelButton.Text = \"Personel Girişi\";\r\n            this.personelButton.UseSelectable = true;\r\n            this.personelButton.Click += new System.EventHandler(this.personelButton_Click);\r\n            // \r\n            // uyeliksizButton\r\n            // \r\n            this.uyeliksizButton.BackColor = System.Drawing.Color.Transparent;\r\n            this.uyeliksizButton.FontSize = MetroFramework.MetroButtonSize.Tall;\r\n            this.uyeliksizButton.ForeColor = System.Drawing.Color.Transparent;\r\n            this.uyeliksizButton.Location = new System.Drawing.Point(188, 157);\r\n            this.uyeliksizButton.Margin = new System.Windows.Forms.Padding(4);\r\n            this.uyeliksizButton.Name = \"uyeliksizButton\";\r\n            this.uyeliksizButton.Size = new System.Drawing.Size(312, 139);\r\n            this.uyeliksizButton.TabIndex = 1;\r\n            this.uyeliksizButton.Text = \"GIRIS\";\r\n            this.uyeliksizButton.UseSelectable = true;\r\n            this.uyeliksizButton.Click += new System.EventHandler(this.uyeliksizButton_Click);\r\n            // \r\n            // baslikLabel\r\n            // \r\n            this.baslikLabel.Font = new System.Drawing.Font(\"Microsoft Sans Serif\", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));\r\n            this.baslikLabel.Location = new System.Drawing.Point(226, 79);\r\n            this.baslikLabel.Name = \"baslikLabel\";\r\n            this.baslikLabel.Size = new System.Drawing.Size(224, 57);\r\n            this.baslikLabel.TabIndex = 3;\r\n            this.baslikLabel.Text = \"OTOPARK\";\r\n            // \r\n            // Form1\r\n            // \r\n            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);\r\n            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;\r\n            this.BackColor = System.Drawing.Color.LightSteelBlue;\r\n            this.ClientSize = new System.Drawing.Size(692, 546);\r\n            this.Controls.Add(this.baslikLabel);\r\n            this.Controls.Add(this.uyeliksizButton);\r\n            this.Controls.Add(this.personelButton);\r\n            this.Controls.Add(this.tarihLabel);\r\n            this.Controls.Add(this.saatLabel);\r\n            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;\r\n            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);\r\n            this.Name = \"Form1\";\r\n            this.Text = \"OtoparkOtomasyon\";\r\n            this.Load += new System.EventHandler(this.Form1_Load);\r\n            this.ResumeLayout(false);\r\n            this.PerformLayout();\r\n        }\r\n\r\n        private System.Windows.Forms.Label baslikLabel;\r\n        private MetroFramework.Controls.MetroButton personelButton;\r\n        private MetroFramework.Controls.MetroLabel saatLabel;\r\n        private System.Windows.Forms.Timer saatTimer;\r\n        private MetroFramework.Controls.MetroLabel tarihLabel;\r\n        private MetroFramework.Controls.MetroButton uyeliksizButton;\r\n\r\n        #endregion\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- CarParkAutomatisation/Form1.Designer.cs	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
++++ CarParkAutomatisation/Form1.Designer.cs	(date 1590418136121)
+@@ -44,10 +44,9 @@
+             this.saatLabel.BackColor = System.Drawing.Color.Transparent;
+             this.saatLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+             this.saatLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+-            this.saatLabel.Location = new System.Drawing.Point(16, 11);
+-            this.saatLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
++            this.saatLabel.Location = new System.Drawing.Point(12, 9);
+             this.saatLabel.Name = "saatLabel";
+-            this.saatLabel.Size = new System.Drawing.Size(134, 25);
++            this.saatLabel.Size = new System.Drawing.Size(124, 25);
+             this.saatLabel.TabIndex = 0;
+             this.saatLabel.Text = "VarsayilanSaat";
+             this.saatLabel.UseCustomBackColor = true;
+@@ -63,10 +62,9 @@
+             this.tarihLabel.BackColor = System.Drawing.Color.Transparent;
+             this.tarihLabel.FontSize = MetroFramework.MetroLabelSize.Tall;
+             this.tarihLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+-            this.tarihLabel.Location = new System.Drawing.Point(385, 11);
+-            this.tarihLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
++            this.tarihLabel.Location = new System.Drawing.Point(289, 9);
+             this.tarihLabel.Name = "tarihLabel";
+-            this.tarihLabel.Size = new System.Drawing.Size(139, 25);
++            this.tarihLabel.Size = new System.Drawing.Size(126, 25);
+             this.tarihLabel.TabIndex = 1;
+             this.tarihLabel.Text = "VarsayilanTarih";
+             this.tarihLabel.UseCustomBackColor = true;
+@@ -74,10 +72,9 @@
+             // personelButton
+             // 
+             this.personelButton.FontSize = MetroFramework.MetroButtonSize.Tall;
+-            this.personelButton.Location = new System.Drawing.Point(188, 304);
+-            this.personelButton.Margin = new System.Windows.Forms.Padding(4);
++            this.personelButton.Location = new System.Drawing.Point(141, 247);
+             this.personelButton.Name = "personelButton";
+-            this.personelButton.Size = new System.Drawing.Size(312, 139);
++            this.personelButton.Size = new System.Drawing.Size(234, 113);
+             this.personelButton.TabIndex = 2;
+             this.personelButton.Text = "Personel Girişi";
+             this.personelButton.UseSelectable = true;
+@@ -88,10 +85,9 @@
+             this.uyeliksizButton.BackColor = System.Drawing.Color.Transparent;
+             this.uyeliksizButton.FontSize = MetroFramework.MetroButtonSize.Tall;
+             this.uyeliksizButton.ForeColor = System.Drawing.Color.Transparent;
+-            this.uyeliksizButton.Location = new System.Drawing.Point(188, 157);
+-            this.uyeliksizButton.Margin = new System.Windows.Forms.Padding(4);
++            this.uyeliksizButton.Location = new System.Drawing.Point(141, 128);
+             this.uyeliksizButton.Name = "uyeliksizButton";
+-            this.uyeliksizButton.Size = new System.Drawing.Size(312, 139);
++            this.uyeliksizButton.Size = new System.Drawing.Size(234, 113);
+             this.uyeliksizButton.TabIndex = 1;
+             this.uyeliksizButton.Text = "GIRIS";
+             this.uyeliksizButton.UseSelectable = true;
+@@ -100,25 +96,26 @@
+             // baslikLabel
+             // 
+             this.baslikLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (162)));
+-            this.baslikLabel.Location = new System.Drawing.Point(226, 79);
++            this.baslikLabel.Location = new System.Drawing.Point(170, 64);
++            this.baslikLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+             this.baslikLabel.Name = "baslikLabel";
+-            this.baslikLabel.Size = new System.Drawing.Size(224, 57);
++            this.baslikLabel.Size = new System.Drawing.Size(168, 46);
+             this.baslikLabel.TabIndex = 3;
+             this.baslikLabel.Text = "OTOPARK";
+             // 
+             // Form1
+             // 
+-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
++            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+             this.BackColor = System.Drawing.Color.LightSteelBlue;
+-            this.ClientSize = new System.Drawing.Size(692, 546);
++            this.ClientSize = new System.Drawing.Size(519, 444);
+             this.Controls.Add(this.baslikLabel);
+             this.Controls.Add(this.uyeliksizButton);
+             this.Controls.Add(this.personelButton);
+             this.Controls.Add(this.tarihLabel);
+             this.Controls.Add(this.saatLabel);
+             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
++            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+             this.Name = "Form1";
+             this.Text = "OtoparkOtomasyon";
+             this.Load += new System.EventHandler(this.Form1_Load);
+Index: .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ContentModelStore\">\r\n    <e p=\"C:\\Users\\PC\\AppData\\local\\JetBrains\\Rider2020.1\\extResources\" t=\"IncludeRecursive\" />\r\n    <e p=\"C:\\Users\\PC\\AppData\\local\\JetBrains\\Rider2020.1\\resharper-host\\local\\Transient\\ReSharperHost\\v201\\SolutionCaches\\_CarParkAutomatisation.1018619674.00\" t=\"ExcludeRecursive\" />\r\n    <e p=\"C:\\Users\\PC\\AppData\\Roaming\\JetBrains\\Rider2020.1\\consoles\\db\" t=\"IncludeRecursive\" />\r\n    <e p=\"C:\\Users\\PC\\AppData\\Roaming\\JetBrains\\Rider2020.1\\extensions\" t=\"IncludeRecursive\" />\r\n    <e p=\"D:\\zahid\\bsm\\jbRiderProjects\\vtProje\" t=\"IncludeFlat\">\r\n      <e p=\"CarParkAutomatisation\" t=\"IncludeRecursive\">\r\n        <e p=\"App.config\" t=\"Include\" />\r\n        <e p=\"AracCek.cs\" t=\"Include\" />\r\n        <e p=\"AracCek.Designer.cs\" t=\"Include\" />\r\n        <e p=\"AracCek.resx\" t=\"Include\" />\r\n        <e p=\"bin\" t=\"ExcludeRecursive\" />\r\n        <e p=\"CarParkAutomatisation.csproj\" t=\"IncludeRecursive\" />\r\n        <e p=\"FaturaGoster.cs\" t=\"Include\" />\r\n        <e p=\"FaturaGoster.Designer.cs\" t=\"Include\" />\r\n        <e p=\"FaturaGoster.resx\" t=\"Include\" />\r\n        <e p=\"Form1.cs\" t=\"Include\" />\r\n        <e p=\"Form1.Designer.cs\" t=\"Include\" />\r\n        <e p=\"Form1.resx\" t=\"Include\" />\r\n        <e p=\"obj\" t=\"ExcludeRecursive\" />\r\n        <e p=\"OtoparkYerlesimi.cs\" t=\"Include\" />\r\n        <e p=\"OtoparkYerlesimi.Designer.cs\" t=\"Include\" />\r\n        <e p=\"OtoparkYerlesimi.resx\" t=\"Include\" />\r\n        <e p=\"packages.config\" t=\"Include\" />\r\n        <e p=\"PersonelForm.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"PersonelForm.resx\" t=\"Include\" />\r\n        <e p=\"Program.cs\" t=\"Include\" />\r\n        <e p=\"Properties\" t=\"Include\">\r\n          <e p=\"AssemblyInfo.cs\" t=\"Include\" />\r\n          <e p=\"Resources.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Resources.resx\" t=\"Include\" />\r\n          <e p=\"Settings.Designer.cs\" t=\"Include\" />\r\n          <e p=\"Settings.settings\" t=\"Include\" />\r\n        </e>\r\n        <e p=\"UyeGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.Designer.cs\" t=\"Include\" />\r\n        <e p=\"UyeliksiGirisForm.resx\" t=\"Include\" />\r\n        <e p=\"Veritabani.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.Designer.cs\" t=\"Include\" />\r\n        <e p=\"YeniUye.resx\" t=\"Include\" />\r\n      </e>\r\n      <e p=\"CarParkAutomatisation.sln\" t=\"IncludeFlat\" />\r\n      <e p=\"packages\" t=\"ExcludeRecursive\" />\r\n    </e>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(revision 800d3400534e9b0b67aa14fb1176672b11dfca85)
++++ .idea/.idea.CarParkAutomatisation/.idea/contentModel.xml	(date 1590419141454)
+@@ -1,11 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ContentModelStore">
+-    <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
+-    <e p="C:\Users\PC\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_CarParkAutomatisation.1018619674.00" t="ExcludeRecursive" />
+-    <e p="C:\Users\PC\AppData\Roaming\JetBrains\Rider2020.1\consoles\db" t="IncludeRecursive" />
+-    <e p="C:\Users\PC\AppData\Roaming\JetBrains\Rider2020.1\extensions" t="IncludeRecursive" />
+-    <e p="D:\zahid\bsm\jbRiderProjects\vtProje" t="IncludeFlat">
++    <e p="C:\Users\disci\AppData\local\JetBrains\Rider2020.1\extResources" t="IncludeRecursive" />
++    <e p="C:\Users\disci\AppData\local\JetBrains\Rider2020.1\resharper-host\local\Transient\ReSharperHost\v201\SolutionCaches\_CarParkAutomatisation.865586213.00" t="ExcludeRecursive" />
++    <e p="C:\Users\disci\AppData\Roaming\JetBrains\Rider2020.1\consoles\db" t="IncludeRecursive" />
++    <e p="C:\Users\disci\AppData\Roaming\JetBrains\Rider2020.1\extensions" t="IncludeRecursive" />
++    <e p="C:\Users\disci\RiderProjects\CarParkAutomatisation" t="IncludeFlat">
+       <e p="CarParkAutomatisation" t="IncludeRecursive">
+         <e p="App.config" t="Include" />
+         <e p="AracCek.cs" t="Include" />
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2020_16_07__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2020_16_07__Default_Changelist_.xml
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2020_15_49__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_23_05_2020_15_49__Default_Changelist_.xml
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2020_11_12__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2020_11_12__Default_Changelist_.xml
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_2020_19_28__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_21_05_2020_19_28__Default_Changelist_.xml
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_16_36__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_16_36__Default_Changelist_.xml
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_15_43__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_15_43__Default_Changelist_.xml
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_15_03__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_20_05_2020_15_03__Default_Changelist_.xml
+diff --git .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2020_20_07__Default_Changelist_.xml .idea/.idea.CarParkAutomatisation/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2020_20_07__Default_Changelist_.xml

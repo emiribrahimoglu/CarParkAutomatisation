@@ -23,7 +23,6 @@ namespace CarParkAutomatisation
             string sorgu2 = "select max(faturaid) from giriscikis where plakaid" + "='" + plakaid + "'";
             sorgu = "select parkId from giriscikis where plakaId" + "='" + plakaid + "'";
             int eskiparkid = Veritabani.ParkIdGetir(sorgu);
-            MessageBox.Show("Okunan ilk Eski park ID: " + eskiparkid);
             sorgu = "update girisCikis set parkId = @parkid where faturaId = @faturaid";
             Veritabani.AraciCek(sorgu,plakaid,parkid,eskiparkid, sorgu2);
             MetroFramework.MetroMessageBox.Show(this, "Araç Yeni Yerine Çekildi.", "Çekme İşlemi Başarılı",

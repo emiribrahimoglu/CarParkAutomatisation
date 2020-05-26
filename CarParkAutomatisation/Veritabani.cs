@@ -15,7 +15,7 @@ namespace CarParkAutomatisation
 {
     public static class Veritabani
     {
-        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=.zahid746.;database=vtproje";
+        private static string baglantiString = "server=127.0.0.1;uid=root;pwd=120zatura120;database=vtproje";
         private static MySqlConnection baglanti;
         private static MySqlCommand komut;
         private static MySqlDataAdapter adaptor;
@@ -186,7 +186,6 @@ namespace CarParkAutomatisation
             sorgu = "select plakaId from plakalar where plaka" + "='"+aracplaka+"'";
             komut = new MySqlCommand(sorgu,baglanti);
             plaka2 = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan aracın plakaId si alindi.
-            MessageBox.Show("plaka2:" + plaka2);
             
             // Önceden çekildiği parkyeri varsa temizleyen kod parçası başlangıcı
             sorgu = "Select * from cekilenaraclar";
@@ -215,9 +214,8 @@ namespace CarParkAutomatisation
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Bilgilendirme: Girdiğiniz plakanın çekildiğine dair bir bilgi yOktUr!");
+                    // Yoksayıldı
                 }
-                
             }
             
             // Önceden çekildiği parkyeri varsa temizleyen kod parçası bitişi
@@ -226,7 +224,6 @@ namespace CarParkAutomatisation
             komut.Connection = baglanti;
             komut.CommandText = "select uyeId from uyeler where plakaId" + "='"+plaka2+"'";
             kisiId = Convert.ToInt32(komut.ExecuteScalar()); // giris yapan arac sahibinin  uyeId si alindi.
-            MessageBox.Show("kişi id:" + kisiId);
 
             if (kisiId!=0) // kisiye kesilecek ucret belirlendi. 
             {
@@ -270,18 +267,14 @@ namespace CarParkAutomatisation
             if (girisSaati != DateTime.MinValue)
             {
                 DateTime cikisSaati = DateTime.Now; // bu deger alindi, veritabanina girilecek
-                MessageBox.Show("Giriş Saati: " + girisSaati + Environment.NewLine + "Çıkış Saati: "+ cikisSaati);
-                cikisSaati = cikisSaati.AddHours(2).AddMinutes(30);
                 int parkSuresi = Convert.ToInt32(cikisSaati.Subtract(girisSaati).TotalMinutes);
-                MessageBox.Show("Dakika tipinde park süresi: " + parkSuresi);
-                
+
                 komut.CommandText = "select plakaId from plakalar where plaka=@aracplaka";
                 komut.Parameters.Add("@aracplaka", MySqlDbType.VarChar).Value = aracplaka;
                 int aracplakaid = Convert.ToInt32(komut.ExecuteScalar());
                 komut.CommandText = "select max(faturaId) from girisCikis where plakaId=@aracplakaid";
                 komut.Parameters.Add("@aracplakaid", MySqlDbType.Int32).Value = aracplakaid;
                 string maxfaturaid = Convert.ToString(komut.ExecuteScalar());
-                MessageBox.Show("Max Fatura ID:: " + maxfaturaid);
                 komut = new MySqlCommand();
                 komut.Connection = baglanti;
                 komut.CommandText =
@@ -295,7 +288,6 @@ namespace CarParkAutomatisation
                 komut.ExecuteNonQuery();
                 
                 komut.CommandText = "update girisCikis set cikisSaati=@cikisSaati, parkSuresi=@toplamParkSuresi where faturaId=@maxfaturaid";
-                MessageBox.Show("Update Komutu:: "+komut.CommandText);
                 komut.Parameters.Add("@cikisSaati", MySqlDbType.DateTime).Value = cikisSaati;
                 komut.Parameters.Add("@toplamParkSuresi", MySqlDbType.Double).Value = parkSuresi;
                 //komut.Parameters.Add("@maxfaturaid", MySqlDbType.VarChar).Value = maxfaturaid;
@@ -303,7 +295,6 @@ namespace CarParkAutomatisation
                  
                 komut.CommandText =
                      "select ucret from ucretlendirmeler,girisCikis where girisCikis.faturaId=(select max(faturaId) from girisCikis where plakaId=@aracplakaid and girisCikis.ucretId=ucretlendirmeler.ucretId)";
-                MessageBox.Show("Select Komutu:: "+komut.CommandText);
                 double tarife = Convert.ToDouble(komut.ExecuteScalar());
                 double ucret = Convert.ToDouble(parkSuresi) / 60 * tarife;
                 if (parkSuresi%60>30)
@@ -329,8 +320,6 @@ namespace CarParkAutomatisation
             string maxfaturaid = Convert.ToString(komut.ExecuteScalar());
             komut.CommandText = "select parkid from giriscikis where faturaId" + "='" + maxfaturaid + "'";
             eskiparkid = Convert.ToInt32(komut.ExecuteScalar());
-            MessageBox.Show(
-                "Sırayla: Çekilen ID, Park ID, Eski Park ID = " + cekilenid + @" " + parkid + @" " + eskiparkid);
             komut = new MySqlCommand(sorgu,baglanti);
             komut.Parameters.Add("@parkid", MySqlDbType.Int32).Value = parkid;
             komut.Parameters.Add("@faturaid", MySqlDbType.Int32).Value = maxfaturaid;
